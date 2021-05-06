@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Feeling blue? Taking a few minutes every day to disconnect from distractions can bring balance and peace to your life. Glow In The Blue can help put you back on track with being more present, more productive and grateful for what surrounds you. Every time you successfully stay away from your phone, you’ll earn rewards, unlock new achievements, and become a better version of yourself :sparkles:",
+    "githubUrl": "https://github.com/VulpixTribe/VulpixCapstoneProject"
   }
 }
