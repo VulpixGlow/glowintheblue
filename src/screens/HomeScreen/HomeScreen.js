@@ -5,15 +5,17 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  Button
 } from "react-native"
 import styles from "./styles"
 import { firebase } from "../../firebase/config"
+import Modal from 'react-native-modal'
 
 export default function HomeScreen(props) {
   const [entityText, setEntityText] = useState("")
   const [entities, setEntities] = useState([])
-
+  const [isModalVisible, setModalVisible] = useState(false)
   const entityRef = firebase.firestore().collection("entities")
   const userID = props.extraData.id
 
@@ -67,6 +69,10 @@ export default function HomeScreen(props) {
     )
   }
 
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+  const [flexDirection, setflexDirection] = useState("column")
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
@@ -83,16 +89,67 @@ export default function HomeScreen(props) {
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
       </View>
-      {entities && (
         <View style={styles.listContainer}>
-          <FlatList
-            data={entities}
-            renderItem={renderEntity}
-            keyExtractor={item => item.id}
-            removeClippedSubviews={true}
-          />
+          <Button title="Category" onPress={toggleModal} />
+          <Modal
+            isVisible={isModalVisible}
+            testID={'modal'}
+            backdropColor="#5cffff"
+            backdropOpacity={0.8}
+            animationIn="zoomInDown"
+            animationOut="zoomOutUp"
+            animationInTiming={600}
+            animationOutTiming={600}
+            backdropTransitionInTiming={600}
+            backdropTransitionOutTiming={600}>
+            <View style={{flex:1}}>
+            <PreviewLayout
+              label="Category"
+              values={["Work", "Sport", "Rest", "Social", "Study", "Other", "Entertainment", "Unset", "Coding", "Yoga", "Play", "Read", 'activity1', 'activity2']}
+              selectedValue={flexDirection}
+              setSelectedValue={setflexDirection}
+            >
+            </PreviewLayout>
+              <Button title="Close" onPress={toggleModal} />
+            </View>
+          </Modal>
         </View>
-      )}
     </View>
   )
 }
+
+const PreviewLayout = ({
+  label,
+  children,
+  values,
+  selectedValue,
+  setSelectedValue,
+}) => (
+  <View style={{ padding: 10, flex: 1 }}>
+    <Text style={styles.label}>{label}</Text>
+    <View style={styles.row}>
+      {values.map((value) => (
+        <TouchableOpacity
+          key={value}
+          onPress={() => setSelectedValue(value)}
+          style={[
+            styles.button_cat,
+            selectedValue === value && styles.selected,
+          ]}
+        >
+          <Text
+            style={[
+              styles.buttonLabel,
+              selectedValue === value && styles.selectedLabel,
+            ]}
+          >
+            {value}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+    <View style={[styles.container, { [label]: selectedValue }]}>
+      {children}
+    </View>
+  </View>
+);
