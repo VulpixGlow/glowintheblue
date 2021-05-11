@@ -8,7 +8,7 @@ import {
   View
 } from "react-native"
 import styles from "./styles"
-import { firebase } from "../../firebase/config"
+import { firebase } from "../../../config/Firebase"
 import HomeScreen from "../TimerScreen/TimerScreen"
 
 export default function TimerScreen(props) {
