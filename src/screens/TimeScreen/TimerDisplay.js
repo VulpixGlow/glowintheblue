@@ -1,0 +1,41 @@
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+class TimerDisplay extends React.Component {
+  // display currently running timer
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.textStyle}>
+          {Math.floor(this.props.time / 60)
+            .toString()
+            .padStart(2, '0') +
+            ':' +
+            (this.props.time % 60).toString().padStart(2, '0')}
+        </Text>
+      </View>
+    );
+  }
+}
+
+export default TimerDisplay;
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: '7%',
+    marginBottom: '10%',
+    marginLeft: '7%',
+    marginRight: '7%',
+    padding: '20%',
+    borderColor: '#e885e3',
+    borderRadius: 200,
+    borderWidth: 5,
+    alignItems: 'center',
+    // backgroundColor: '#C2362B',
+  },
+  textStyle: {
+    color: 'white',
+    fontSize: 50,
+    fontWeight: '400',
+  },
+});
