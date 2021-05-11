@@ -30,7 +30,7 @@ export default TimerScreen = () => {
         <Text>Points</Text>
       </View>
       <View style={styles.circleBackgroundIcon}>
-        <Text>Image w/ button to set timer</Text>
+        <Text>Image w/ slider to set timer</Text>
         {/* <Text style={styles.timerIcon}>
           {mins}:{secs < 10 && 0}
           {secs}
