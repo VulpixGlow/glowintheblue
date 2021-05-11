@@ -23,16 +23,21 @@ export default TimerScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.hamburgerIcon}></View>
-      <View style={styles.pointsIcon}></View>
+      <View style={styles.hamburgerIcon}>
+        <Text>SlideM</Text>
+      </View>
+      <View style={styles.pointsIcon}>
+        <Text>Points</Text>
+      </View>
       <View style={styles.circleBackgroundIcon}>
+        <Text>Image w/ button to set timer</Text>
         {/* <Text style={styles.timerIcon}>
           {mins}:{secs < 10 && 0}
           {secs}
         </Text> */}
       </View>
 
-      <Button title="Tags" style={styles.tagIcon}></Button>
+      <Button title="Tags Button" style={styles.tagIcon}></Button>
 
       <View>
         <Text style={styles.timerIcon}>
@@ -40,7 +45,7 @@ export default TimerScreen = () => {
           {secs}
         </Text>
       </View>
-      <Button title="Ocean Life" style={styles.startTimerIcon}>
+      <Button title="Start Button" style={styles.startTimerIcon}>
         Stop Timer
       </Button>
     </View>
