@@ -1,18 +1,91 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native"
+
 export default StyleSheet.create({
-    container: {
+  container: {
+    flex: 1,
+    alignItems: "center"
+  },
+  formContainer: {
+    flexDirection: "row",
+    height: 80,
+    marginTop: 40,
+    marginBottom: 20,
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  input: {
+    height: 48,
+    borderRadius: 5,
+    overflow: "hidden",
+    backgroundColor: "white",
+    paddingLeft: 16,
+    flex: 1,
+    marginRight: 5
+  },
+  button: {
+    height: 47,
+    borderRadius: 5,
+    backgroundColor: "#788eec",
+    width: 80,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16
+  },
+  listContainer: {
+    marginTop: 20,
+    padding: 20,
+  },
+  entityContainer: {
+    marginTop: 16,
+    borderBottomColor: "#cccccc",
+    borderBottomWidth: 1,
+    paddingBottom: 16
+  },
+  entityText: {
+    fontSize: 20,
+    color: "#333333"
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  button_cat: {
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 4,
+    backgroundColor: "oldlace",
+    alignSelf: "flex-start",
+    marginHorizontal: "1%",
+    marginBottom: 6,
+    minWidth: "48%",
+    textAlign: "center",
+  },
+  selected: {
+    backgroundColor: "coral",
+    borderWidth: 0,
+  },
+  buttonLabel: {
+    fontSize: 12,
+    fontWeight: "500",
+    color: "coral",
+  },
+  selectedLabel: {
+    color: "white",
+  },
+  label: {
+    textAlign: "center",
+    marginBottom: 10,
+    fontSize: 24,
+  },
+  container_timer: {
         flex: 1,
-        alignItems: 'center'
-    },
-    input: {
-        height: 48,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
-    }
+      },
 })
