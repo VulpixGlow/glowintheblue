@@ -85,4 +85,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     fontSize: 24,
   },
+  container_timer: {
+        flex: 1,
+      },
 })
