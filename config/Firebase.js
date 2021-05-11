@@ -1,4 +1,3 @@
-// import * as firebase from 'firebase';
 import {
   API_KEY,
   AUTH_DOMAIN,
@@ -20,7 +19,7 @@ const firebaseConfig = {
   messagingSenderId: MESSAGE_SENDER_ID,
   appId: APP_ID
 }
-
+console.log(API_KEY)
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
