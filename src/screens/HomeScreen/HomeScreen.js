@@ -13,6 +13,7 @@ import { firebase } from "../../../config/Firebase"
 import Modal from 'react-native-modal'
 import { ScrollView, StyleSheet } from 'react-native';
 import PomodoroTimer from '../TimeScreen/PomodoroTimer';
+import Success from '../../Success/Success.js'
 
 export default function HomeScreen(props) {
   // const [entityText, setEntityText] = useState("")
@@ -82,6 +83,7 @@ export default function HomeScreen(props) {
         <ScrollView style={styles.container_timer}>
           {/* <Header /> */}
           <PomodoroTimer />
+          {/* <Success /> */}
         </ScrollView>
         <View style={styles.listContainer}>
           <Button title="Category" onPress={toggleModal} />
