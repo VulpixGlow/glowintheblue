@@ -2,6 +2,19 @@ import React from 'react';
 import { Platform, StyleSheet, Text, View, TextInput } from 'react-native';
 import Timer from './Timer';
 
+// function Success({navigation}) {
+//   return (
+//     <View>
+//       <Text>Success!</Text>
+//       <Button
+//           // style={styles.button}
+//           title="Yay"
+//           onPress={() => navigation.navigate("PomodoroTimer")}
+//         />
+//     </View>
+//   )
+// }
+
 class PomodoroTimer extends React.Component {
   constructor(props) {
     super(props);
@@ -15,10 +28,12 @@ class PomodoroTimer extends React.Component {
   // handles completion of timer
   handleTimerCompleted = () => {
     if (this.state.intervalType === 'Working') {
+    
       this.setState({
         intervalType: 'Break',
       });
     } else {
+      
       this.setState({
         intervalType: 'Working',
       });
