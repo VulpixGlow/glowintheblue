@@ -6,21 +6,30 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  Touchable
 } from "react-native"
 import styles from "./styles"
 import { firebase } from "../../../config/Firebase"
 import Modal from 'react-native-modal'
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import PomodoroTimer from '../TimeScreen/PomodoroTimer';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function HomeScreen(props) {
   // const [entityText, setEntityText] = useState("")
   // const [entities, setEntities] = useState([])
+  const clearOnboarding = async () => {
+    try {
+      await AsyncStorage.removeItem('@viewedOnboarding')
+    } catch(e) {
+      console.log('Error @clearOnboarding:', e)
+    }
+  }
   const [isModalVisible, setModalVisible] = useState(false)
   const entityRef = firebase.firestore().collection("entities")
   const userID = props.extraData.id
-
+  console.log("HomeScreen props",props)
     // useEffect(() => {
     //   entityRef
     //     .where("authorID", "==", userID)
@@ -77,8 +86,15 @@ export default function HomeScreen(props) {
     setModalVisible(!isModalVisible);
   };
   const [flexDirection, setflexDirection] = useState("column")
+  const signOut=()=>{
+    firebase
+      .auth()
+      .signOut()
+      .then(()=>{
+      props.navigation.navigate("Login")})
+  }
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <ScrollView style={styles.container_timer}>
           {/* <Header /> */}
           <PomodoroTimer />
@@ -108,7 +124,13 @@ export default function HomeScreen(props) {
             </View>
           </Modal>
         </View>
-    </View>
+        <TouchableOpacity onPress={()=>signOut()}>
+          <Text>Sign out</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={clearOnboarding}>
+          <Text>Clear onboarding</Text>
+        </TouchableOpacity>
+    </SafeAreaView>
   )
 }
 
