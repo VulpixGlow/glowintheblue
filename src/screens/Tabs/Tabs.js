@@ -12,7 +12,7 @@ function Tabs() {
     <View style={styles.buttonContainer}>
           <Button
             buttonStyle={styles.buttonCTA}
-            title='🏠'
+            title='🕙'
             onPress={() => navigation.navigate('Home')}
           />
           <Button
