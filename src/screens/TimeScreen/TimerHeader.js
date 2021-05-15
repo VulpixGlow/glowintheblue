@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '500',
     letterSpacing: 1.5,
-    fontFamily: Platform.OS == 'android' ? 'notoserif' : 'system',
+    // fontFamily: Platform.OS == 'android' ? 'notoserif' : 'system',
     marginTop: 40,
     padding: 20,
   },
