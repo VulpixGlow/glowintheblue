@@ -46,6 +46,7 @@ class Timer extends React.Component {
       clearInterval(this.timerId);
       Vibration.vibrate([500, 500, 500]);
       this.props.Oncomplete();
+      // this.props.successNavigate();
     } else if (this.state.running === false) {
       clearInterval(this.timerId);
     }
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '500',
     letterSpacing: 1.5,
-    fontFamily: Platform.OS == 'android' ? 'notoserif' : 'system',
+    // fontFamily: Platform.OS == 'android' ? 'notoserif' : 'system',
     marginTop: 40,
     padding: 20,
   },
