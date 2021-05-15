@@ -1,27 +1,31 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TextInput } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+} from 'react-native';
+import { useNavigation, navigation, navigate } from '@react-navigation/native';
 import Timer from './Timer';
+import Success from '../Success/Success';
+import Modal from 'react-native-modal';
+// import { useNavigation } from '@react-navigation/native';
 
 class PomodoroTimer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      workTime: 25,
-      breakTime: 5,
+      workTime: 0.1,
+      completed: 0,
       intervalType: 'Working',
     };
   }
 
-  // handles completion of timer
   handleTimerCompleted = () => {
     if (this.state.intervalType === 'Working') {
-      this.setState({
-        intervalType: 'Break',
-      });
-    } else {
-      this.setState({
-        intervalType: 'Working',
-      });
+      navigation.navigate('Success');
     }
   };
 
@@ -39,33 +43,18 @@ class PomodoroTimer extends React.Component {
     }
   };
 
-  // gets triggered on change of breaktimer text
-  handleBreakTime = (text) => {
-    if (text >= 0) {
-      this.setState({
-        breakTime: text,
-      });
-    } else {
-      alert('Time invalid. Setting value to default. Please enter valid time');
-      this.setState({
-        breakTime: 5,
-      });
-    }
-  };
-
   // called to set the timer's time
   handleTime = () => {
     if (this.state.intervalType === 'Working') {
       return this.state.workTime;
-    } else {
-      return this.state.breakTime;
     }
   };
 
   render() {
+    const { navigation } = this.props;
     let time = this.handleTime();
     return (
-      <View style={styles.mainView}>
+      <ScrollView style={styles.mainView}>
         <View style={styles.row}>
           <View style={styles.inputWrap}>
             <Text style={styles.textStyle}>WorkTime</Text>
@@ -77,27 +66,21 @@ class PomodoroTimer extends React.Component {
               onChangeText={this.handleWorkTime}
             />
           </View>
-          <View style={styles.inputWrap}>
-            <Text style={styles.textStyle}>BreakTime</Text>
-            <TextInput
-              style={styles.textStyle}
-              keyboardType={'numeric'}
-              defaultValue={'' + this.state.breakTime}
-              placeholder='breakTime in mins'
-              onChangeText={this.handleBreakTime}
-            />
-          </View>
         </View>
         <Timer
           intervalType={this.state.intervalType}
           Oncomplete={this.handleTimerCompleted}
           period={time}
         />
-      </View>
+      </ScrollView>
     );
   }
 }
-export default PomodoroTimer;
+
+export default function (props) {
+  const navigation = useNavigation();
+  return <PomodoroTimer {...props} navigation={navigation} />;
+}
 
 const styles = StyleSheet.create({
   mainView: {
