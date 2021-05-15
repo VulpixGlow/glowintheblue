@@ -194,7 +194,7 @@ const MyStackedBarChart = () => {
   )
 }
 
-const MyPieChart = () => {
+export const MyPieChart = () => {
   return (
     <>
       <Text style={styles.header}>Pie Chart</Text>

@@ -17,6 +17,7 @@ import Modal from 'react-native-modal';
 import { useNavigation } from '@react-navigation/native';
 import Success from '../Success/Success';
 import Category from '../CategoryScreen/CategoryScreen';
+import Tabs from '../Tabs/Tabs'
 
 export default function TimerExperiment() {
   const navigation = useNavigation();
@@ -64,6 +65,7 @@ export default function TimerExperiment() {
       <Category name='Home' component={Category} />
       <Button title='Start' onPress={() => setRunning(true)} />
       <Button title='Pause' onPress={() => setRunning(false)} />
+      <Tabs />
     </View>
   );
 }

@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { firebase } from './config/Firebase';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens';
+import { LoginScreen, HomeScreen, RegistrationScreen} from './src/screens';
 import Success from './src/screens/Success/Success';
 import { decode, encode } from 'base-64';
 import { ScrollView, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
 import TimerExperiment from './src/screens/TimerExperiment/TimerExperiment';
+
 
 const Stack = createStackNavigator();
 
@@ -41,6 +42,7 @@ export default function App(props) {
           }}
         />
         <Stack.Screen name='Success' component={Success} />
+        {/* <Stack.Screen name='Graph' component={GraphScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
