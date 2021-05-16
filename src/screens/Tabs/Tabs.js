@@ -23,7 +23,7 @@ function Tabs() {
            <Button
             buttonStyle={styles.buttonCTA}
             title='📈'
-            onPress={() => navigation.navigate('Graph')}
+            onPress={() => navigation.navigate('GraphScreen')}
           />
             <Button
             buttonStyle={styles.buttonCTA}
