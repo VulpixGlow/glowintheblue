@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { firebase } from './config/Firebase';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens';
+import { LoginScreen, HomeScreen, RegistrationScreen} from './src/screens';
 import Success from './src/screens/Success/Success';
 import { decode, encode } from 'base-64';
 import { ScrollView, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
 import TimerExperiment from './src/screens/TimerExperiment/TimerExperiment';
+import Points from './src/screens/Points/Points'
+import Store from './src/screens/store/Store'
+import Graph from './src/screens/GraphScreen/GraphScreen'
+
 
 const Stack = createStackNavigator();
 
@@ -15,10 +19,12 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)',
-    background: 'red',
+    primary: '#aedcff',
+    background: '#8cffde',
   },
 };
+
+
 
 export default function App(props) {
   return (
@@ -41,6 +47,10 @@ export default function App(props) {
           }}
         />
         <Stack.Screen name='Success' component={Success} />
+        {/* <Stack.Screen name='Graph' component={GraphScreen} /> */}
+        <Stack.Screen name='Points' component={Points} />
+        <Stack.Screen name="Store" component={Store} />
+        <Stack.Screen name="Graph" component={GraphScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
