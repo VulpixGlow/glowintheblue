@@ -291,34 +291,44 @@ const MyContributionGraph = () => {
   )
 }
 
-const App = () => {
+export default function Graph() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <View>
+             <MyPieChart /> 
+          </View>
       <ScrollView>
         <View style={styles.container}>
           <View>
+          <SafeAreaView >
+      <MyProgressChart />
+      </SafeAreaView>
             {/*Example of Bezier LineChart*/}
-            <MyBezierLineChart />
+            {/* <MyBezierLineChart /> */}
             {/*Example of LineChart*/}
-            <MyLineChart />
+            {/* <MyLineChart /> */}
             {/*Example of Progress Chart*/}
-            <MyProgressChart />
+           
             {/*Example of Bar Chart*/}
-            <MyBarChart />
+            {/* <MyBarChart /> */}
             {/*Example of StackedBar Chart*/}
-            <MyStackedBarChart />
+            {/* <MyStackedBarChart /> */}
             {/*Example of Pie Chart*/}
-            <MyPieChart />
+            {/* <MyPieChart /> */}
             {/*Example of Contribution Chart*/}
-            <MyContributionGraph />
+            {/* <MyContributionGraph /> */}
           </View>
+         
         </View>
       </ScrollView>
+     
+     
+          
     </SafeAreaView>
   )
 }
 
-export default App
+// export default Graph
 
 const styles = StyleSheet.create({
   container: {
