@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
-import CountDown from 'react-native-countdown-component';
+import React, { useEffect, useState, useRef } from "react"
+import CountDown from "react-native-countdown-component"
 import { Text, View, Button, StyleSheet, Alert } from "react-native"
-import { Picker } from '@react-native-picker/picker';
-import styles from './styles';
-import Modal from 'react-native-modal';
-import { useNavigation } from '@react-navigation/native';
-import Success from '../Success/Success';
-import Category from '../CategoryScreen/CategoryScreen';
-import Tabs from '../Tabs/Tabs'
-
+import { Picker } from "@react-native-picker/picker"
+import styles from "./styles"
+import Modal from "react-native-modal"
+import { useNavigation } from "@react-navigation/native"
+import Success from "../Success/Success"
+import Category from "../CategoryScreen/CategoryScreen"
+import FooterScreen from "../FooterScreen/FooterScreen"
 
 export default function TimerExperiment() {
   const [worktime, setWorktime] = useState(10)
@@ -18,7 +17,6 @@ export default function TimerExperiment() {
 
   const navigation = useNavigation()
   const pickerRef = useRef()
-
 
   let addPoints = 0
 
@@ -108,10 +106,10 @@ export default function TimerExperiment() {
         showSeparator
         running={isRunning}
       />
-      <Category name='Home' component={Category} />
-      <Button title='Start' onPress={() => setRunning(true)} />
-      <Button title='Pause' onPress={() => setRunning(false)} />
-      <Tabs />
+      <Category name="Home" component={Category} />
+      <Button title="Start" onPress={() => setRunning(true)} />
+      <Button title="Pause" onPress={() => setRunning(false)} />
+      <FooterScreen />
     </View>
   )
 }

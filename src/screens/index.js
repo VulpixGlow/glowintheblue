@@ -11,3 +11,5 @@ export { default as PointScreen } from "./PointScreen/PointScreen"
 export { default as GraphScreen } from "./GraphScreen/GraphScreen"
 
 export { default as StoreScreen } from "./StoreScreen/StoreScreen"
+
+export { default as FooterScreen } from "./FooterScreen/FooterScreen"

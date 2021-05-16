@@ -11,7 +11,8 @@ import {
   HomeScreen,
   PointScreen,
   StoreScreen,
-  GraphScreen
+  GraphScreen,
+  FooterScreen
 } from "./src/screens"
 
 import { StatusBar } from "react-native"
@@ -26,6 +27,8 @@ const MyTheme = {
     background: "#8cffde"
   }
 }
+
+// Lets consider creating a FooterScreen Component that holds all the footer elements so they can be viewed on everyscreen
 
 export default function App(props) {
   return (
@@ -56,9 +59,10 @@ export default function App(props) {
           }}
         />
 
-        <Stack.Screen name="Points" component={PointScreen} />
+        <Stack.Screen name="Footer" component={FooterScreen} />
+        {/* <Stack.Screen name="Points" component={PointScreen} />
         <Stack.Screen name="Graph" component={GraphScreen} />
-        <Stack.Screen name="Store" component={StoreScreen} />
+        <Stack.Screen name="Store" component={StoreScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   )
