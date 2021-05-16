@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import Success from '../Success/Success';
 import Category from '../CategoryScreen/CategoryScreen';
 
+
 export default function TimerExperiment() {
   const navigation = useNavigation();
   const [worktime, setWorktime] = useState(10);
@@ -27,9 +28,11 @@ export default function TimerExperiment() {
 
   console.log('selectedValue-->', selectedValue);
 
+
   return (
     <View style={styles.mainView}>
       {/* <Text>Choose your time!</Text> */}
+
       <Picker
         ref={pickerRef}
         selectedValue={selectedValue}
