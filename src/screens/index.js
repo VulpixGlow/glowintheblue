@@ -5,3 +5,5 @@ export { default as HomeScreen } from "./HomeScreen/HomeScreen"
 export { default as RegistrationScreen } from "./RegistrationScreen/RegistrationScreen"
 
 export { default as TimerScreen } from "./TimerScreen/TimerScreen"
+
+export { default as Onboarding } from "./Onboarding/Onboarding"

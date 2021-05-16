@@ -9,6 +9,7 @@ import Success from '../Success/Success';
 import Category from '../CategoryScreen/CategoryScreen';
 import Tabs from '../Tabs/Tabs'
 
+
 export default function TimerExperiment() {
   const [worktime, setWorktime] = useState(10)
   const [isRunning, setRunning] = useState(false)
@@ -17,6 +18,7 @@ export default function TimerExperiment() {
 
   const navigation = useNavigation()
   const pickerRef = useRef()
+
 
   let addPoints = 0
 
@@ -72,6 +74,7 @@ export default function TimerExperiment() {
           }}
         ></Button>
       </View>
+
       <Picker
         ref={pickerRef}
         selectedValue={selectedValue}
