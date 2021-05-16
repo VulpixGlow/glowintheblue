@@ -1,20 +1,20 @@
+import "react-native-gesture-handler"
+import React, { useEffect, useState } from "react"
+import { firebase } from "./config/Firebase"
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
 
-import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
-import { firebase } from './config/Firebase';
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  Onboarding,
+  LoginScreen,
+  RegistrationScreen,
+  HomeScreen,
+  PointScreen,
+  StoreScreen,
+  GraphScreen
+} from "./src/screens"
 
-import { LoginScreen, HomeScreen, RegistrationScreen, Onboarding } from './src/screens';
-
-import Success from './src/screens/Success/Success';
-import { decode, encode } from 'base-64';
-import { ActivityIndicator, ScrollView, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
-import TimerExperiment from './src/screens/TimerExperiment/TimerExperiment';
-import Points from './src/screens/Points/Points'
-import Store from './src/screens/store/Store'
-import Graph from './src/screens/GraphScreen/GraphScreen'
-import { PointScreen } from "./src/screens/PointScreen/PointScreen"
+import { StatusBar } from "react-native"
 
 const Stack = createStackNavigator()
 
@@ -22,15 +22,13 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#aedcff',
-    background: '#8cffde',
-  },
-};
+    primary: "#aedcff",
+    background: "#8cffde"
+  }
+}
 
 export default function App(props) {
-
   return (
-
     <NavigationContainer theme={MyTheme}>
       <StatusBar
         translucent
@@ -38,8 +36,13 @@ export default function App(props) {
         barStyle="light-content"
       />
 
-      <Stack.Navigator initialRouteName='Onboarding' screenOptions={{ title: '' }}>
-        <Stack.Screen name='Onboarding' component={Onboarding} />
+      <Stack.Navigator
+        initialRouteName="Onboarding"
+        screenOptions={{ title: "" }}
+      >
+        <Stack.Screen name="Onboarding" component={Onboarding} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Registration" component={RegistrationScreen} />
 
         <Stack.Screen
           name="Home"
@@ -53,13 +56,9 @@ export default function App(props) {
           }}
         />
 
-        <Stack.Screen name='Success' component={Success} />
-        {/* <Stack.Screen name='Graph' component={GraphScreen} /> */}
-        <Stack.Screen name='Points' component={Points} />
-        <Stack.Screen name="Store" component={Store} />
+        <Stack.Screen name="Points" component={PointScreen} />
         <Stack.Screen name="Graph" component={GraphScreen} />
-
-
+        <Stack.Screen name="Store" component={StoreScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
