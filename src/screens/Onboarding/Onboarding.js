@@ -74,7 +74,7 @@ const Onboarding = () => {
             leftButtonLabel="Back"
             leftButtonPress={() => handlePageChange(2)}
             rightButtonLabel="Continue"
-            rightButtonPress={() => navigation.navigate("Home")}
+            rightButtonPress={() => navigation.navigate("Login")}
           />
         </View>
       </ViewPager>
