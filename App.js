@@ -1,3 +1,4 @@
+
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { firebase } from './config/Firebase';
@@ -11,9 +12,9 @@ import TimerExperiment from './src/screens/TimerExperiment/TimerExperiment';
 import Points from './src/screens/Points/Points'
 import Store from './src/screens/store/Store'
 import Graph from './src/screens/GraphScreen/GraphScreen'
+import { PointScreen } from "./src/screens/PointScreen/PointScreen"
 
-
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 const MyTheme = {
   ...DefaultTheme,
@@ -24,34 +25,34 @@ const MyTheme = {
   },
 };
 
-
-
 export default function App(props) {
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar
         translucent
-        backgroundColor='#2d2660'
-        barStyle='light-content'
+        backgroundColor="#2d2660"
+        barStyle="light-content"
       />
-      <Stack.Navigator initialRouteName='Home' screenOptions={{ title: '' }}>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{ title: "" }}>
         <Stack.Screen
-          name='Home'
+          name="Home"
           component={HomeScreen}
           options={{
             headerStyle: {
-              backgroundColor: '#2d2660',
-              shadowColor: 'transparent',
+              backgroundColor: "#2d2660",
+              shadowColor: "transparent"
             },
-            headerTintColor: 'white',
+            headerTintColor: "white"
           }}
         />
+
         <Stack.Screen name='Success' component={Success} />
         {/* <Stack.Screen name='Graph' component={GraphScreen} /> */}
         <Stack.Screen name='Points' component={Points} />
         <Stack.Screen name="Store" component={Store} />
         <Stack.Screen name="Graph" component={GraphScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
