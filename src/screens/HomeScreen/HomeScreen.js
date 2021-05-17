@@ -11,11 +11,6 @@ export default function HomeScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.container_timer}>
-        {/* <TimerScreen /> */}
-
-        {/* <CategoryScreen /> */}
-        {/* <Success /> */}
-        {/* <TimerExperiment homeProps={props} /> */}
         <TimerExperiment />
       </View>
     </View>

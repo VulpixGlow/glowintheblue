@@ -62,6 +62,8 @@ export default function App() {
     })
   }, [])
 
+  // Good Spot to add a spinnging wheel or loading icon
+
   if (loading) {
     return <></>
   }

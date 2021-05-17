@@ -18,11 +18,8 @@ export default function TimerExperiment() {
   const [isRunning, setRunning] = useState(false)
   const [selectedValue, setSelectedValue] = useState(0)
   const [points, setPoints] = useState(0)
-  // console.log('points', points)
 
   // Async Storage Logic
-  // const [userPoints, setUserPoints] = useState(0)
-
   // const { getItem, setItem } = AsyncStorage()
 
   const retrieveDataFromStorage = async () => {
@@ -60,13 +57,11 @@ export default function TimerExperiment() {
   }, [])
 
   // Helper Function
-  // const onPointChange = userPoints => setPoints(userPoints)
   const onConfirmCompleted = total => {
     if (!points) return
     saveDataToStorage(total)
     setPoints(total)
   }
-
   // Async Storage Logic END
 
   const navigation = useNavigation()
@@ -81,20 +76,20 @@ export default function TimerExperiment() {
     case 20:
       addPoints = 10
       break
-    // case 30:
-    //   setPoints(points + 15)
-    //   break
-    // case 40:
-    //   setPoints(points + 20)
-    //   break
-    // case 50:
-    //   setPoints(points + 25)
-    //   break
-    // case 60:
-    //   setPoints(points + 30)
-    //   break
+    case 30:
+      addPoints = 15
+      break
+    case 40:
+      addPoints = 20
+      break
+    case 50:
+      addPoints = 25
+      break
+    case 60:
+      addPoints = 30
+      break
     default:
-      addPoints = 0
+      addPoints = 35
   }
   //   console.log("selectedValue-->", selectedValue)
   //   console.log("addPoints-->", addPoints)
