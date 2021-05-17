@@ -61,7 +61,7 @@ export default function TimerExperiment() {
 
   // Helper Function
   const onConfirmCompleted = total => {
-    if (!points) return
+    // if (!points) return
     saveDataToStorage(total)
     setPoints(total)
   }
