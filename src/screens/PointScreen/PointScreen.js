@@ -13,8 +13,8 @@ export function Store() {
 }
 
 function Points() {
-  const navigation = useNavigation();
-  console.log('navigation', navigation);
+  const navigation = useNavigation()
+  console.log('navigation', navigation)
 
   return (
     <View>
@@ -24,12 +24,11 @@ function Points() {
         </View>
       </Card>
       <Store />
-
     </View>
   );
 }
 
-export default Points;
+export default Points
 
 const styles = StyleSheet.create({
   container: {
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
     // marginLeft: 7,
     // marginRight: 7,
     // padding: 20,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   // textStyle: {
   //   color: 'white',
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#aedcff',
     // justifyContent: 'center',
     alignItems: 'center',
-    display: 'flex',
+    display: 'flex'
   },
   buttonCTA: {
     borderRadius: 50,
