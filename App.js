@@ -1,8 +1,8 @@
-import "react-native-gesture-handler"
-import React, { useEffect, useState } from "react"
-import { firebase } from "./config/Firebase"
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
+import 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react'
+import { firebase } from './config/Firebase'
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
 import {
   Onboarding,
@@ -12,11 +12,11 @@ import {
   PointScreen,
   StoreScreen,
   GraphScreen
-} from "./src/screens"
+} from './src/screens'
 
-import { StatusBar } from "react-native"
+import { StatusBar } from 'react-native'
 
-import { decode, encode } from "base-64"
+import { decode, encode } from 'base-64'
 if (!global.btoa) {
   global.btoa = encode
 }
@@ -30,8 +30,8 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#aedcff",
-    background: "#8cffde"
+    primary: '#aedcff',
+    background: '#8cffde'
   }
 }
 
@@ -42,7 +42,7 @@ export default function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const usersRef = firebase.firestore().collection("users")
+    const usersRef = firebase.firestore().collection('users')
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         usersRef
@@ -62,46 +62,43 @@ export default function App() {
     })
   }, [])
 
+  // Good Spot to add a spinnging wheel or loading icon
+
   if (loading) {
     return <></>
   }
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <StatusBar
-        translucent
-        backgroundColor="#2d2660"
-        barStyle="light-content"
-      />
+      <StatusBar translucent backgroundColor='#2d2660' barStyle='light-content' />
 
       {/* <Stack.Navigator
         initialRouteName="Onboarding"
         screenOptions={{ title: "" }}
       > */}
-      <Stack.Navigator screenOptions={{ title: "" }}>
+      <Stack.Navigator screenOptions={{ title: '' }}>
         {user ? (
           <>
             <Stack.Screen
-              name="Home"
+              name='Home'
               options={{
                 headerStyle: {
-                  backgroundColor: "#2d2660",
-                  shadowColor: "transparent"
+                  backgroundColor: '#2d2660',
+                  shadowColor: 'transparent'
                 },
-                headerTintColor: "white"
-              }}
-            >
+                headerTintColor: 'white'
+              }}>
               {props => <HomeScreen {...props} extraData={user} />}
             </Stack.Screen>
-            <Stack.Screen name="Points" component={PointScreen} />
-            <Stack.Screen name="Graph" component={GraphScreen} />
-            <Stack.Screen name="Store" component={StoreScreen} />
+            <Stack.Screen name='Points' component={PointScreen} />
+            <Stack.Screen name='Graph' component={GraphScreen} />
+            <Stack.Screen name='Store' component={StoreScreen} />
           </>
         ) : (
           <>
-            <Stack.Screen name="Onboarding" component={Onboarding} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
+            <Stack.Screen name='Onboarding' component={Onboarding} />
+            <Stack.Screen name='Login' component={LoginScreen} />
+            <Stack.Screen name='Registration' component={RegistrationScreen} />
           </>
         )}
       </Stack.Navigator>
