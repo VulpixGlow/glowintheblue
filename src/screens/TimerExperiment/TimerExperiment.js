@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react'
 import CountDown from 'react-native-countdown-component'
 import { Text, View, Button, StyleSheet, Alert, SafeAreaView, Item } from 'react-native'
@@ -10,7 +9,7 @@ import Success from '../Success/Success'
 import Category from '../CategoryScreen/CategoryScreen'
 import FooterScreen from '../FooterScreen/FooterScreen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import SelectCountdownComponent from './SelectDropdownComponent';
+import SelectCountdownComponent from './SelectDropdownComponent'
 
 // for AsyncStorage
 const STORAGE_KEY = '@save_points'
@@ -20,6 +19,8 @@ export default function TimerExperiment() {
   const [isRunning, setRunning] = useState(false)
   const [selectedValue, setSelectedValue] = useState(0)
   const [points, setPoints] = useState(0)
+  const navigation = useNavigation()
+  const pickerRef = useRef()
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
@@ -66,9 +67,6 @@ export default function TimerExperiment() {
   }
   // Async Storage Logic END
 
-  const navigation = useNavigation()
-  const pickerRef = useRef()
-
   let addPoints = 0
 
   switch (selectedValue) {
@@ -108,48 +106,44 @@ export default function TimerExperiment() {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) }
     ])
   // How can this all be stored in a object and referenced for graphing?
-  //   console.log("AselectedValue-->", selectedValue)
-  //   console.log("AaddPoints-->", addPoints)
-  //   console.log("Points", points)
+  console.log('AselectedValue-->', selectedValue)
+  console.log('AaddPoints-->', addPoints)
+  console.log('Points', points)
 
   return (
-
     <SafeAreaView>
-     <View style={styles.pointsIcon}>
+      <View style={styles.pointsIcon}>
         <Text>Points Earned:</Text>
         <Button
           title={`${points}`}
-          // points={points}
-          // selectedTime={selectedValue}
-          // pointsAdded={addPoints}
           onPress={() => {
             navigation.navigate('Points')
           }}></Button>
       </View>
 
       <View style={styles.mainView}>
-        <View>
-          <Picker
-            ref={pickerRef}
-            selectedValue={selectedValue}
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
-            style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
-            <Picker.Item color='white' label='10 minutes' value={10} />
-            <Picker.Item color='white' label='20 minutes' value={20} />
-            <Picker.Item color='white' label='30 minutes' value={30} />
-          </Picker>
-        </View>
+        {/* <View> */}
+        <Picker
+          ref={pickerRef}
+          selectedValue={selectedValue}
+          onValueChange={itemValue => setSelectedValue(itemValue)}
+          style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
+          <Picker.Item color='white' label='10 minutes' value={10} />
+          <Picker.Item color='white' label='20 minutes' value={20} />
+          <Picker.Item color='white' label='30 minutes' value={30} />
+        </Picker>
+        {/* </View> */}
         <CountDown
           size={60}
           // until={selectedValue * 60}
           until={selectedValue}
-     // onFinish={() => navigation.navigate('Success')}
-        onFinish={createTwoButtonAlert}
+          // onFinish={() => navigation.navigate('Success')}
+          onFinish={createTwoButtonAlert}
           digitStyle={{
             // backgroundColor: '#FFF',
             borderWidth: 0,
             borderColor: '#e785e2',
-            borderRadius: 50,
+            borderRadius: 50
           }}
           digitTxtStyle={{ color: '#e785e2' }}
           timeLabelStyle={{ color: '#8cfede', fontWeight: 'light' }}
@@ -160,15 +154,15 @@ export default function TimerExperiment() {
           running={isRunning}
         />
 
-        <View style={styles.pickerView}>
+        {/* <View style={styles.pickerView}>
           <SelectCountdownComponent />
-        </View>
+        </View> */}
         <View style={styles.buttonsView}>
           <Button title='Start' onPress={() => setRunning(true)} />
           <Button title='Pause' onPress={() => setRunning(false)} />
-          <FooterScreen />
         </View>
+        <FooterScreen />
       </View>
     </SafeAreaView>
-  );
+  )
 }
