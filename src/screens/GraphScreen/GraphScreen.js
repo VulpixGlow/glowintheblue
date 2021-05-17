@@ -1,5 +1,5 @@
 import React from "react";
-
+import FooterScreen from '../FooterScreen/FooterScreen'
 // import all the components we are going to use
 import {
   SafeAreaView,
@@ -318,8 +318,10 @@ export default function GraphScreen() {
             {/*Example of Contribution Chart*/}
             {/* <MyContributionGraph /> */}
           </View>
+          
         </View>
       </ScrollView>
+      <FooterScreen />
     </SafeAreaView>
   );
 }
