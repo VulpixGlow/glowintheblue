@@ -1,10 +1,10 @@
-import React from "react"
-import { View } from "react-native"
-import styles from "./styles"
+import React from 'react'
+import { View } from 'react-native'
+import styles from './styles'
 
 // import CategoryScreen from "../CategoryScreen/CategoryScreen"
 // import TimerScreen from "../TimerScreen/TimerScreen"
-import TimerExperiment from "../TimerExperiment/TimerExperiment"
+import TimerExperiment from '../TimerExperiment/TimerExperiment'
 // import Success from "../Success/Success"
 
 export default function HomeScreen(props) {
@@ -15,7 +15,8 @@ export default function HomeScreen(props) {
 
         {/* <CategoryScreen /> */}
         {/* <Success /> */}
-        <TimerExperiment homeProps={props} />
+        {/* <TimerExperiment homeProps={props} /> */}
+        <TimerExperiment />
       </View>
     </View>
   )
