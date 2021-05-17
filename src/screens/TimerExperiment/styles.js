@@ -11,10 +11,14 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 20,
+    // marginTop: 20,
   },
   pickerView: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  countdownView: {
     justifyContent: 'center',
     alignItems: 'center',
   },

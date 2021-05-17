@@ -6,38 +6,37 @@ import { useNavigation } from '@react-navigation/native';
 
 export function Buy() {
   return (
-    <View >
-     <Button
-            buttonStyle={styles.buttonCTA}
-            title='✅'
-            onPress={() => navigation.navigate('Store')}
-          />
-  </View>
-  )
+    <View>
+      <Button
+        buttonStyle={styles.buttonCTA}
+        title='✅'
+        onPress={() => navigation.navigate('Store')}
+      />
+    </View>
+  );
 }
 
 function Store() {
   const navigation = useNavigation();
-  console.log('navigation', navigation);
+  // console.log('navigation', navigation);
 
   return (
     <View>
-    <Card >
-    <View style={styles.buttonContainer}>
-     <Text h1>SHOP</Text>
-    </View>
-    </Card>
-    <Buy/>
+      <Card>
+        <View style={styles.buttonContainer}>
+          <Text h1>SHOP</Text>
+        </View>
+      </Card>
+      <Buy />
     </View>
   );
-
 }
 
 export default Store;
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 20
+    borderRadius: 20,
   },
   // container: {
   //   marginTop: '7%',
@@ -57,17 +56,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#aedcff',
     borderRadius: 50,
   },
- buttonCTA: {
+  buttonCTA: {
     borderRadius: 50,
-   padding: 15,
-   margin: 40,
-   marginLeft: 185,
-   marginRight: 185,
+    padding: 15,
+    margin: 40,
+    marginLeft: 185,
+    marginRight: 185,
     backgroundColor: '#fec4fc',
     borderStyle: 'solid',
     borderColor: '#aedcff',
-   
-    
   },
   buttonContainer: {
     borderRadius: 50,
@@ -76,6 +73,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
-    
-  }
+  },
 });
