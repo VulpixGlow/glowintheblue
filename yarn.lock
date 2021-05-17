@@ -5866,7 +5866,7 @@
   dependencies:
     "asap" "~2.0.6"
 
-"prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15.7.0":
+"prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.5.9", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15.7.0":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -6082,6 +6082,52 @@
     "prop-types" "^15.6.2"
     "react-native-iphone-x-helper" "^1.0.3"
 
+"react-native-material-buttons@^0.5.0":
+  "integrity" "sha1-qys+P8P1AMpxP1Hp11l4r/YCFSo="
+  "resolved" "https://registry.npmjs.org/react-native-material-buttons/-/react-native-material-buttons-0.5.0.tgz"
+  "version" "0.5.0"
+  dependencies:
+    "prop-types" "^15.5.9"
+    "react-native-material-ripple" "^0.7.0"
+
+"react-native-material-dropdown@^0.11.1":
+  "integrity" "sha1-wP5DSo5heUHvkQukTS8HyPN1hP4="
+  "resolved" "https://registry.npmjs.org/react-native-material-dropdown/-/react-native-material-dropdown-0.11.1.tgz"
+  "version" "0.11.1"
+  dependencies:
+    "prop-types" "^15.5.9"
+    "react-native-material-buttons" "^0.5.0"
+    "react-native-material-ripple" "^0.8.0"
+    "react-native-material-textfield" "^0.12.0"
+
+"react-native-material-ripple@^0.7.0":
+  "integrity" "sha1-4q9REGgFMvFK6jw6Q4JHvi/+9lk="
+  "resolved" "https://registry.npmjs.org/react-native-material-ripple/-/react-native-material-ripple-0.7.5.tgz"
+  "version" "0.7.5"
+  dependencies:
+    "prop-types" "^15.5.10"
+
+"react-native-material-ripple@^0.8.0":
+  "integrity" "sha1-uMJOb96iryoh6EaLH0CzVIMBni8="
+  "resolved" "https://registry.npmjs.org/react-native-material-ripple/-/react-native-material-ripple-0.8.0.tgz"
+  "version" "0.8.0"
+  dependencies:
+    "prop-types" "^15.5.10"
+
+"react-native-material-textfield@^0.12.0":
+  "integrity" "sha1-P7oZ12q4n2cFLIHgghUvwkPYKj8="
+  "resolved" "https://registry.npmjs.org/react-native-material-textfield/-/react-native-material-textfield-0.12.0.tgz"
+  "version" "0.12.0"
+  dependencies:
+    "prop-types" "^15.5.9"
+
+"react-native-modal-dropdown@^1.0.0":
+  "integrity" "sha512-+ghOIKgdRk4p3VLY2EcpKGE3IxCLcdjXkPJu6dNm4hRvre8et4T5fNiqhezYCg5aZUlTYn31Ba0dG9OOFAJHmg=="
+  "resolved" "https://registry.npmjs.org/react-native-modal-dropdown/-/react-native-modal-dropdown-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "prop-types" "^15.6.0"
+
 "react-native-modal@^11.10.0":
   "integrity" "sha512-syRYDJYSh16bR37R5EKU9T/wC+5bEOfF17IUqf5URdhbEDd+hxyMInC++l45E8oI+MtdOaEp9yAws5xDqk8dnA=="
   "resolved" "https://registry.npmjs.org/react-native-modal/-/react-native-modal-11.10.0.tgz"
@@ -6118,6 +6164,11 @@
   "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.0.0.tgz"
   "version" "3.0.0"
 
+"react-native-select-dropdown@^1.0.6":
+  "integrity" "sha512-FVwllKL8rzz99XijVAOEhcS0XPhEKeprn18dO4ridEO4J2tGQZSyvswtaJ+Gl0EwVk397z/c+GgdYj8C/yRveA=="
+  "resolved" "https://registry.npmjs.org/react-native-select-dropdown/-/react-native-select-dropdown-1.0.6.tgz"
+  "version" "1.0.6"
+
 "react-native-size-matters@^0.3.1":
   "integrity" "sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw=="
   "resolved" "https://registry.npmjs.org/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"
@@ -6131,7 +6182,7 @@
     "css-select" "^2.1.0"
     "css-tree" "^1.0.0-alpha.39"
 
-"react-native-vector-icons@^7.0.0":
+"react-native-vector-icons@^7.0.0", "react-native-vector-icons@^7.1.0":
   "integrity" "sha512-V2a1zJ4i+kS8O4j183gIwX14St9AxxXabxwYpFBgRhvr2NDXyFcjHDEAgrOYYlt2W57e20aN1tBDU/I+wn9WtQ=="
   "resolved" "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-7.1.0.tgz"
   "version" "7.1.0"
@@ -6160,7 +6211,7 @@
     "prop-types" "^15.6.0"
     "react-timer-mixin" "^0.13.4"
 
-"react-native@>= 0.50.0", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz":
+"react-native@*", "react-native@>= 0.50.0", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz":
   "integrity" "sha512-3jHI2YufrJi7eIABRf/DN/I2yOkmIZ0vAyezTz+PAUJiEs4v//5LLojWEU+W53AZsnuaEMcl/4fVy4bd+OuUbA=="
   "resolved" "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz"
   dependencies:
