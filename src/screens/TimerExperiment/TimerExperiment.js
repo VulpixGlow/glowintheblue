@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState, useRef } from 'react'
 import CountDown from 'react-native-countdown-component'
-import { Text, View, Button, StyleSheet, Alert } from 'react-native'
+import { Text, View, Button, StyleSheet, Alert, SafeAreaView, Item } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import styles from './styles'
 import Modal from 'react-native-modal'
@@ -9,6 +10,7 @@ import Success from '../Success/Success'
 import Category from '../CategoryScreen/CategoryScreen'
 import FooterScreen from '../FooterScreen/FooterScreen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import SelectCountdownComponent from './SelectDropdownComponent';
 
 // for AsyncStorage
 const STORAGE_KEY = '@save_points'
@@ -111,8 +113,9 @@ export default function TimerExperiment() {
   //   console.log("Points", points)
 
   return (
-    <View>
-      <View style={styles.pointsIcon}>
+
+    <SafeAreaView>
+     <View style={styles.pointsIcon}>
         <Text>Points Earned:</Text>
         <Button
           title={`${points}`}
@@ -124,42 +127,48 @@ export default function TimerExperiment() {
           }}></Button>
       </View>
 
-      <Picker
-        ref={pickerRef}
-        selectedValue={selectedValue}
-        onValueChange={(itemValue, itemPosition) => setSelectedValue(itemValue)}
-        // onValueChange={(itemValue) => console.log('itemValue -->', itemValue)}
-        style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
-        <Picker.Item color='white' label='0 minutes' value={0} />
-        <Picker.Item color='white' label='10 minutes' value={10} />
-        <Picker.Item color='white' label='20 minutes' value={20} />
-        <Picker.Item color='white' label='30 minutes' value={30} />
-      </Picker>
-      <CountDown
-        size={60}
-        // until={selectedValue * 60}
-        until={selectedValue}
-        // onFinish={() => navigation.navigate("Success")}
-        //  onFinish={setPoints => navigation.navigate("Success")}
+      <View style={styles.mainView}>
+        <View>
+          <Picker
+            ref={pickerRef}
+            selectedValue={selectedValue}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+            style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
+            <Picker.Item color='white' label='10 minutes' value={10} />
+            <Picker.Item color='white' label='20 minutes' value={20} />
+            <Picker.Item color='white' label='30 minutes' value={30} />
+          </Picker>
+        </View>
+        <CountDown
+          size={60}
+          // until={selectedValue * 60}
+          until={selectedValue}
+     // onFinish={() => navigation.navigate('Success')}
         onFinish={createTwoButtonAlert}
-        digitStyle={{
-          // backgroundColor: '#FFF',
-          borderWidth: 0,
-          borderColor: '#e785e2',
-          borderRadius: 50
-        }}
-        digitTxtStyle={{ color: '#e785e2' }}
-        timeLabelStyle={{ color: '#8cfede', fontWeight: 'light' }}
-        separatorStyle={{ marginBottom: 10, color: '#e785e2' }}
-        timeToShow={['M', 'S']}
-        timeLabels={{ m: null, s: null }}
-        showSeparator
-        running={isRunning}
-      />
-      <Category name='Home' component={Category} />
-      <Button title='Start' onPress={() => setRunning(true)} />
-      <Button title='Pause' onPress={() => setRunning(false)} />
-      <FooterScreen />
-    </View>
-  )
+          digitStyle={{
+            // backgroundColor: '#FFF',
+            borderWidth: 0,
+            borderColor: '#e785e2',
+            borderRadius: 50,
+          }}
+          digitTxtStyle={{ color: '#e785e2' }}
+          timeLabelStyle={{ color: '#8cfede', fontWeight: 'light' }}
+          separatorStyle={{ marginBottom: 10, color: '#e785e2' }}
+          timeToShow={['M', 'S']}
+          timeLabels={{ m: null, s: null }}
+          showSeparator
+          running={isRunning}
+        />
+
+        <View style={styles.pickerView}>
+          <SelectCountdownComponent />
+        </View>
+        <View style={styles.buttonsView}>
+          <Button title='Start' onPress={() => setRunning(true)} />
+          <Button title='Pause' onPress={() => setRunning(false)} />
+          <FooterScreen />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
 }
