@@ -19,7 +19,6 @@ const firebaseConfig = {
   messagingSenderId: MESSAGE_SENDER_ID,
   appId: APP_ID
 }
-console.log(API_KEY)
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
