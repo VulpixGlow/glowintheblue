@@ -13,8 +13,7 @@ export function Store() {
 }
 
 function Points() {
-  const navigation = useNavigation()
-  console.log('navigation', navigation)
+  const navigation = useNavigation();
 
   return (
     <View>

@@ -5,7 +5,14 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column'
     // justifyContent: 'center',
-    // alignItems: 'center'
+    // alignItems: 'center',
+  },
+  buttonsView: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    // marginTop: 20,
+
   },
   // buttonsView: {
   //   flex: 1,
@@ -17,6 +24,9 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20
-  }
-})
+  },
+  countdownView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

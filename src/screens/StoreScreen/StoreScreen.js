@@ -8,37 +8,31 @@ export function Buy() {
   return (
     <View >
       <FooterScreen />
-     {/* <Button
-            buttonStyle={styles.buttonCTA}
-            title='✅'
-            onPress={() => navigation.navigate('Store')}
-          /> */}
   </View>
   )
+
 }
 
 function Store() {
   const navigation = useNavigation();
-  console.log('navigation', navigation);
 
   return (
     <View>
-    <Card >
-    <View style={styles.buttonContainer}>
-     <Text h1>SHOP</Text>
-    </View>
-    </Card>
-    <Buy/>
+      <Card>
+        <View style={styles.buttonContainer}>
+          <Text h1>SHOP</Text>
+        </View>
+      </Card>
+      <Buy />
     </View>
   );
-
 }
 
 export default Store;
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 20
+    borderRadius: 20,
   },
   // container: {
   //   marginTop: '7%',
