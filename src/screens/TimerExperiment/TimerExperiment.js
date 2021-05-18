@@ -10,7 +10,6 @@ import FooterScreen from '../FooterScreen/FooterScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
 
@@ -24,13 +23,7 @@ export default function TimerExperiment() {
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
-
-  const testAxios = async () => {
-    const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/test');
-    console.log('Data -->', data);
-  };
-
-  testAxios();
+ 
 
   const retrieveDataFromStorage = async () => {
     try {
@@ -158,9 +151,9 @@ export default function TimerExperiment() {
           </CountdownCircleTimer>
         </View>
 
-        {/* <View style={styles.pickerView}>
+        <View style={styles.pickerView}>
           <SelectCountdownComponent />
-        </View> */}
+        </View>
         <View style={styles.buttonsView}>
           <Button title='Start' onPress={() => setRunning(true)} />
           <Button title='Pause' onPress={() => setRunning(false)} />
