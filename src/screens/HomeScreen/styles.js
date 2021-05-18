@@ -1,13 +1,13 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "#2d2660"
+    alignItems: 'center',
+    backgroundColor: '#2d2660',
   },
   formContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     height: 80,
     marginTop: 40,
     marginBottom: 20,
@@ -16,53 +16,53 @@ export default StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 30,
     paddingRight: 30,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   input: {
     height: 48,
     borderRadius: 5,
-    overflow: "hidden",
-    backgroundColor: "white",
+    overflow: 'hidden',
+    backgroundColor: 'white',
     paddingLeft: 16,
     flex: 1,
-    marginRight: 5
+    marginRight: 5,
   },
   button: {
     height: 47,
     borderRadius: 5,
-    backgroundColor: "#788eec",
+    backgroundColor: '#788eec',
     width: 80,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
-    color: "white",
-    fontSize: 16
+    color: 'white',
+    fontSize: 16,
   },
   listContainer: {
     marginTop: 20,
-    padding: 20
+    padding: 20,
   },
   entityContainer: {
     marginTop: 16,
-    borderBottomColor: "#cccccc",
+    borderBottomColor: '#cccccc',
     borderBottomWidth: 1,
-    paddingBottom: 16
+    paddingBottom: 16,
   },
   entityText: {
     fontSize: 20,
-    color: "#333333"
+    color: '#333333',
   },
   container_timer: {
-    flex: 1
+    flex: 1,
   },
   pointsIcon: {
     width: 50,
     height: 50,
-    backgroundColor: "gold",
-    position: "absolute",
+    backgroundColor: 'gold',
+    position: 'absolute',
     top: 40,
-    right: 30
-  }
-})
+    right: 30,
+  },
+});
