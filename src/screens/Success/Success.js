@@ -10,7 +10,7 @@ function Success({ navigation }) {
     setModalVisible(!isModalVisible);
   };
 
-  console.log('navigation', navigation);
+  // console.log('navigation', navigation);
 
   return (
     // <Modal isVisible={isModalVisible}>
@@ -19,9 +19,7 @@ function Success({ navigation }) {
         <Card.Title>Success!</Card.Title>
         <Card.Divider />
         <Card.Image style={styles.cardText}>
-          <Text style={styles.text}>
-            You've successfully finished a session!
-          </Text>
+          <Text style={styles.text}>You've successfully finished a session!</Text>
           <Button
             buttonStyle={styles.buttonCTA}
             title='Yay!'

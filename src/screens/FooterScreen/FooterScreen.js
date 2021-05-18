@@ -1,37 +1,37 @@
-import React, { useState } from "react"
-import { StyleSheet, Text, View, Image, ImageBackground } from "react-native"
-import { Card, ListItem, Button, Icon } from "react-native-elements"
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import { Card, ListItem, Button, Icon } from 'react-native-elements';
 
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from '@react-navigation/native';
 
 export default function FooterScreen() {
-  const navigation = useNavigation()
-  console.log("navigation", navigation)
+  const navigation = useNavigation();
+  // console.log('navigation', navigation);
 
   return (
     <View style={styles.buttonContainer}>
       <Button
         buttonStyle={styles.buttonCTA}
-        title="🕙"
-        onPress={() => navigation.navigate("Home")}
+        title='🕙'
+        onPress={() => navigation.navigate('Home')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
-        title="💎"
-        onPress={() => navigation.navigate("Points")}
+        title='💎'
+        onPress={() => navigation.navigate('Points')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
-        title="📈"
-        onPress={() => navigation.navigate("Graph")}
+        title='📈'
+        onPress={() => navigation.navigate('Graph')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
-        title="🎁"
-        onPress={() => navigation.navigate("Store")}
+        title='🎁'
+        onPress={() => navigation.navigate('Store')}
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 15,
     margin: 20,
-    backgroundColor: "#fec4fc",
-    borderStyle: "solid",
-    borderColor: "#aedcff"
+    backgroundColor: '#fec4fc',
+    borderStyle: 'solid',
+    borderColor: '#aedcff',
   },
   buttonContainer: {
-    marginTop: 220,
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row"
-  }
-})
+    marginTop: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+});
