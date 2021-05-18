@@ -10,16 +10,17 @@ import FooterScreen from '../FooterScreen/FooterScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import axios from 'axios';
 
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
 
 export default function TimerExperiment() {
-  const [worktime, setWorktime] = useState(10);
-  const [isRunning, setRunning] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(0);
-  const [points, setPoints] = useState(0);
+  const [worktime, setWorktime] = useState(10)
+  const [isRunning, setRunning] = useState(false)
+  const [selectedValue, setSelectedValue] = useState(0)
+  const [points, setPoints] = useState(0)
+  const navigation = useNavigation()
+  const pickerRef = useRef()
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
@@ -73,9 +74,6 @@ export default function TimerExperiment() {
   };
   // Async Storage Logic END
 
-  const navigation = useNavigation();
-  const pickerRef = useRef();
-
   let addPoints = 0;
 
   switch (selectedValue) {
@@ -115,8 +113,6 @@ export default function TimerExperiment() {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
-  console.log('AaddPoints-->', addPoints);
-  console.log('Points', points);
 
   return (
     <SafeAreaView>
@@ -124,9 +120,6 @@ export default function TimerExperiment() {
         <Text>Points Earned:</Text>
         <Button
           title={`${points}`}
-          // points={points}
-          // selectedTime={selectedValue}
-          // pointsAdded={addPoints}
           onPress={() => {
             navigation.navigate('Points');
           }}></Button>
@@ -165,9 +158,9 @@ export default function TimerExperiment() {
           </CountdownCircleTimer>
         </View>
 
-        <View style={styles.pickerView}>
+        {/* <View style={styles.pickerView}>
           <SelectCountdownComponent />
-        </View>
+        </View> */}
         <View style={styles.buttonsView}>
           <Button title='Start' onPress={() => setRunning(true)} />
           <Button title='Pause' onPress={() => setRunning(false)} />
@@ -175,5 +168,5 @@ export default function TimerExperiment() {
         <FooterScreen />
       </View>
     </SafeAreaView>
-  );
+  )
 }
