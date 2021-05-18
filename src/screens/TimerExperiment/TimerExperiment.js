@@ -10,6 +10,7 @@ import Category from '../CategoryScreen/CategoryScreen'
 import FooterScreen from '../FooterScreen/FooterScreen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import SelectCountdownComponent from './SelectDropdownComponent'
+import axios from 'axios'
 
 // for AsyncStorage
 const STORAGE_KEY = '@save_points'
@@ -24,6 +25,13 @@ export default function TimerExperiment() {
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
+
+  // const testAxios = async () => {
+  //   const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/test')
+  //   console.log('Data -->', data)
+  // }
+
+  // testAxios()
 
   const retrieveDataFromStorage = async () => {
     try {
@@ -109,6 +117,10 @@ export default function TimerExperiment() {
   console.log('AselectedValue-->', selectedValue)
   console.log('AaddPoints-->', addPoints)
   console.log('Points', points)
+
+  // useEffect(() => {
+  //   setSelectedValue(pickerRef.current.props.selectedValue)
+  // }, [selectedValue])
 
   return (
     <SafeAreaView>
