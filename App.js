@@ -71,11 +71,6 @@ export default function App() {
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar translucent backgroundColor='#2d2660' barStyle='light-content' />
-
-      {/* <Stack.Navigator
-        initialRouteName="Onboarding"
-        screenOptions={{ title: "" }}
-      > */}
       <Stack.Navigator screenOptions={{ title: '' }}>
         {user ? (
           <>
@@ -96,9 +91,36 @@ export default function App() {
           </>
         ) : (
           <>
-            <Stack.Screen name='Onboarding' component={Onboarding} />
-            <Stack.Screen name='Login' component={LoginScreen} />
-            <Stack.Screen name='Registration' component={RegistrationScreen} />
+            <Stack.Screen
+              name='Onboarding'
+              options={{
+                headerShown: false,
+                headerTintColor: null,
+              }}
+              component={Onboarding}
+            />
+            <Stack.Screen
+              name='Login'
+              options={{
+                headerStyle: {
+                  backgroundColor: '#ffe1fd',
+                  shadowColor: 'transparent',
+                },
+                headerTintColor: '#e981e4',
+              }}
+              component={LoginScreen}
+            />
+            <Stack.Screen
+              name='Registration'
+              options={{
+                headerStyle: {
+                  backgroundColor: '#cbe3fc',
+                  shadowColor: 'transparent',
+                },
+                headerTintColor: '#64a5e9',
+              }}
+              component={RegistrationScreen}
+            />
           </>
         )}
       </Stack.Navigator>

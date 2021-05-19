@@ -180,9 +180,9 @@ export default function TimerExperiment() {
           </CountdownCircleTimer>
         </View>
 
-        {/* <View style={styles.pickerView}>
+        <View style={styles.pickerView}>
           <SelectCountdownComponent />
-        </View> */}
+        </View>
         <View style={styles.buttonsView}>
           <Button
             buttonStyle={styles.homeButton}
