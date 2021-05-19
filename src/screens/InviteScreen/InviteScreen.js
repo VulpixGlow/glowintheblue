@@ -6,7 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function InviteScreen() {
   // const navigation = useNavigation();
-
+  const [email, setEmail] = useState('');
+  console.log(email);
+  const handleSubmit = (evt) => {
+    // evt.preventDefault();
+    // console.log(email);
+    alert(`Invite Sent!`);
+  };
   return (
     <View>
       <Card>
@@ -16,12 +22,15 @@ export default function InviteScreen() {
             placeholder='Email'
             // button={    <Button title='➕' type="outline" style={{width: 50, marginLeft: 300}}></Button>}>
             rightIcon={{ name: 'add', size: 24, color: 'green' }}></Input>
-
-          <Input placeholder='Email' rightIcon={{ name: 'add', size: 24, color: 'green' }} />
-          <Input placeholder='Email' rightIcon={{ name: 'add', size: 24, color: 'green' }} />
+          <Input
+            placeholder='Email'
+            onHandleSubmit={(value) => this.setState({ email: value })}
+            rightIcon={{ name: 'add', size: 24, color: 'green' }}
+          />
           <Input placeholder='Email' rightIcon={{ name: 'add', size: 24, color: 'green' }} />
           <Input placeholder='Email' rightIcon={{ name: 'add', size: 24, color: 'green' }} />
         </View>
+        <Button title='Send' onPress={handleSubmit}></Button>
       </Card>
       <FooterScreen />
     </View>

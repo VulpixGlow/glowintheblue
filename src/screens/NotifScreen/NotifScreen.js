@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function NotifScreen() {
   // const navigation = useNavigation();
+ 
 
   return (
     <View >

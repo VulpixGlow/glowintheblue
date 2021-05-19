@@ -71,7 +71,7 @@ export default StyleSheet.create({
     borderStyle: 'solid',
     borderColor: '#aedcff',
   },
-  oima: {
-    fontFamily: 'Spoof-Regular',
-  },
+  // oima: {
+  //   fontFamily: 'Spoof-Regular',
+  // },
 });
