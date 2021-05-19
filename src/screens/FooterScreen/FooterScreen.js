@@ -12,7 +12,7 @@ export default function FooterScreen() {
     <View style={styles.buttonContainer}>
       <Button
         buttonStyle={styles.buttonCTA}
-        title='🕙'
+        title='Home'
         onPress={() => navigation.navigate('Home')}
       />
       <Button
@@ -35,14 +35,15 @@ export default function FooterScreen() {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   marginTop: '7%',
-  //   marginBottom: '10%',
-  //   marginLeft: '7%',
-  //   marginRight: '7%',
-  //   padding: '20%',
-  //   alignItems: 'center',
-  // },
+  container: {
+    // marginTop: '7%',
+    // marginBottom: '10%',
+    // marginLeft: '7%',
+    // marginRight: '7%',
+    // padding: '20%',
+    // alignItems: 'center',
+    backgroundColor: 'white',
+  },
   // textStyle: {
   //   color: 'white',
   //   fontSize: 50,
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   //   backgroundColor: '#aedcff',
   // },
   buttonCTA: {
-    borderRadius: 50,
+    borderRadius: 10,
     padding: 15,
     margin: 20,
     backgroundColor: '#fec4fc',

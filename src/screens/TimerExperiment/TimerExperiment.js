@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Text, View, Button, StyleSheet, Alert, SafeAreaView, Item, Animated } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+  Item,
+  Animated,
+  TouchableHighlight,
+} from 'react-native';
+import { Button } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
 import Modal from 'react-native-modal';
@@ -105,22 +115,32 @@ export default function TimerExperiment() {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
+  console.log('AaddPoints-->', addPoints);
+  console.log('Points', points);
+  const children = ({ remainingTime }) => {
+    const hours = Math.floor(remainingTime / 3600);
+    const minutes = Math.floor((remainingTime % 3600) / 60);
+    const seconds = remainingTime % 60;
+
+    return `${hours}:${minutes}:${seconds}`;
+  };
 
   return (
     <SafeAreaView>
       <View >
         <Button style={styles.buttonContainer} title='🔔' onPress={() => navigation.navigate('NotifScreen')}></Button>
-      {/* </View>
-      <View > */}
         <Button style={styles.buttonContainerF} title='👯' onPress={() => navigation.navigate('InviteScreen')}></Button>
       </View>
       <View style={styles.buttonContainerP}>
         <Text>💎</Text>
-        <Button
+      <View style={styles.pointsIcon}>
+        <Text style={styles.oima}>Points Earned:</Text>
+        <Text>{points}</Text>
+        {/* <Button
           title={`${points}`}
           onPress={() => {
             navigation.navigate('Points');
-          }}></Button>
+          }}></Button> */}
       </View>
 
       <View style={styles.mainView}>
@@ -130,7 +150,7 @@ export default function TimerExperiment() {
             selectedValue={selectedValue}
             onValueChange={(itemValue) => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
-            <Picker.Item color='white' label='10 minutes' value={10} />
+            <Picker.Item color='white' label='5 seconds' value={5} />
             <Picker.Item color='white' label='20 minutes' value={20} />
             <Picker.Item color='white' label='30 minutes' value={30} />
           </Picker>
@@ -141,11 +161,12 @@ export default function TimerExperiment() {
             key={selectedValue}
             duration={selectedValue}
             onComplete={createTwoButtonAlert}
+            children
             size={180}
             strokeWidth={15}
             colors={[
               ['#e785e2', 0.4],
-              ['#8cfede', 0.4],
+              ['#5ba5e7', 0.4],
               ['#e785e2', 0.4],
             ]}>
             {({ remainingTime, animatedColor }) => (
@@ -160,8 +181,13 @@ export default function TimerExperiment() {
           <SelectCountdownComponent />
         </View>
         <View style={styles.buttonsView}>
-          <Button title='Start' onPress={() => setRunning(true)} />
-          <Button title='Pause' onPress={() => setRunning(false)} />
+          <Button
+            buttonStyle={styles.homeButton}
+            titleStyle={{ color: '#2d2660' }}
+            title='Start'
+            onPress={() => setRunning(true)}
+          />
+          <Button buttonStyle={styles.homeButton} title='Pause' onPress={() => setRunning(false)} />
         </View>
         <FooterScreen />
       </View>
