@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Text, View, Button, StyleSheet, Alert, SafeAreaView, Item, Animated } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+  Item,
+  Animated,
+  TouchableHighlight,
+} from 'react-native';
+import { Button } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
 import Modal from 'react-native-modal';
@@ -15,12 +25,12 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 const STORAGE_KEY = '@save_points';
 
 export default function TimerExperiment() {
-  const [worktime, setWorktime] = useState(10)
-  const [isRunning, setRunning] = useState(false)
-  const [selectedValue, setSelectedValue] = useState(0)
-  const [points, setPoints] = useState(0)
-  const navigation = useNavigation()
-  const pickerRef = useRef()
+  const [worktime, setWorktime] = useState(10);
+  const [isRunning, setRunning] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(0);
+  const [points, setPoints] = useState(0);
+  const navigation = useNavigation();
+  const pickerRef = useRef();
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
@@ -113,16 +123,27 @@ export default function TimerExperiment() {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
+  console.log('AaddPoints-->', addPoints);
+  console.log('Points', points);
+  const children = ({ remainingTime }) => {
+    const hours = Math.floor(remainingTime / 3600);
+    const minutes = Math.floor((remainingTime % 3600) / 60);
+    const seconds = remainingTime % 60;
+
+    return `${hours}:${minutes}:${seconds}`;
+  };
 
   return (
     <SafeAreaView>
       <View style={styles.pointsIcon}>
-        <Text>Points Earned:</Text>
-        <Button
+        <Text style={styles.oima}>Points Earned:</Text>
+        <Text>{points}</Text>
+        {/* <Button
+
           title={`${points}`}
           onPress={() => {
             navigation.navigate('Points');
-          }}></Button>
+          }}></Button> */}
       </View>
 
       <View style={styles.mainView}>
@@ -132,7 +153,7 @@ export default function TimerExperiment() {
             selectedValue={selectedValue}
             onValueChange={(itemValue) => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
-            <Picker.Item color='white' label='10 minutes' value={10} />
+            <Picker.Item color='white' label='5 seconds' value={5} />
             <Picker.Item color='white' label='20 minutes' value={20} />
             <Picker.Item color='white' label='30 minutes' value={30} />
           </Picker>
@@ -143,11 +164,12 @@ export default function TimerExperiment() {
             key={selectedValue}
             duration={selectedValue}
             onComplete={createTwoButtonAlert}
+            children
             size={180}
             strokeWidth={15}
             colors={[
               ['#e785e2', 0.4],
-              ['#8cfede', 0.4],
+              ['#5ba5e7', 0.4],
               ['#e785e2', 0.4],
             ]}>
             {({ remainingTime, animatedColor }) => (
@@ -158,15 +180,20 @@ export default function TimerExperiment() {
           </CountdownCircleTimer>
         </View>
 
-        {/* <View style={styles.pickerView}>
+        <View style={styles.pickerView}>
           <SelectCountdownComponent />
-        </View> */}
+        </View>
         <View style={styles.buttonsView}>
-          <Button title='Start' onPress={() => setRunning(true)} />
-          <Button title='Pause' onPress={() => setRunning(false)} />
+          <Button
+            buttonStyle={styles.homeButton}
+            titleStyle={{ color: '#2d2660' }}
+            title='Start'
+            onPress={() => setRunning(true)}
+          />
+          <Button buttonStyle={styles.homeButton} title='Pause' onPress={() => setRunning(false)} />
         </View>
         <FooterScreen />
       </View>
     </SafeAreaView>
-  )
+  );
 }
