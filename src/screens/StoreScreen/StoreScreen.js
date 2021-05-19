@@ -10,7 +10,6 @@ export function Buy() {
       <FooterScreen />
   </View>
   )
-
 }
 
 function Store() {
@@ -28,7 +27,7 @@ function Store() {
   );
 }
 
-export default Store;
+export default Store
 
 const styles = StyleSheet.create({
   card: {
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: 10,
     backgroundColor: '#aedcff',
-    borderRadius: 50,
+    borderRadius: 50
   },
  buttonCTA: {
   //     borderRadius: 50,

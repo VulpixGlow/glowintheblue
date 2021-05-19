@@ -70,6 +70,8 @@ export default function App() {
     return <></>;
   }
 
+  console.log('How can user.id be passed down to store data', user)
+
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar translucent backgroundColor='#2d2660' barStyle='light-content' />

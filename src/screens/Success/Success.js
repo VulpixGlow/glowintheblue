@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
-import { Card, ListItem, Button, Icon } from 'react-native-elements';
-import { NavigationContainer } from '@react-navigation/native';
-import Modal from 'react-native-modal';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native'
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import { NavigationContainer } from '@react-navigation/native'
+import Modal from 'react-native-modal'
 
 function Success({ navigation }) {
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false)
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  // console.log('navigation', navigation);
-
   return (
-    // <Modal isVisible={isModalVisible}>
     <View>
       <Card>
         <Card.Title>Success!</Card.Title>
@@ -28,11 +25,10 @@ function Success({ navigation }) {
         </Card.Image>
       </Card>
     </View>
-    // </Modal>
-  );
+  )
 }
 
-export default Success;
+export default Success
 
 const styles = StyleSheet.create({
   container: {
@@ -41,27 +37,27 @@ const styles = StyleSheet.create({
     marginLeft: '7%',
     marginRight: '7%',
     padding: '20%',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   textStyle: {
     color: 'white',
     fontSize: 50,
-    fontWeight: '400',
+    fontWeight: '400'
   },
   cardText: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#aedcff',
+    backgroundColor: '#aedcff'
   },
   text: {
     marginBottom: 10,
-    backgroundColor: '#aedcff',
+    backgroundColor: '#aedcff'
   },
   buttonCTA: {
     borderRadius: 0,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 70,
-    backgroundColor: '#fec4fc',
-  },
-});
+    backgroundColor: '#fec4fc'
+  }
+})
