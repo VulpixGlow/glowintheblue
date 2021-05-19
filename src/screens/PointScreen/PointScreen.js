@@ -17,12 +17,11 @@ export function Store() {
 }
 
 function Points() {
-  const navigation = useNavigation();
-  console.log('navigation', navigation);
+  const navigation = useNavigation()
 
   return (
     <View>
-    <Card >
+    <Card>
     <View style={styles.buttonContainer}>
      <Text h1>POINTS! </Text>
     </View>

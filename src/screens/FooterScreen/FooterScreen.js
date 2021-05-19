@@ -1,33 +1,41 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
-import { Card, ListItem, Button, Icon } from 'react-native-elements';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native'
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 
-export default function FooterScreen() {
-  const navigation = useNavigation();
-  // console.log('navigation', navigation);
+export default function FooterScreen(props) {
+  console.log('FOOTER SCREEN PROPS', props)
+  const navigation = useNavigation()
 
   return (
     <View style={styles.buttonContainer}>
       <Button
         buttonStyle={styles.buttonCTA}
-        title='Home'
+        title='🕙'
+        props={props}
         onPress={() => navigation.navigate('Home')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
         title='💎'
+        props={props}
         onPress={() => navigation.navigate('Points')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
         title='📈'
-        onPress={() => navigation.navigate('Graph')}
+        props={props}
+        onPress={() =>
+          navigation.navigate('Graph', {
+            userData: props.userData
+          })
+        }
       />
       <Button
         buttonStyle={styles.buttonCTA}
         title='🎁'
+        props={props}
         onPress={() => navigation.navigate('Store')}
       />
     </View>

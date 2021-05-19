@@ -20,10 +20,15 @@ import FooterScreen from '../FooterScreen/FooterScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import axios from 'axios'
+import filterDataFunction from './filterDataFunction'
+
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
 
 export default function TimerExperiment() {
+  console.log('TIMEREXPERIMENT COMPONENT PROPS', props)
+  const [userData, setUserData] = useState([])
   const [worktime, setWorktime] = useState(10);
   const [isRunning, setRunning] = useState(false);
   const [selectedValue, setSelectedValue] = useState(0);
@@ -31,18 +36,30 @@ export default function TimerExperiment() {
   const navigation = useNavigation();
   const pickerRef = useRef();
 
+  const sessionData = async () => {
+    try {
+      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions')
+      console.log('Data from Timer Component -->', data)
+
+      setUserData(data)
+    } catch (error) {
+      console.log('Unable to retrieve data')
+    }
+  }
+
+  useEffect(() => {
+    sessionData()
+  }, [])
+
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
 
   const retrieveDataFromStorage = async () => {
     try {
-      const userPoints = await AsyncStorage.getItem(STORAGE_KEY);
-      console.log('retrieving data');
+      const userPoints = await AsyncStorage.getItem(STORAGE_KEY)
 
       if (userPoints !== null) {
-        console.log('We have data!');
-        console.log('Json Parse', JSON.parse(userPoints));
-        return JSON.parse(userPoints);
+        return JSON.parse(userPoints)
       }
     } catch (error) {
       alert('Failed to load points');
@@ -51,12 +68,8 @@ export default function TimerExperiment() {
 
   const saveDataToStorage = async (value) => {
     try {
-      console.log('saving data!');
-      const userPoints = JSON.stringify(value);
-      console.log('Json string ', userPoints);
-      await AsyncStorage.setItem(STORAGE_KEY, userPoints);
-      alert('Points were saved');
-      // setPoints(newValue)
+      const userPoints = JSON.stringify(value)
+      await AsyncStorage.setItem(STORAGE_KEY, userPoints)
     } catch (error) {
       alert('Failed to save points');
     }
@@ -109,14 +122,17 @@ export default function TimerExperiment() {
     Alert.alert('Congratulations', 'Confirm Completed Task', [
       {
         text: 'Uncompleted',
-        onPress: () => console.log('NO - Uncompleted Pressed'),
-        style: 'cancel',
+        onPress: () => console.log('Uncompleted Pressed'),
+        style: 'cancel'
       },
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
-  console.log('AaddPoints-->', addPoints);
-  console.log('Points', points);
+  console.log('MOST RECENT USER DATA', userData)
+
+  // how to access the user email => props.userData.extraData.email
+  let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com')
+  
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600);
     const minutes = Math.floor((remainingTime % 3600) / 60);
@@ -149,7 +165,6 @@ export default function TimerExperiment() {
             navigation.navigate('Points');
           }}></Button> */}
       </View>
-
       <View style={styles.mainView}>
         <View>
           <Picker
@@ -196,7 +211,13 @@ export default function TimerExperiment() {
           />
           <Button buttonStyle={styles.homeButton} title='Pause' onPress={() => setRunning(false)} />
         </View>
-        <FooterScreen />
+        <FooterScreen
+          userSession={props}
+          userPoints={points}
+          userTime={selectedValue}
+          userEmail={props.userData.extraData.email}
+          userData={dataForTimeLine}
+        />
       </View>
     </SafeAreaView>
   );
