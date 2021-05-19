@@ -10,7 +10,8 @@ import FooterScreen from '../FooterScreen/FooterScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-
+// logout
+import { firebase } from "../../../config/Firebase"
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
 
@@ -24,13 +25,6 @@ export default function TimerExperiment() {
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
-
-  const testAxios = async () => {
-    const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/test');
-    console.log('Data -->', data);
-  };
-
-  testAxios();
 
   const retrieveDataFromStorage = async () => {
     try {
@@ -98,8 +92,7 @@ export default function TimerExperiment() {
     default:
       addPoints = 35;
   }
-  //   console.log("selectedValue-->", selectedValue)
-  //   console.log("addPoints-->", addPoints)
+
 
   let totalPoints = points + addPoints;
 
@@ -113,7 +106,16 @@ export default function TimerExperiment() {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
-
+//logout
+  const logout = () =>{
+    firebase
+      .auth()
+      .signOut()
+      .then(()=> {
+        navigation.navigate('Login')
+      })
+  }
+  console.log('Hello from TimerExperiment')
   return (
     <SafeAreaView>
       <View style={styles.pointsIcon}>
@@ -158,12 +160,16 @@ export default function TimerExperiment() {
           </CountdownCircleTimer>
         </View>
 
-        {/* <View style={styles.pickerView}>
+        <View style={styles.pickerView}>
           <SelectCountdownComponent />
-        </View> */}
+        </View>
         <View style={styles.buttonsView}>
           <Button title='Start' onPress={() => setRunning(true)} />
           <Button title='Pause' onPress={() => setRunning(false)} />
+        </View>
+        <View style={{flex:1}}>
+          <Button title='Logout' onPress={() => logout()} />
+          <Button title='My Group' onPress={() => navigation.navigate('Group')} />
         </View>
         <FooterScreen />
       </View>
