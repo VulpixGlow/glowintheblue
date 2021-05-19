@@ -20,15 +20,17 @@ import FooterScreen from '../FooterScreen/FooterScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import axios from 'axios'
-import filterDataFunction from './filterDataFunction'
+import axios from 'axios';
+import filterDataFunction from './filterDataFunction';
 
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
 
-export default function TimerExperiment() {
-  console.log('TIMEREXPERIMENT COMPONENT PROPS', props)
-  const [userData, setUserData] = useState([])
+export default function TimerExperiment(props) {
+  console.log('TIMEREXPERIMENT COMPONENT PROPS', props);
+  const timerEmail = props.userData.extraData.email;
+  console.log('timerEmail -->', timerEmail);
+  const [userData, setUserData] = useState([]);
   const [worktime, setWorktime] = useState(10);
   const [isRunning, setRunning] = useState(false);
   const [selectedValue, setSelectedValue] = useState(0);
@@ -38,28 +40,28 @@ export default function TimerExperiment() {
 
   const sessionData = async () => {
     try {
-      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions')
-      console.log('Data from Timer Component -->', data)
+      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions');
+      console.log('Data from Timer Component -->', data);
 
-      setUserData(data)
+      setUserData(data);
     } catch (error) {
-      console.log('Unable to retrieve data')
+      console.log('Unable to retrieve data');
     }
-  }
+  };
 
   useEffect(() => {
-    sessionData()
-  }, [])
+    sessionData();
+  }, []);
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
 
   const retrieveDataFromStorage = async () => {
     try {
-      const userPoints = await AsyncStorage.getItem(STORAGE_KEY)
+      const userPoints = await AsyncStorage.getItem(STORAGE_KEY);
 
       if (userPoints !== null) {
-        return JSON.parse(userPoints)
+        return JSON.parse(userPoints);
       }
     } catch (error) {
       alert('Failed to load points');
@@ -68,8 +70,8 @@ export default function TimerExperiment() {
 
   const saveDataToStorage = async (value) => {
     try {
-      const userPoints = JSON.stringify(value)
-      await AsyncStorage.setItem(STORAGE_KEY, userPoints)
+      const userPoints = JSON.stringify(value);
+      await AsyncStorage.setItem(STORAGE_KEY, userPoints);
     } catch (error) {
       alert('Failed to save points');
     }
@@ -123,16 +125,17 @@ export default function TimerExperiment() {
       {
         text: 'Uncompleted',
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel'
+        style: 'cancel',
       },
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
-  console.log('MOST RECENT USER DATA', userData)
+  console.log('MOST RECENT USER DATA', userData);
 
   // how to access the user email => props.userData.extraData.email
-  let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com')
-  
+  // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
+  let dataForTimeLine = filterDataFunction(userData, `${timerEmail}`);
+
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600);
     const minutes = Math.floor((remainingTime % 3600) / 60);
@@ -200,7 +203,13 @@ export default function TimerExperiment() {
         </View>
 
         <View style={styles.pickerView}>
-          <SelectCountdownComponent />
+          <SelectCountdownComponent
+            userSession={props}
+            userPoints={points}
+            userTime={selectedValue}
+            userEmail={props.userData.extraData.email}
+            userData={dataForTimeLine}
+          />
         </View>
         <View style={styles.buttonsView}>
           <Button
