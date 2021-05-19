@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Text, View, Button, StyleSheet, Alert, SafeAreaView, Item, Animated } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+  Item,
+  Animated,
+  TouchableHighlight,
+} from 'react-native';
+import { Button } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
 import Modal from 'react-native-modal';
@@ -12,16 +22,38 @@ import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 // logout
 import { firebase } from "../../../config/Firebase"
+import axios from 'axios';
+import filterDataFunction from './filterDataFunction';
+
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
 
-export default function TimerExperiment() {
-  const [worktime, setWorktime] = useState(10)
-  const [isRunning, setRunning] = useState(false)
-  const [selectedValue, setSelectedValue] = useState(0)
-  const [points, setPoints] = useState(0)
-  const navigation = useNavigation()
-  const pickerRef = useRef()
+export default function TimerExperiment(props) {
+  console.log('TIMEREXPERIMENT COMPONENT PROPS', props);
+  const timerEmail = props.userData.extraData.email;
+  console.log('timerEmail -->', timerEmail);
+  const [userData, setUserData] = useState([]);
+  const [worktime, setWorktime] = useState(10);
+  const [isRunning, setRunning] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(0);
+  const [points, setPoints] = useState(0);
+  const navigation = useNavigation();
+  const pickerRef = useRef();
+
+  const sessionData = async () => {
+    try {
+      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions');
+      console.log('Data from Timer Component -->', data);
+
+      setUserData(data);
+    } catch (error) {
+      console.log('Unable to retrieve data');
+    }
+  };
+
+  useEffect(() => {
+    sessionData();
+  }, []);
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
@@ -29,11 +61,8 @@ export default function TimerExperiment() {
   const retrieveDataFromStorage = async () => {
     try {
       const userPoints = await AsyncStorage.getItem(STORAGE_KEY);
-      console.log('retrieving data');
 
       if (userPoints !== null) {
-        console.log('We have data!');
-        console.log('Json Parse', JSON.parse(userPoints));
         return JSON.parse(userPoints);
       }
     } catch (error) {
@@ -43,12 +72,8 @@ export default function TimerExperiment() {
 
   const saveDataToStorage = async (value) => {
     try {
-      console.log('saving data!');
       const userPoints = JSON.stringify(value);
-      console.log('Json string ', userPoints);
       await AsyncStorage.setItem(STORAGE_KEY, userPoints);
-      alert('Points were saved');
-      // setPoints(newValue)
     } catch (error) {
       alert('Failed to save points');
     }
@@ -97,10 +122,10 @@ export default function TimerExperiment() {
   let totalPoints = points + addPoints;
 
   const createTwoButtonAlert = () =>
-    Alert.alert('Congradulations', 'Confirm Completed Task', [
+    Alert.alert('Congratulations', 'Confirm Completed Task', [
       {
         text: 'Uncompleted',
-        onPress: () => console.log('NO - Uncompleted Pressed'),
+        onPress: () => console.log('Uncompleted Pressed'),
         style: 'cancel',
       },
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
@@ -116,17 +141,44 @@ export default function TimerExperiment() {
       })
   }
   console.log('Hello from TimerExperiment')
+  console.log('MOST RECENT USER DATA', userData);
+
+  // how to access the user email => props.userData.extraData.email
+  // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
+  let dataForTimeLine = filterDataFunction(userData, `${timerEmail}`);
+
+  const children = ({ remainingTime }) => {
+    const hours = Math.floor(remainingTime / 3600);
+    const minutes = Math.floor((remainingTime % 3600) / 60);
+    const seconds = remainingTime % 60;
+
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   return (
     <SafeAreaView>
-      <View style={styles.pointsIcon}>
-        <Text>Points Earned:</Text>
+      <View>
         <Button
+          style={styles.buttonContainer}
+          title='🔔'
+          onPress={() => navigation.navigate('NotifScreen')}></Button>
+        <Button
+          style={styles.buttonContainerF}
+          title='👯'
+          onPress={() => navigation.navigate('InviteScreen')}></Button>
+      </View>
+      <View style={styles.buttonContainerP}>
+        <Text>💎</Text>
+      </View>
+      <View style={styles.pointsIcon}>
+        <Text style={styles.oima}>Points Earned:</Text>
+        <Text>{points}</Text>
+        {/* <Button
           title={`${points}`}
           onPress={() => {
             navigation.navigate('Points');
-          }}></Button>
+          }}></Button> */}
       </View>
-
       <View style={styles.mainView}>
         <View>
           <Picker
@@ -134,7 +186,7 @@ export default function TimerExperiment() {
             selectedValue={selectedValue}
             onValueChange={(itemValue) => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
-            <Picker.Item color='white' label='10 minutes' value={10} />
+            <Picker.Item color='white' label='5 seconds' value={5} />
             <Picker.Item color='white' label='20 minutes' value={20} />
             <Picker.Item color='white' label='30 minutes' value={30} />
           </Picker>
@@ -145,11 +197,12 @@ export default function TimerExperiment() {
             key={selectedValue}
             duration={selectedValue}
             onComplete={createTwoButtonAlert}
+            children
             size={180}
             strokeWidth={15}
             colors={[
               ['#e785e2', 0.4],
-              ['#8cfede', 0.4],
+              ['#5ba5e7', 0.4],
               ['#e785e2', 0.4],
             ]}>
             {({ remainingTime, animatedColor }) => (
@@ -161,18 +214,35 @@ export default function TimerExperiment() {
         </View>
 
         <View style={styles.pickerView}>
-          <SelectCountdownComponent />
+          <SelectCountdownComponent
+            userSession={props}
+            userPoints={points}
+            userTime={selectedValue}
+            userEmail={props.userData.extraData.email}
+            userData={dataForTimeLine}
+          />
         </View>
         <View style={styles.buttonsView}>
-          <Button title='Start' onPress={() => setRunning(true)} />
-          <Button title='Pause' onPress={() => setRunning(false)} />
+          <Button
+            buttonStyle={styles.homeButton}
+            titleStyle={{ color: '#2d2660' }}
+            title='Start'
+            onPress={() => setRunning(true)}
+          />
+          <Button buttonStyle={styles.homeButton} title='Pause' onPress={() => setRunning(false)} />
         </View>
         <View style={{flex:1}}>
           <Button title='Logout' onPress={() => logout()} />
           <Button title='My Group' onPress={() => navigation.navigate('Group')} />
         </View>
-        <FooterScreen />
+        <FooterScreen
+          userSession={props}
+          userPoints={points}
+          userTime={selectedValue}
+          userEmail={props.userData.extraData.email}
+          userData={dataForTimeLine}
+        />
       </View>
     </SafeAreaView>
-  )
+  );
 }
