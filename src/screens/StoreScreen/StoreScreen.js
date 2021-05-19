@@ -1,39 +1,37 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Image, ImageBackground } from 'react-native';
-import { Card, ListItem, Button, Icon, Text } from 'react-native-elements';
+import React, { useState } from 'react'
+import { StyleSheet, View, Image, ImageBackground } from 'react-native'
+import { Card, ListItem, Button, Icon, Text } from 'react-native-elements'
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 
 export function Buy() {
   return (
-    <View >
-     <Button
-            buttonStyle={styles.buttonCTA}
-            title='✅'
-            onPress={() => navigation.navigate('Store')}
-          />
-  </View>
+    <View>
+      <Button
+        buttonStyle={styles.buttonCTA}
+        title='✅'
+        onPress={() => navigation.navigate('Store')}
+      />
+    </View>
   )
 }
 
 function Store() {
-  const navigation = useNavigation();
-  console.log('navigation', navigation);
+  const navigation = useNavigation()
 
   return (
     <View>
-    <Card >
-    <View style={styles.buttonContainer}>
-     <Text h1>SHOP</Text>
+      <Card>
+        <View style={styles.buttonContainer}>
+          <Text h1>SHOP</Text>
+        </View>
+      </Card>
+      <Buy />
     </View>
-    </Card>
-    <Buy/>
-    </View>
-  );
-
+  )
 }
 
-export default Store;
+export default Store
 
 const styles = StyleSheet.create({
   card: {
@@ -55,19 +53,17 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: 10,
     backgroundColor: '#aedcff',
-    borderRadius: 50,
+    borderRadius: 50
   },
- buttonCTA: {
+  buttonCTA: {
     borderRadius: 50,
-   padding: 15,
-   margin: 40,
-   marginLeft: 185,
-   marginRight: 185,
+    padding: 15,
+    margin: 40,
+    marginLeft: 185,
+    marginRight: 185,
     backgroundColor: '#fec4fc',
     borderStyle: 'solid',
-    borderColor: '#aedcff',
-   
-    
+    borderColor: '#aedcff'
   },
   buttonContainer: {
     borderRadius: 50,
@@ -75,7 +71,6 @@ const styles = StyleSheet.create({
     marginTop: 220,
     justifyContent: 'center',
     alignItems: 'center',
-    display: 'flex',
-    
+    display: 'flex'
   }
-});
+})

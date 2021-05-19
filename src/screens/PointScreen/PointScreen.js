@@ -19,7 +19,6 @@ export function Store() {
 
 function Points() {
   const navigation = useNavigation()
-  console.log('navigation', navigation)
 
   return (
     <View>
