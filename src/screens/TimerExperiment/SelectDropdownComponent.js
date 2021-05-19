@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Keyboard,
@@ -7,34 +7,35 @@ import {
   TouchableOpacity,
   View,
   Button,
-  StyleSheet
-} from 'react-native'
-import SelectDropdown from 'react-native-select-dropdown'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+  StyleSheet,
+} from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function SelectDropdownComponent(props) {
-  console.log('SELECT DROPDOWN PROPS', props)
-  const [selectCat, setSelectedCat] = useState()
-  const userEmail = props.userSession.userData.extraData.email
+  console.log('SELECT DROPDOWN PROPS', props);
+  const [selectCat, setSelectedCat] = useState();
+  const userEmail = props.userSession.userData.extraData.email;
+  console.log('userEmail in SelectDropdown-->', userEmail);
 
   const updateUserSessionData = async () => {
     try {
       // console.log('userpoints', props.userPoints)
       // console.log('usertime', props.userTime)
       // console.log('category', selectCat)
-      await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', props.userPoints)
+      await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', props.userPoints);
     } catch (error) {
-      console.log('Unable to update user information')
+      console.log('Unable to update user information');
     }
-  }
+  };
   // unable to capture the category on change in order to pass it to the axios call.
   // when comment out setSelectedCat() inside of the useEffect and then put it back it it updates to the current cat.
   useEffect(() => {
-    updateUserSessionData()
-    setSelectedCat()
-  }, [])
+    updateUserSessionData();
+    setSelectedCat();
+  }, []);
 
-  const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other']
+  const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other'];
 
   return (
     <SelectDropdown
@@ -46,7 +47,7 @@ export default function SelectDropdownComponent(props) {
         borderRadius: 50,
         borderColor: '#42397d',
         borderWidth: 2,
-        outerHeight: 40
+        outerHeight: 40,
       }}
       renderDropdownIcon={() => {
         return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
@@ -54,20 +55,20 @@ export default function SelectDropdownComponent(props) {
       dropdownIconPosition={'right'}
       buttonTextStyle={{ color: '#fff' }}
       onSelect={(selectedItem, index) => {
-        console.log(selectedItem, index)
-        setSelectedCat(selectedItem)
+        console.log(selectedItem, index);
+        setSelectedCat(selectedItem);
       }}
       buttonTextAfterSelection={(selectedItem, index) => {
-        return selectedItem
+        return selectedItem;
       }}
       rowTextForSelection={(item, index) => {
-        return item
+        return item;
       }}
       dropdownStyle={styles.dropdown1DropdownStyle}
       rowStyle={styles.dropdown1RowStyle}
       rowTextStyle={styles.dropdown1RowTxtStyle}
     />
-  )
+  );
 }
 
 const styles = StyleSheet.create({
