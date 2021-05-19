@@ -14,16 +14,15 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 const STORAGE_KEY = '@save_points';
 
 export default function TimerExperiment() {
-  const [worktime, setWorktime] = useState(10)
-  const [isRunning, setRunning] = useState(false)
-  const [selectedValue, setSelectedValue] = useState(0)
-  const [points, setPoints] = useState(0)
-  const navigation = useNavigation()
-  const pickerRef = useRef()
+  const [worktime, setWorktime] = useState(10);
+  const [isRunning, setRunning] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(0);
+  const [points, setPoints] = useState(0);
+  const navigation = useNavigation();
+  const pickerRef = useRef();
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
- 
 
   const retrieveDataFromStorage = async () => {
     try {
@@ -97,7 +96,7 @@ export default function TimerExperiment() {
   let totalPoints = points + addPoints;
 
   const createTwoButtonAlert = () =>
-    Alert.alert('Congradulations', 'Confirm Completed Task', [
+    Alert.alert('Congratulations', 'Confirm Completed Task', [
       {
         text: 'Uncompleted',
         onPress: () => console.log('NO - Uncompleted Pressed'),
@@ -109,8 +108,14 @@ export default function TimerExperiment() {
 
   return (
     <SafeAreaView>
-      <View style={styles.pointsIcon}>
-        <Text>Points Earned:</Text>
+      <View >
+        <Button style={styles.buttonContainer} title='🔔' onPress={() => navigation.navigate('NotifScreen')}></Button>
+      {/* </View>
+      <View > */}
+        <Button style={styles.buttonContainerF} title='👯' onPress={() => navigation.navigate('InviteScreen')}></Button>
+      </View>
+      <View style={styles.buttonContainerP}>
+        <Text>💎</Text>
         <Button
           title={`${points}`}
           onPress={() => {
@@ -161,5 +166,5 @@ export default function TimerExperiment() {
         <FooterScreen />
       </View>
     </SafeAreaView>
-  )
+  );
 }
