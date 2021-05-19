@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Image, ImageBackground } from 'react-native';
 import { Card, ListItem, Button, Icon, Text } from 'react-native-elements';
-import FooterScreen from '../FooterScreen/FooterScreen'
+import FooterScreen from '../FooterScreen/FooterScreen';
 import { useNavigation } from '@react-navigation/native';
 
-export function Buy() {
-  return (
-    <View >
-      <FooterScreen />
-  </View>
-  )
-}
+// export function Buy(props) {
+//   return (
+//     <View>
+//       <FooterScreen userData={dataForTimeLine} />
+//     </View>
+//   );
+// }
 
-function Store() {
+function Store(props) {
+  console.log('PROPS FROM STORESCREEN', props);
   const navigation = useNavigation();
-
+  const dataForTimeLine = props.route.params.userData;
   return (
     <View>
       <Card>
@@ -22,12 +23,12 @@ function Store() {
           <Text h1>SHOP</Text>
         </View>
       </Card>
-      <Buy />
+      <FooterScreen userData={dataForTimeLine} />
     </View>
   );
 }
 
-export default Store
+export default Store;
 
 const styles = StyleSheet.create({
   card: {
@@ -49,21 +50,21 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: 10,
     backgroundColor: '#aedcff',
-    borderRadius: 50
+    borderRadius: 50,
   },
- buttonCTA: {
-  //     borderRadius: 50,
+  buttonCTA: {
+    //     borderRadius: 50,
     padding: 15,
     margin: 20,
-    backgroundColor: "#fec4fc",
-    borderStyle: "solid",
-    borderColor: "#aedcff"
+    backgroundColor: '#fec4fc',
+    borderStyle: 'solid',
+    borderColor: '#aedcff',
   },
   buttonContainer: {
     marginTop: 390,
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row"
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+  },
 });

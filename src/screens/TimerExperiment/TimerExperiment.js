@@ -150,11 +150,13 @@ export default function TimerExperiment(props) {
         <Button
           style={styles.buttonContainer}
           title='🔔'
-          onPress={() => navigation.navigate('NotifScreen')}></Button>
+          onPress={() => navigation.navigate('NotifScreen', { userData: props.userData })}></Button>
         <Button
           style={styles.buttonContainerF}
           title='👯'
-          onPress={() => navigation.navigate('InviteScreen')}></Button>
+          onPress={() =>
+            navigation.navigate('InviteScreen', { userData: props.userData })
+          }></Button>
       </View>
       <View style={styles.buttonContainerP}>
         <Text>💎</Text>

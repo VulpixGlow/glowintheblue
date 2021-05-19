@@ -4,7 +4,7 @@ import { Card, Input, Text, Button } from 'react-native-elements';
 import FooterScreen from '../FooterScreen/FooterScreen';
 import { useNavigation } from '@react-navigation/native';
 
-export default function InviteScreen() {
+export default function InviteScreen(props) {
   // const navigation = useNavigation();
   const [email, setEmail] = useState('');
   console.log(email);
@@ -13,6 +13,8 @@ export default function InviteScreen() {
     // console.log(email);
     alert(`Invite Sent!`);
   };
+  console.log('INVITE FUNCTION', props);
+  const dataForTimeLine = props.route.params.userData;
   return (
     <View>
       <Card>
@@ -32,7 +34,7 @@ export default function InviteScreen() {
         </View>
         <Button title='Send' onPress={handleSubmit}></Button>
       </Card>
-      <FooterScreen />
+      <FooterScreen userData={dataForTimeLine} />
     </View>
   );
 }
