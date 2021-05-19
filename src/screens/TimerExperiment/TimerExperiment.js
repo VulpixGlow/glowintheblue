@@ -146,30 +146,29 @@ export default function TimerExperiment(props) {
 
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.inviteNotif}>
         <Button
-          style={styles.buttonContainer}
+          buttonStyle={styles.buttonContainerN}
           title='🔔'
           onPress={() => navigation.navigate('NotifScreen')}></Button>
-        <Button
-          style={styles.buttonContainerF}
-          title='👯'
-          onPress={() => navigation.navigate('InviteScreen')}></Button>
-      </View>
-      <View style={styles.buttonContainerP}>
-        <Text>💎</Text>
-      </View>
-      <View style={styles.pointsIcon}>
-        <Text style={styles.oima}>Points Earned:</Text>
-        <Text>{points}</Text>
-        {/* <Button
+        <View style={styles.pointsBox}>
+          <Text style={styles.oima}>Points Earned:</Text>
+          <Text>{points}</Text>
+          {/* <Button
           title={`${points}`}
           onPress={() => {
             navigation.navigate('Points');
           }}></Button> */}
+        </View>
+        <Button
+          buttonStyle={styles.buttonContainerF}
+          title='👯'
+          onPress={() => navigation.navigate('InviteScreen')}></Button>
       </View>
+
       <View style={styles.mainView}>
-        <View>
+        <View style={styles.pickerView}>
+          {/* <Text style={styles.pickerViewText}>Choose your time:</Text> */}
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
@@ -202,7 +201,7 @@ export default function TimerExperiment(props) {
           </CountdownCircleTimer>
         </View>
 
-        <View style={styles.pickerView}>
+        <View style={styles.dropdownView}>
           <SelectCountdownComponent
             userSession={props}
             userPoints={points}
@@ -218,7 +217,12 @@ export default function TimerExperiment(props) {
             title='Start'
             onPress={() => setRunning(true)}
           />
-          <Button buttonStyle={styles.homeButton} title='Pause' onPress={() => setRunning(false)} />
+          <Button
+            buttonStyle={styles.homeButton}
+            titleStyle={{ color: '#2d2660' }}
+            title='Pause'
+            onPress={() => setRunning(false)}
+          />
         </View>
         <FooterScreen
           userSession={props}

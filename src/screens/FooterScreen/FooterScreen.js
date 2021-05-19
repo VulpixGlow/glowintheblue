@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native'
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import { Card, ListItem, Button, Icon } from 'react-native-elements';
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 
 export default function FooterScreen(props) {
-  console.log('FOOTER SCREEN PROPS', props)
-  const navigation = useNavigation()
+  console.log('FOOTER SCREEN PROPS', props);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.buttonContainer}>
@@ -28,7 +28,7 @@ export default function FooterScreen(props) {
         props={props}
         onPress={() =>
           navigation.navigate('Graph', {
-            userData: props.userData
+            userData: props.userData,
           })
         }
       />
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     borderColor: '#aedcff',
   },
   buttonContainer: {
-    marginTop: 100,
+    marginTop: 80,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
