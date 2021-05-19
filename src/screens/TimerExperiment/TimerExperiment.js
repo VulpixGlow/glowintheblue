@@ -20,7 +20,6 @@ import FooterScreen from '../FooterScreen/FooterScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
 
@@ -34,13 +33,6 @@ export default function TimerExperiment() {
 
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
-
-  const testAxios = async () => {
-    const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/test');
-    console.log('Data -->', data);
-  };
-
-  testAxios();
 
   const retrieveDataFromStorage = async () => {
     try {
@@ -114,7 +106,7 @@ export default function TimerExperiment() {
   let totalPoints = points + addPoints;
 
   const createTwoButtonAlert = () =>
-    Alert.alert('Congradulations', 'Confirm Completed Task', [
+    Alert.alert('Congratulations', 'Confirm Completed Task', [
       {
         text: 'Uncompleted',
         onPress: () => console.log('NO - Uncompleted Pressed'),
@@ -135,11 +127,16 @@ export default function TimerExperiment() {
 
   return (
     <SafeAreaView>
+      <View >
+        <Button style={styles.buttonContainer} title='🔔' onPress={() => navigation.navigate('NotifScreen')}></Button>
+        <Button style={styles.buttonContainerF} title='👯' onPress={() => navigation.navigate('InviteScreen')}></Button>
+      </View>
+      <View style={styles.buttonContainerP}>
+        <Text>💎</Text>
       <View style={styles.pointsIcon}>
         <Text style={styles.oima}>Points Earned:</Text>
         <Text>{points}</Text>
         {/* <Button
-
           title={`${points}`}
           onPress={() => {
             navigation.navigate('Points');

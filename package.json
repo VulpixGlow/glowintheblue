@@ -23,6 +23,7 @@
     "native-base": "^2.15.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-icons": "^4.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-background-timer": "^2.4.1",
     "react-native-chart-kit": "^6.11.0",
