@@ -25,5 +25,5 @@ export default function HomeScreen(props) {
         <TimerExperiment userData={props} />
       </View>
     </View>
-  )
+  );
 }

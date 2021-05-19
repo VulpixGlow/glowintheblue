@@ -8,34 +8,6 @@ const Graph = props => {
   console.log('Array', props.route.params.userData)
   const data = props.route.params.userData
 
-  // [
-  //   {
-  //     time: '09:00',
-  //     title: 'Event 1',
-  //     description: 'Lorem Ipsum is simply dummy text of the printing.',
-  //     circleColor: '#009688',
-  //     lineColor: '#009688'
-  //   },
-  //   {
-  //     time: '10:45',
-  //     title: 'Event 2',
-  //     description: 'Lorem Ipsum is simply dummy text of the printing.'
-  //   },
-  //   { time: '12:00', title: 'Event 2' },
-  //   {
-  //     time: '14:00',
-  //     title: 'Event 3',
-  //     description: 'Lorem Ipsum is simply dummy text of the printing.',
-  //     lineColor: '#009688'
-  //   },
-  //   {
-  //     time: '16:30',
-  //     title: 'Event 4',
-  //     description: 'Lorem Ipsum is simply dummy text of the printing.',
-  //     circleColor: '#009688'
-  //   }
-  // ]
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Glow Timeline </Text>

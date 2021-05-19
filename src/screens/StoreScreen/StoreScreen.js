@@ -1,23 +1,19 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Image, ImageBackground } from 'react-native'
-import { Card, ListItem, Button, Icon, Text } from 'react-native-elements'
-
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, ImageBackground } from 'react-native';
+import { Card, ListItem, Button, Icon, Text } from 'react-native-elements';
+import FooterScreen from '../FooterScreen/FooterScreen'
+import { useNavigation } from '@react-navigation/native';
 
 export function Buy() {
   return (
-    <View>
-      <Button
-        buttonStyle={styles.buttonCTA}
-        title='✅'
-        onPress={() => navigation.navigate('Store')}
-      />
-    </View>
+    <View >
+      <FooterScreen />
+  </View>
   )
 }
 
 function Store() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View>
@@ -28,14 +24,14 @@ function Store() {
       </Card>
       <Buy />
     </View>
-  )
+  );
 }
 
 export default Store
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 20
+    borderRadius: 20,
   },
   // container: {
   //   marginTop: '7%',
@@ -55,22 +51,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#aedcff',
     borderRadius: 50
   },
-  buttonCTA: {
-    borderRadius: 50,
+ buttonCTA: {
+  //     borderRadius: 50,
     padding: 15,
-    margin: 40,
-    marginLeft: 185,
-    marginRight: 185,
-    backgroundColor: '#fec4fc',
-    borderStyle: 'solid',
-    borderColor: '#aedcff'
+    margin: 20,
+    backgroundColor: "#fec4fc",
+    borderStyle: "solid",
+    borderColor: "#aedcff"
   },
   buttonContainer: {
-    borderRadius: 50,
-    padding: 150,
-    marginTop: 220,
-    justifyContent: 'center',
-    alignItems: 'center',
-    display: 'flex'
+    marginTop: 390,
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row"
   }
-})
+});

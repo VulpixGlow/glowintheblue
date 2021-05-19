@@ -7,11 +7,10 @@ import Modal from 'react-native-modal'
 function Success({ navigation }) {
   const [isModalVisible, setModalVisible] = useState(false)
   const toggleModal = () => {
-    setModalVisible(!isModalVisible)
-  }
+    setModalVisible(!isModalVisible);
+  };
 
   return (
-    // <Modal isVisible={isModalVisible}>
     <View>
       <Card>
         <Card.Title>Success!</Card.Title>
@@ -26,7 +25,6 @@ function Success({ navigation }) {
         </Card.Image>
       </Card>
     </View>
-    // </Modal>
   )
 }
 

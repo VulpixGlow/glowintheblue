@@ -34,25 +34,25 @@ export default function SelectDropdownComponent(props) {
     setSelectedCat()
   }, [])
 
-  const categories = ['Yoga', 'Sport', 'Focus', 'Mediate', 'Other', 'Movement', 'Connect']
+  const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other']
 
   return (
     <SelectDropdown
       email={userEmail}
       data={categories}
-      defaultButtonText='Choose a category...'
+      defaultButtonText='Choose a category'
       buttonStyle={{
-        backgroundColor: '#8cfede',
-        borderRadius: 10,
-        borderColor: '#5ba5e7',
+        backgroundColor: '#42397d',
+        borderRadius: 50,
+        borderColor: '#42397d',
         borderWidth: 2,
         outerHeight: 40
       }}
       renderDropdownIcon={() => {
-        return <FontAwesome name='chevron-down' color={'#5ba5e7'} size={14} />
+        return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
       }}
       dropdownIconPosition={'right'}
-      buttonTextStyle={{ color: '#5ba5e7' }}
+      buttonTextStyle={{ color: '#fff' }}
       onSelect={(selectedItem, index) => {
         console.log(selectedItem, index)
         setSelectedCat(selectedItem)
@@ -71,13 +71,10 @@ export default function SelectDropdownComponent(props) {
 }
 
 const styles = StyleSheet.create({
-  SelectDropdown: {
-    borderRadius: 5
-  },
   dropdown1DropdownStyle: { backgroundColor: '#EFEFEF' },
   dropdown1RowStyle: {
-    backgroundColor: '#8cfede',
-    borderBottomColor: '#C5C5C5'
+    backgroundColor: '#42397d',
+    borderBottomColor: '#C5C5C5',
   },
-  dropdown1RowTxtStyle: { color: '#5ba5e7', textAlign: 'left' }
-})
+  dropdown1RowTxtStyle: { color: '#fff', textAlign: 'left' },
+});
