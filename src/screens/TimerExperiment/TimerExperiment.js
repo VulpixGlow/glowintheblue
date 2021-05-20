@@ -136,9 +136,9 @@ export default function TimerExperiment(props) {
     firebase
       .auth()
       .signOut()
-      .then(()=> {
+      .then(()=>
         navigation.navigate('Login')
-      })
+      )
   }
   console.log('Hello from TimerExperiment')
   console.log('MOST RECENT USER DATA', userData);
@@ -231,9 +231,9 @@ export default function TimerExperiment(props) {
           />
           <Button buttonStyle={styles.homeButton} title='Pause' onPress={() => setRunning(false)} />
         </View>
-        <View style={{flex:1}}>
+        <View>
           <Button title='Logout' onPress={() => logout()} />
-          <Button title='My Group' onPress={() => navigation.navigate('Group')} />
+          <Button title='Start a group session' onPress={() => navigation.navigate('Groups')} />
         </View>
         <FooterScreen
           userSession={props}

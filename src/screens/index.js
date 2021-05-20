@@ -19,3 +19,5 @@ export { default as GroupScreen } from './GroupScreen/GroupScreen'
 export { default as NotifScreen } from './NotifScreen/NotifScreen';
 
 export { default as InviteScreen } from './InviteScreen/InviteScreen';
+
+export { default as GroupsScreen } from './GroupsScreen/GroupsScreen'
