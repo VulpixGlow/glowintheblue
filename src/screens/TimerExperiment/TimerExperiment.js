@@ -20,6 +20,8 @@ import FooterScreen from '../FooterScreen/FooterScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+// logout
+import { firebase } from "../../../config/Firebase"
 import axios from 'axios';
 import filterDataFunction from './filterDataFunction';
 // for AsyncStorage
@@ -101,8 +103,8 @@ export default function TimerExperiment(props) {
     default:
       addPoints = 35;
   }
-  //   console.log("selectedValue-->", selectedValue)
-  //   console.log("addPoints-->", addPoints)
+
+
   let totalPoints = points + addPoints;
   const createTwoButtonAlert = () =>
     Alert.alert('Congratulations', 'Confirm Completed Task', [
@@ -114,6 +116,16 @@ export default function TimerExperiment(props) {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
+//logout
+  const logout = () =>{
+    firebase
+      .auth()
+      .signOut()
+      .then(()=>
+        navigation.navigate('Login')
+      )
+  }
+  console.log('Hello from TimerExperiment')
   console.log('MOST RECENT USER DATA', userData);
   // how to access the user email => props.userData.extraData.email
   // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
@@ -201,6 +213,10 @@ export default function TimerExperiment(props) {
             title='Pause'
             onPress={() => setRunning(false)}
           />
+        </View>
+        <View>
+          <Button title='Logout' onPress={() => logout()} />
+          <Button title='Start a group session' onPress={() => navigation.navigate('Groups')} />
         </View>
         <FooterScreen
           userSession={props}
