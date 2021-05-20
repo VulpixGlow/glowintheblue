@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 export default function NotifScreen(props) {
   // const navigation = useNavigation();
 
-  console.log('NOTIF FUNCTION', props);
-  const dataForTimeLine = props.route.params.userData;
+  // console.log('NOTIF FUNCTION', props);
+  // const dataForTimeLine = props.route.params.userData;
   return (
     <View>
       <Card>
@@ -25,7 +25,9 @@ export default function NotifScreen(props) {
           <Button title='💣💔💣💔' type='outline' style={{ backgroundColor: 'red' }}></Button>
         </View>
       </Card>
-      <FooterScreen userData={dataForTimeLine} />
+      <FooterScreen  />
     </View>
   );
 }
+
+// userData={dataForTimeLine}

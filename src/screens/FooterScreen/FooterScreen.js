@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     borderColor: '#aedcff',
   },
   buttonContainer: {
-    marginTop: 100,
+    marginTop: 80,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',

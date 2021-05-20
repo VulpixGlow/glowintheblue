@@ -22,10 +22,8 @@ import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import axios from 'axios';
 import filterDataFunction from './filterDataFunction';
-
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
-
 export default function TimerExperiment(props) {
   console.log('TIMEREXPERIMENT COMPONENT PROPS', props);
   const timerEmail = props.userData.extraData.email;
@@ -37,29 +35,23 @@ export default function TimerExperiment(props) {
   const [points, setPoints] = useState(0);
   const navigation = useNavigation();
   const pickerRef = useRef();
-
   const sessionData = async () => {
     try {
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions');
       console.log('Data from Timer Component -->', data);
-
       setUserData(data);
     } catch (error) {
       console.log('Unable to retrieve data');
     }
   };
-
   useEffect(() => {
     sessionData();
   }, []);
-
   // Async Storage Logic
   // const { getItem, setItem } = AsyncStorage()
-
   const retrieveDataFromStorage = async () => {
     try {
       const userPoints = await AsyncStorage.getItem(STORAGE_KEY);
-
       if (userPoints !== null) {
         return JSON.parse(userPoints);
       }
@@ -67,7 +59,6 @@ export default function TimerExperiment(props) {
       alert('Failed to load points');
     }
   };
-
   const saveDataToStorage = async (value) => {
     try {
       const userPoints = JSON.stringify(value);
@@ -76,13 +67,10 @@ export default function TimerExperiment(props) {
       alert('Failed to save points');
     }
   };
-
   /* To retrieve the data whenever the app starts, invoke this method inside the useEffect hook.*/
-
   useEffect(() => {
     retrieveDataFromStorage();
   }, []);
-
   // Helper Function
   const onConfirmCompleted = (total) => {
     // if (!points) return;
@@ -90,9 +78,7 @@ export default function TimerExperiment(props) {
     setPoints(total);
   };
   // Async Storage Logic END
-
   let addPoints = 0;
-
   switch (selectedValue) {
     case 10:
       addPoints = 5;
@@ -117,9 +103,7 @@ export default function TimerExperiment(props) {
   }
   //   console.log("selectedValue-->", selectedValue)
   //   console.log("addPoints-->", addPoints)
-
   let totalPoints = points + addPoints;
-
   const createTwoButtonAlert = () =>
     Alert.alert('Congratulations', 'Confirm Completed Task', [
       {
@@ -131,47 +115,39 @@ export default function TimerExperiment(props) {
     ]);
   // How can this all be stored in a object and referenced for graphing?
   console.log('MOST RECENT USER DATA', userData);
-
   // how to access the user email => props.userData.extraData.email
   // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
   let dataForTimeLine = filterDataFunction(userData, `${timerEmail}`);
-
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600);
     const minutes = Math.floor((remainingTime % 3600) / 60);
     const seconds = remainingTime % 60;
-
     return `${hours}:${minutes}:${seconds}`;
   };
-
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.inviteNotif}>
         <Button
-          style={styles.buttonContainer}
+          buttonStyle={styles.buttonContainerN}
           title='🔔'
-          onPress={() => navigation.navigate('NotifScreen', { userData: props.userData })}></Button>
-        <Button
-          style={styles.buttonContainerF}
-          title='👯'
-          onPress={() =>
-            navigation.navigate('InviteScreen', { userData: props.userData })
-          }></Button>
-      </View>
-      <View style={styles.buttonContainerP}>
-        <Text>💎</Text>
-      </View>
-      <View style={styles.pointsIcon}>
-        <Text style={styles.oima}>Points Earned:</Text>
-        <Text>{points}</Text>
-        {/* <Button
+          onPress={() => navigation.navigate('NotifScreen')}></Button>
+        <View style={styles.pointsBox}>
+          <Text style={styles.oima}>Points Earned:</Text>
+          <Text>{points}</Text>
+          {/* <Button
           title={`${points}`}
           onPress={() => {
             navigation.navigate('Points');
           }}></Button> */}
+        </View>
+        <Button
+          buttonStyle={styles.buttonContainerF}
+          title='👯'
+          onPress={() => navigation.navigate('InviteScreen')}></Button>
       </View>
       <View style={styles.mainView}>
-        <View>
+        <View style={styles.pickerView}>
+          {/* <Text style={styles.pickerViewText}>Choose your time:</Text> */}
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
@@ -203,8 +179,7 @@ export default function TimerExperiment(props) {
             )}
           </CountdownCircleTimer>
         </View>
-
-        <View style={styles.pickerView}>
+        <View style={styles.dropdownView}>
           <SelectCountdownComponent
             userSession={props}
             userPoints={points}
@@ -220,7 +195,12 @@ export default function TimerExperiment(props) {
             title='Start'
             onPress={() => setRunning(true)}
           />
-          <Button buttonStyle={styles.homeButton} title='Pause' onPress={() => setRunning(false)} />
+          <Button
+            buttonStyle={styles.homeButton}
+            titleStyle={{ color: '#2d2660' }}
+            title='Pause'
+            onPress={() => setRunning(false)}
+          />
         </View>
         <FooterScreen
           userSession={props}

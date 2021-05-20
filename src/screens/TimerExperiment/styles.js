@@ -13,49 +13,36 @@ export default StyleSheet.create({
     justifyContent: 'center',
     // marginTop: 20,
   },
-  // buttonsView: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   justifyContent: 'center',
-  //   marginTop: 50
-  // },
-  pickerView: {
-    // flex: 1,
+  dropdownView: {
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 20,
+  },
+  pickerView: {
+    marginTop: 20,
+    flexDirection: 'column',
+  },
+  pickerViewText: {
+    color: 'white',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   countdownView: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonContainer: {
-    marginTop: -10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // display: 'flex',
-    marginLeft: 340,
-    flexDirection: 'row',
-  },
-  buttonContainerP: {
-    marginTop: -30,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // display: 'flex',
-    marginRight: 340,
-    flexDirection: 'row',
+  buttonContainerN: {
+    margin: 10,
+    backgroundColor: '#ffd893',
   },
   buttonContainerF: {
-    marginTop: -37,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // display: 'flex',
-    marginLeft: 300,
-    flexDirection: 'row',
+    margin: 10,
+    backgroundColor: '#ffd893',
   },
-  pointsIcon: {
+  pointsBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffecca',
+    backgroundColor: '#8cffdf',
     width: 150,
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -71,7 +58,10 @@ export default StyleSheet.create({
     borderStyle: 'solid',
     borderColor: '#aedcff',
   },
-  // oima: {
-  //   fontFamily: 'Spoof-Regular',
-  // },
+  inviteNotif: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    // margin: 10,
+  },
 });

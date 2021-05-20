@@ -3,53 +3,53 @@ import { StyleSheet, View, TextInput } from 'react-native';
 import { Card, Input, Text, Button } from 'react-native-elements';
 import FooterScreen from '../FooterScreen/FooterScreen';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
+const checkEmail = async (value) => {
+  try {
+    const userEmail = JSON.stringify(value);
+    await AsyncStorage.setEmail(STORAGE_KEY, userEmail);
+  } catch (error) {
+    alert('Failed to load points');
+  }
+};
 
 export default function InviteScreen(props) {
   // const navigation = useNavigation();
   const [email, setEmail] = useState('');
-  console.log(email);
+
   const handleSubmit = (evt) => {
-    // evt.preventDefault();
-    // console.log(email);
+    evt.preventDefault();
+    console.log('EMAIL', email);
     alert(`Invite Sent!`);
   };
-  console.log('INVITE FUNCTION', props);
-  const dataForTimeLine = props.route.params.userData;
+
   return (
     <View>
       <Card>
         <View style={{ marginBottom: 160 }}>
           <Text h1>Invite your friends!</Text>
-          <Input
+          <TextInput
+          type="text"
             placeholder='Email'
-            // button={    <Button title='➕' type="outline" style={{width: 50, marginLeft: 300}}></Button>}>
-            rightIcon={{ name: 'add', size: 24, color: 'green' }}></Input>
-          <Input
-            placeholder='Email'
-            onHandleSubmit={(value) => this.setState({ email: value })}
+            value={email}
+            onChangeText={(text) => {
+              console.log('EVENT TARGET', text);
+              setEmail(text);
+            }}
             rightIcon={{ name: 'add', size: 24, color: 'green' }}
           />
-          <Input placeholder='Email' rightIcon={{ name: 'add', size: 24, color: 'green' }} />
-          <Input placeholder='Email' rightIcon={{ name: 'add', size: 24, color: 'green' }} />
         </View>
         <Button title='Send' onPress={handleSubmit}></Button>
       </Card>
-      <FooterScreen userData={dataForTimeLine} />
+      <FooterScreen />
     </View>
   );
 }
 
-// export default InviteScreen
 
-// style={styles.buttonContainer}
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    // marginTop: 7,
-    // marginBottom: 7,
-
-    marginRight: 7,
-    // padding: 20,
-    // alignItems: 'center'
-  },
-});
+// const styles = StyleSheet.create({
+//   buttonContainer: {
+//     marginRight: 7,
+//   },
+// });
