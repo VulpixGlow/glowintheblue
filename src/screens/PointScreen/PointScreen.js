@@ -4,17 +4,23 @@ import { Card, ListItem, Button, Icon, Text } from 'react-native-elements';
 import FooterScreen from '../FooterScreen/FooterScreen';
 import { useNavigation } from '@react-navigation/native';
 
-export function Store() {
-  return (
-    <View>
-  <FooterScreen />
-    </View>
-  );
-}
+// export function Store() {
+//   return (
+//     <View >
 
-function Points() {
+//     {/* <Button
+//     buttonStyle={styles.buttonCTA}
+//     title='🎁'
+//     onPress={() => navigation.navigate('Store')}
+//   /> */}
+//   </View>
+//   )
+// }
+
+function Points(props) {
   const navigation = useNavigation();
-
+  console.log('POINTS FUNCTION', props);
+  const dataForTimeLine = props.route.params.userData;
   return (
     <View>
       <Card>
@@ -22,12 +28,18 @@ function Points() {
           <Text h1>POINTS! </Text>
         </View>
       </Card>
-      <Store />
+      <FooterScreen
+        // userSession={props}
+        // userPoints={points}
+        // userTime={selectedValue}
+        // userEmail={props.userData.extraData.email}
+        userData={dataForTimeLine}
+      />
     </View>
   );
 }
 
-export default Points
+export default Points;
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +48,7 @@ const styles = StyleSheet.create({
     // marginLeft: 7,
     // marginRight: 7,
     // padding: 20,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   // textStyle: {
   //   color: 'white',
@@ -48,21 +60,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#aedcff',
     // justifyContent: 'center',
     alignItems: 'center',
-    display: 'flex'
+    display: 'flex',
   },
   buttonCTA: {
     borderRadius: 50,
     padding: 15,
-    margin: 20,
-    backgroundColor: "#fec4fc",
-    borderStyle: "solid",
-    borderColor: "#aedcff"
+    margin: 40,
+    marginLeft: 185,
+    marginRight: 185,
+    backgroundColor: '#fec4fc',
+    borderStyle: 'solid',
+    borderColor: '#aedcff',
   },
-    buttonContainer: {
-      marginTop: 390,
-      justifyContent: "center",
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "row"
+  buttonContainer: {
+    borderRadius: 50,
+    padding: 150,
+    marginTop: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
   },
 });
