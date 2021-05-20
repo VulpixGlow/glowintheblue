@@ -18,10 +18,10 @@ export default function FooterScreen(props) {
       />
       <Button
         buttonStyle={styles.buttonCTA}
-        title='💎'
+        title='🎭'
         props={props}
         onPress={() =>
-          navigation.navigate('Points', {
+          navigation.navigate('Groups', {
             userData: props.userData,
           })
         }

@@ -19,6 +19,20 @@ export default function InviteScreen(props) {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (evt) => {
+    // email = "s@s.com, a@a.com"
+    const emails = email.split(', ');
+    // axios.post('')
+
+    const userData = async (props) => {
+      //const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
+      const { data } = await axios.post('http://localhost:8080/api/notifications', emails);
+    };
+    // const emails = email.split(', '); ['s@s.com', 'a@a.com']
+    // email -> a string of comma delimited emails
+    // make sure you split the emails email.split(',') so you can get an array
+    // axios.post('herokuapp.com/api/...', emails)
+    // axios.post('http://YOUR_IP_ADDRESS:8080/api/...', emails)
+    // Make your axios call to that route, and pass in your list of emails
     evt.preventDefault();
     console.log('EMAIL', email);
     alert(`Invite Sent!`);
@@ -30,7 +44,7 @@ export default function InviteScreen(props) {
         <View style={{ marginBottom: 160 }}>
           <Text h1>Invite your friends!</Text>
           <TextInput
-          type="text"
+            type='text'
             placeholder='Email'
             value={email}
             onChangeText={(text) => {
@@ -46,7 +60,6 @@ export default function InviteScreen(props) {
     </View>
   );
 }
-
 
 // const styles = StyleSheet.create({
 //   buttonContainer: {

@@ -21,7 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 // logout
-import { firebase } from "../../../config/Firebase"
+import { firebase } from '../../../config/Firebase';
 import axios from 'axios';
 import filterDataFunction from './filterDataFunction';
 // for AsyncStorage
@@ -104,7 +104,6 @@ export default function TimerExperiment(props) {
       addPoints = 35;
   }
 
-
   let totalPoints = points + addPoints;
   const createTwoButtonAlert = () =>
     Alert.alert('Congratulations', 'Confirm Completed Task', [
@@ -116,16 +115,14 @@ export default function TimerExperiment(props) {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
-//logout
-  const logout = () =>{
+  //logout
+  const logout = () => {
     firebase
       .auth()
       .signOut()
-      .then(()=>
-        navigation.navigate('Login')
-      )
-  }
-  console.log('Hello from TimerExperiment')
+      .then(() => navigation.navigate('Onboarding'));
+  };
+  console.log('Hello from TimerExperiment');
   console.log('MOST RECENT USER DATA', userData);
   // how to access the user email => props.userData.extraData.email
   // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
@@ -152,10 +149,10 @@ export default function TimerExperiment(props) {
             navigation.navigate('Points');
           }}></Button> */}
         </View>
-        <Button
+        {/* <Button
           buttonStyle={styles.buttonContainerF}
           title='👯'
-          onPress={() => navigation.navigate('InviteScreen')}></Button>
+          onPress={() => navigation.navigate('InviteScreen')}></Button> */}
       </View>
       <View style={styles.mainView}>
         <View style={styles.pickerView}>
@@ -215,8 +212,7 @@ export default function TimerExperiment(props) {
           />
         </View>
         <View>
-          <Button title='Logout' onPress={() => logout()} />
-          <Button title='Start a group session' onPress={() => navigation.navigate('Groups')} />
+          <Button title='Logout' onPress={logout} />
         </View>
         <FooterScreen
           userSession={props}
