@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 // }
 
 function Store(props) {
-  console.log('PROPS FROM STORESCREEN', props);
+  //console.log('PROPS FROM STORESCREEN', props);
   const navigation = useNavigation();
   const dataForTimeLine = props.route.params.userData;
   return (

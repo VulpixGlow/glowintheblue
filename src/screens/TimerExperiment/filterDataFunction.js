@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function filterUserData(arr, email) {
-  console.log('Inside FilterDataFunction')
+  //console.log('Inside FilterDataFunction')
   let focusTotal = 0
   let meditateTotal = 0
   let moveTotal = 0
@@ -14,7 +14,7 @@ export default function filterUserData(arr, email) {
     }
   })
 
-  console.log('Filtered Arr- should only see the user data', filterArr)
+  //console.log('Filtered Arr- should only see the user data', filterArr)
 
   filterArr.forEach(obj => {
     if (obj.categoryName === 'Focus') {
@@ -57,6 +57,6 @@ export default function filterUserData(arr, email) {
       description: `I've spent a total of ${otherTotal} minutes on other task that enhance my emotional, mental and physical well-being.`
     }
   ]
-  console.log('Data structure returned from FilterDataFunction', categoryDataArr)
+  //console.log('Data structure returned from FilterDataFunction', categoryDataArr)
   return categoryDataArr
 }

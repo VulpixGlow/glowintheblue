@@ -15,7 +15,7 @@ import {
   GroupScreen,
   InviteScreen,
   NotifScreen,
-  PieChartScreen
+  PieChartScreen,
   GroupsScreen
 } from './src/screens';
 
@@ -72,7 +72,7 @@ export default function App() {
     return <></>
   }
 
-  console.log('How can user.id be passed down to store data', user)
+  //console.log('How can user.id be passed down to store data', user)
 
   return (
     <NavigationContainer theme={MyTheme}>

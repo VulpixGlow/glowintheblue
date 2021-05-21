@@ -110,13 +110,13 @@
 }
 
 const MyPieChart = props => {
-  console.log('Inside PieChart PROPS', props)
+  //console.log('Inside PieChart PROPS', props)
   const [chartData, setChartData] = useState()
 
   const sessionData = async () => {
     try {
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions')
-      console.log('Data -->', data)
+      //console.log('Data -->', data)
     } catch (error) {
       setLoading(false)
       console.log('Unable to return user data for graph')
@@ -160,7 +160,7 @@ const MyPieChart = props => {
 }
 
 export default function Graph(props) {
-  console.log('Graph Props', props)
+  //console.log('Graph Props', props)
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>

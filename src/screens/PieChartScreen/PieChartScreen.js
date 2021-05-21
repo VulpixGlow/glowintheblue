@@ -6,9 +6,9 @@ import { filterUserDataPieChart } from '../TimerExperiment/filterDataPieFunction
 import { useNavigation } from '@react-navigation/native'
 
 const MyPieChart = props => {
-  console.log('PROPS TO PIE', props)
-  console.log('Array', props.route.params.userData)
-  console.log('FIND USER EMAIL FOR PIE CHART', props.route.params)
+  //console.log('PROPS TO PIE', props)
+  //console.log('Array', props.route.params.userData)
+  //console.log('FIND USER EMAIL FOR PIE CHART', props.route.params)
   // const timerEmail = props.userData.extraData.email
   const data = props.route.params.userData
   const navigation = useNavigation()

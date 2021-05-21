@@ -5,7 +5,7 @@ import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 export default function FooterScreen(props) {
-  console.log('FOOTER SCREEN PROPS', props);
+  //console.log('FOOTER SCREEN PROPS', props);
   const navigation = useNavigation();
 
   return (
