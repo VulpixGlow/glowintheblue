@@ -25,8 +25,8 @@ export default function InviteScreen(props) {
     // axios.post('')
 
     const notificationData = async () => {
-      //const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/notifications');
-      const { data } = await axios.post('http://localhost:8080/api/notifications', {
+      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/notifications',{
+      //const { data } = await axios.post('http://localhost:8080/api/notifications', {
         "userId": 5,
         "emails": emails,
         "groupName": groupName
