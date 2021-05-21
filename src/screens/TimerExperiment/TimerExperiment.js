@@ -66,9 +66,10 @@ export default function TimerExperiment(props) {
         points: points
       })
 
+      // return the updated data for the timeline to reflect newly completed session
       const { data } = await axios.get('http://localhost:8080/api/sessions')
-      console.log('Data from Timer Component THIRD AXIOS REQUEST -->', data)
-
+      console.log('Newly Completed Session -->', data)
+      // update state with new data
       setUserData(data)
     } catch (error) {
       console.log('We got an error', error)
@@ -97,7 +98,7 @@ export default function TimerExperiment(props) {
       addPoints = 30
       break
     default:
-      addPoints = 35
+      addPoints = 2
   }
 
   // TotalPoint collected after each "session"
