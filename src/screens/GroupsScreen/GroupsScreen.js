@@ -12,9 +12,9 @@ import { useNavigation } from '@react-navigation/native';
 // }
 const groupData = async (props) => {
   console.log('props in group screen line 8', props)
-  const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
+  //const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
   //const { data } = await axios.get('http://localhost:8080/api/group')
-  console.log('groupData line 11', data);
+  //console.log('groupData line 11', data);
 };
 groupData();
 
