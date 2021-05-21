@@ -1,7 +1,7 @@
-import React from 'react'
-import { View, Text, Button } from 'react-native'
+import React from 'react';
+import { View, Text, Button } from 'react-native';
 //import styles from './styles'
-import axios from 'axios'
+import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
 //const screenWidth = Dimensions.get('window').width
@@ -18,16 +18,16 @@ const groupData = async (props) => {
 };
 groupData();
 
-console.log('hello from GroupScreen line 15')
+console.log('hello from GroupScreen line 15');
 export default function GroupScreen(props) {
-
-  console.log('props from GroupScreen line 19', props)
+  console.log('props from GroupScreen line 19', props);
   const navigation = useNavigation();
   //const data = [0.4, 0.6, 0.8]
   return (
     <View>
-        <Text>All Groups</Text>
-        <Button title='View Group 1' onPress={() => navigation.navigate('Group')} />
+      <Text>All Groups</Text>
+      <Button title='View Group 1' onPress={() => navigation.navigate('Group')} />
+      <Button title='Create Group' onPress={() => navigation.navigate('InviteScreen')} />
     </View>
-  )
+  );
 }

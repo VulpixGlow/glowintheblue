@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
-import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-elements';
-import ViewPager from '@react-native-community/viewpager';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Swiper from 'react-native-swiper';
+import React, { useRef } from 'react'
+import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native'
+import { Button } from 'react-native-elements'
+import ViewPager from '@react-native-community/viewpager'
+import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import Swiper from 'react-native-swiper'
 
 // Determine if the user has already viewed app if so, no onboarding screens should show.
 
 const Onboarding = () => {
-  const navigation = useNavigation();
-  const pagerRef = useRef(null);
+  const navigation = useNavigation()
+  const pagerRef = useRef(null)
 
   return (
     <Swiper style={styles.wrapper}>
@@ -45,8 +45,8 @@ const Onboarding = () => {
         />
       </View>
     </Swiper>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   onboardingButton: {
@@ -57,13 +57,13 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: '#aedcff',
     marginLeft: 'auto',
-    marginRight: 'auto',
+    marginRight: 'auto'
   },
   wrapper: {},
   slide1: {},
   slide2: {},
   slide3: {},
-  text: {},
-});
+  text: {}
+})
 
-export default Onboarding;
+export default Onboarding
