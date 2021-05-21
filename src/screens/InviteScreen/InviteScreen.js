@@ -19,7 +19,7 @@ export default function InviteScreen(props) {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (evt) => {
-    // email = "s@s.com, a@a.com"
+    // email = "s@s.com, a@a.com",
     const emails = email.split(', ');
     // axios.post('')
 
