@@ -18,9 +18,13 @@ export default function FooterScreen(props) {
       />
       <Button
         buttonStyle={styles.buttonCTA}
-        title='💎'
+        title='🎭'
         props={props}
-        onPress={() => navigation.navigate('Points')}
+        onPress={() =>
+          navigation.navigate('Groups', {
+            userData: props.userData,
+          })
+        }
       />
       <Button
         buttonStyle={styles.buttonCTA}
@@ -36,7 +40,7 @@ export default function FooterScreen(props) {
         buttonStyle={styles.buttonCTA}
         title='🎁'
         props={props}
-        onPress={() => navigation.navigate('Store')}
+        onPress={() => navigation.navigate('Store', { userData: props.userData })}
       />
     </View>
   );
