@@ -32,7 +32,8 @@ export default function TimerExperiment(props) {
   const sessionData = async () => {
     console.log('INSIDE SESSION DATA FUNCTION')
     try {
-      const { data } = await axios.get('http://localhost:8080/api/sessions')
+      // const { data } = await axios.get('http://localhost:8080/api/sessions')
+      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions')
       console.log('Data from Timer Component -->', data)
       setUserData(data)
     } catch (error) {
@@ -58,7 +59,8 @@ export default function TimerExperiment(props) {
   const onConfirmCompleted = async total => {
     try {
       setPoints(total)
-      await axios.put('http://localhost:8080/api/sessions/update', {
+      // http://localhost:8080/api/sessions/update
+      await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: timerEmail,
         userPoints: total,
         categoryName: selectCat,
@@ -67,7 +69,8 @@ export default function TimerExperiment(props) {
       })
 
       // return the updated data for the timeline to reflect newly completed session
-      const { data } = await axios.get('http://localhost:8080/api/sessions')
+      // http://localhost:8080/api/sessions
+      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/')
       console.log('Newly Completed Session -->', data)
       // update state with new data
       setUserData(data)
