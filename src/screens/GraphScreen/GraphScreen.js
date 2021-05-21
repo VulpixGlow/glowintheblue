@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native'
 // had issue with displaying graph with using a sperate style file
 
 const Graph = props => {
-  console.log('PROPS TO GRAPH', props)
-  console.log('Array', props.route.params.userData)
+  //console.log('PROPS TO GRAPH', props)
+  //console.log('Array', props.route.params.userData)
   const data = props.route.params.userData
   const navigation = useNavigation()
 

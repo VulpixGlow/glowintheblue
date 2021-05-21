@@ -22,7 +22,7 @@ import styles from './styles';
 import axios from 'axios';
 
 export default function TimerExperiment(props) {
-  console.log('TIMEREXPERIMENT COMPONENT PROPS', props);
+  //console.log('TIMEREXPERIMENT COMPONENT PROPS', props);
 
   const [userData, setUserData] = useState([]);
   const [isRunning, setRunning] = useState(false);
@@ -30,7 +30,7 @@ export default function TimerExperiment(props) {
   const [points, setPoints] = useState(0);
 
   const timerEmail = props.userData.extraData.email;
-  console.log('timerEmail -->', timerEmail);
+  //console.log('timerEmail -->', timerEmail);
   const pickerRef = useRef();
   const navigation = useNavigation();
 
@@ -40,11 +40,11 @@ export default function TimerExperiment(props) {
 
   // Axios request for data
   const sessionData = async () => {
-    console.log('INSIDE SESSION DATA FUNCTION');
+    //console.log('INSIDE SESSION DATA FUNCTION');
     try {
       // const { data } = await axios.get('http://localhost:8080/api/sessions')
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions');
-      console.log('Data from Timer Component -->', data);
+      //console.log('Data from Timer Component -->', data);
       setUserData(data);
     } catch (error) {
       if (error.response) {
@@ -81,7 +81,7 @@ export default function TimerExperiment(props) {
       // return the updated data for the timeline to reflect newly completed session
       // http://localhost:8080/api/sessions
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
-      console.log('Newly Completed Session -->', data);
+      //console.log('Newly Completed Session -->', data);
       // update state with new data
       setUserData(data);
     } catch (error) {
@@ -129,7 +129,7 @@ export default function TimerExperiment(props) {
     ]);
 
   // Jumps to this console.log after timerEmail console.log
-  console.log('MOST RECENT USER DATA', userData);
+  //console.log('MOST RECENT USER DATA', userData);
 
   // how to access the user email => props.userData.extraData.email
   // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
@@ -250,9 +250,6 @@ export default function TimerExperiment(props) {
             title='Pause'
             onPress={() => setRunning(false)}
           />
-        </View>
-        <View>
-          <Button title='Logout' onPress={logout} />
         </View>
         <FooterScreen
           userSession={props}
