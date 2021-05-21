@@ -12,10 +12,13 @@ import {
   PointScreen,
   StoreScreen,
   GraphScreen,
+  GroupScreen,
   InviteScreen,
   NotifScreen,
   PieChartScreen
-} from './src/screens'
+  GroupsScreen
+} from './src/screens';
+
 
 import { StatusBar } from 'react-native'
 
@@ -92,6 +95,8 @@ export default function App() {
             <Stack.Screen name='Graph' component={GraphScreen} />
             <Stack.Screen name='PieChart' component={PieChartScreen} />
             <Stack.Screen name='Store' component={StoreScreen} />
+            <Stack.Screen name='Group' component={GroupScreen} />
+            <Stack.Screen name='Groups' component={GroupsScreen} />
             <Stack.Screen name='InviteScreen' component={InviteScreen} />
             <Stack.Screen name='NotifScreen' component={NotifScreen} />
           </>
