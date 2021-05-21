@@ -9,7 +9,7 @@ export default function HomeScreen(props) {
 
   const storeUserData = async () => {
     try {
-      console.log('STORING USER DATA', props.extraData.email)
+      console.log('STORING USER DATA HOMESCREEN', props.extraData.email)
       await axios.post('https://glowintheblue.herokuapp.com/api/users', props.extraData.email)
     } catch (error) {
       console.log('Unable to save user info')
@@ -25,5 +25,5 @@ export default function HomeScreen(props) {
         <TimerExperiment userData={props} />
       </View>
     </View>
-  );
+  )
 }

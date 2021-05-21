@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function filterUserData(arr, email) {
+  console.log('Inside FilterDataFunction')
   let focusTotal = 0
   let meditateTotal = 0
   let moveTotal = 0
@@ -13,12 +14,11 @@ export default function filterUserData(arr, email) {
     }
   })
 
-  console.log('Filtered Arr', filterArr)
+  console.log('Filtered Arr- should only see the user data', filterArr)
 
   filterArr.forEach(obj => {
     if (obj.categoryName === 'Focus') {
       focusTotal += obj.time
-      console.log(focusTotal, 'Focus Total')
     } else if (obj.categoryName === 'Meditate') {
       meditateTotal += obj.time
     } else if (obj.categoryName === 'Move') {
@@ -30,33 +30,33 @@ export default function filterUserData(arr, email) {
     }
   })
 
-  let catDataObj = [
+  let categoryDataArr = [
     {
       time: focusTotal,
       title: 'Focus',
-      description: `I spent a total of ${focusTotal} minutes on different task with a focused mind .`
+      description: `I've spent a total of ${focusTotal} minutes on different task with a focused mind .`
     },
     {
       time: meditateTotal,
       title: 'Meditate',
-      description: `I spent a total of ${meditateTotal} minutes allowing my mind and body to rest through meditation.`
+      description: `I've spent a total of ${meditateTotal} minutes allowing my mind and body to rest through meditation.`
     },
     {
       time: moveTotal,
       title: 'Move',
-      description: `I spent a total of ${moveTotal} minutes moving my body and being active .`
+      description: `I've spent a total of ${moveTotal} minutes moving my body and being active .`
     },
     {
       time: connectTotal,
       title: 'Connnect',
-      description: `I spent a total of ${connectTotal} minutes connecting with friends, family, co-workers and pets.`
+      description: `I've spent a total of ${connectTotal} minutes connecting with friends, family, co-workers and pets.`
     },
     {
       time: otherTotal,
       title: 'Other',
-      description: `I spent a total of ${otherTotal} minutes on other task that enhance my emotional, mental and physical well-being.`
+      description: `I've spent a total of ${otherTotal} minutes on other task that enhance my emotional, mental and physical well-being.`
     }
   ]
-
-  return catDataObj
+  console.log('Data structure returned from FilterDataFunction', categoryDataArr)
+  return categoryDataArr
 }
