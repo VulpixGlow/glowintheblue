@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { SafeAreaView, Text, View, Image, StyleSheet, Button } from 'react-native'
 import Timeline from 'react-native-timeline-flatlist'
 
+import { useNavigation } from '@react-navigation/native'
+
+// had issue with displaying graph with using a sperate style file
+
 const Graph = props => {
-  console.log('PROPS TO GRAPH', props)
-  console.log('Array', props.route.params.userData)
+  //console.log('PROPS TO GRAPH', props)
+  //console.log('Array', props.route.params.userData)
   const data = props.route.params.userData
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
@@ -29,9 +33,22 @@ const Graph = props => {
           style: { paddingTop: 5 }
         }}
       />
+      <View style={styles.graphButtonSection}>
+        <Button
+          title='Pie Chart'
+          style={styles.barGraphButton}
+          onPress={() =>
+            navigation.navigate('PieChart', {
+              userData: props.userData
+            })
+          }
+        />
+      </View>
     </View>
   )
 }
+
+export default Graph
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +61,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold'
+  },
+  graphButtonSection: {
+    width: '100%',
+    height: '30%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  barGraphButton: {
+    backgroundColor: 'blue',
+    color: 'white'
   }
 })
-
-export default Graph

@@ -6,9 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function NotifScreen(props) {
   // const navigation = useNavigation();
-
-  // console.log('NOTIF FUNCTION', props);
-  // const dataForTimeLine = props.route.params.userData;
+  
   return (
     <View>
       <Card>

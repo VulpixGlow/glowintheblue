@@ -13,13 +13,10 @@ export default function filterUserDataPieChart(arr, email) {
     }
   })
 
-  console.log('Filtered Arr', filterArr)
-
   filterArr.forEach(obj => {
     if (obj.categoryName === 'Focus') {
       focusTotal += obj.time
-      console.log(focusTotal, 'Focus Total')
-    } else if (obj.categoryName === 'Mediate') {
+    } else if (obj.categoryName === 'Meditate') {
       mediateTotal += obj.time
     } else if (obj.categoryName === 'Move') {
       moveTotal += obj.time
@@ -41,7 +38,7 @@ export default function filterUserDataPieChart(arr, email) {
     {
       name: 'Mediate',
       time: mediateTotal,
-      color: 'darkpurple',
+      color: 'rgb(45,156,219)',
       legendFontColor: '#7F7F7F',
       legendFontSize: 15
     },

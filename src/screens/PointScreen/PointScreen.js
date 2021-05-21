@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function Points(props) {
   const navigation = useNavigation();
-  console.log('POINTS FUNCTION', props);
+  //console.log('POINTS FUNCTION', props);
   const dataForTimeLine = props.route.params.userData;
   return (
     <View>

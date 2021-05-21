@@ -11,16 +11,16 @@ import { useNavigation } from '@react-navigation/native';
 //   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
 // }
 const groupData = async (props) => {
-  console.log('props in group screen line 8', props);
-  // const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
+  //console.log('props in group screen line 8', props)
+  //const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
   //const { data } = await axios.get('http://localhost:8080/api/group')
-  // console.log('groupData line 11', data);
+  //console.log('groupData line 11', data);
 };
 groupData();
 
-console.log('hello from GroupScreen line 15');
+//console.log('hello from GroupScreen line 15');
 export default function GroupScreen(props) {
-  console.log('props from GroupScreen line 19', props);
+  //console.log('props from GroupScreen line 19', props);
   const navigation = useNavigation();
   //const data = [0.4, 0.6, 0.8]
   return (

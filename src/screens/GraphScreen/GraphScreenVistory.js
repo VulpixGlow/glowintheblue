@@ -16,7 +16,7 @@ const BarChart = () => {
     let userCatgy = []
     try {
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/session')
-      console.log('Data -->', data)
+      //console.log('Data -->', data)
       for (const dataObj in data) {
         userTime.push(dataObj.time)
         userCatgy.push(dataObj.categoryName)
@@ -33,7 +33,7 @@ const BarChart = () => {
   return (
     <View style={styles.container}>
       <VictoryChart width={350} theme={VictoryTheme.material}>
-        <VictoryBar data={data} x='quarter' y='earnings' />
+        <VictoryBar data={data} x='points' y='category' />
       </VictoryChart>
     </View>
   )
