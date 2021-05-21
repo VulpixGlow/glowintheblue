@@ -24,7 +24,7 @@ export default function TimerExperiment(props) {
   const pickerRef = useRef()
   const navigation = useNavigation()
 
-  // Category constants
+  // Category constants - Refactored
   const [selectCat, setSelectedCat] = useState('')
   const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other']
 
