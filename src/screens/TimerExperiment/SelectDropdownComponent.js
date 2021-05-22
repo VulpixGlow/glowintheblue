@@ -13,7 +13,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function SelectDropdownComponent(props) {
-  console.log('SELECT DROPDOWN PROPS', props);
+  // console.log('SELECT DROPDOWN PROPS', props);
   const [selectCat, setSelectedCat] = useState();
   const userEmail = props.userSession.userData.extraData.email;
   console.log('userEmail in SelectDropdown-->', userEmail);

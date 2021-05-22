@@ -12,12 +12,14 @@ export { default as GraphScreen } from './GraphScreen/GraphScreen';
 
 export { default as StoreScreen } from './StoreScreen/StoreScreen';
 
-export { default as FooterScreen } from "./FooterScreen/FooterScreen"
+export { default as FooterScreen } from './FooterScreen/FooterScreen';
 
-export { default as GroupScreen } from './GroupScreen/GroupScreen'
+export { default as GroupScreen } from './GroupScreen/GroupScreen';
 
 export { default as NotifScreen } from './NotifScreen/NotifScreen';
 
 export { default as InviteScreen } from './InviteScreen/InviteScreen';
 
-export { default as GroupsScreen } from './GroupsScreen/GroupsScreen'
+export { default as GroupsScreen } from './GroupsScreen/GroupsScreen';
+
+export { default as BottomTabs } from './BottomTabs/BottomTabs';

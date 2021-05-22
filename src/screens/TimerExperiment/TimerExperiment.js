@@ -21,9 +21,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectCountdownComponent from './SelectDropdownComponent';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 // logout
-import { firebase } from "../../../config/Firebase"
+import { firebase } from '../../../config/Firebase';
 import axios from 'axios';
 import filterDataFunction from './filterDataFunction';
+import BottomTabs from '../BottomTabs/BottomTabs';
 
 // for AsyncStorage
 const STORAGE_KEY = '@save_points';
@@ -43,7 +44,7 @@ export default function TimerExperiment(props) {
   const sessionData = async () => {
     try {
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions');
-      console.log('Data from Timer Component -->', data);
+      // console.log('Data from Timer Component -->', data);
 
       setUserData(data);
     } catch (error) {
@@ -118,7 +119,6 @@ export default function TimerExperiment(props) {
       addPoints = 35;
   }
 
-
   let totalPoints = points + addPoints;
 
   const createTwoButtonAlert = () =>
@@ -131,20 +131,16 @@ export default function TimerExperiment(props) {
       { text: 'I DID IT!', onPress: () => onConfirmCompleted(totalPoints) },
     ]);
   // How can this all be stored in a object and referenced for graphing?
-//logout
-  const logout = () =>{
+  //logout
+  const logout = () => {
     firebase
       .auth()
       .signOut()
-      .then(()=>
-        navigation.navigate('Login')
-      )
-  }
-  console.log('Hello from TimerExperiment')
-  console.log('MOST RECENT USER DATA', userData);
+      .then(() => navigation.navigate('Login'));
+  };
+  console.log('Hello from TimerExperiment');
+  // console.log('MOST RECENT USER DATA', userData);
 
-  // how to access the user email => props.userData.extraData.email
-  // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
   let dataForTimeLine = filterDataFunction(userData, `${timerEmail}`);
 
   const children = ({ remainingTime }) => {
@@ -239,13 +235,13 @@ export default function TimerExperiment(props) {
           <Button title='Logout' onPress={() => logout()} />
           <Button title='Start a group session' onPress={() => navigation.navigate('Groups')} />
         </View>
-        <FooterScreen
+        {/* <FooterScreen
           userSession={props}
           userPoints={points}
           userTime={selectedValue}
           userEmail={props.userData.extraData.email}
           userData={dataForTimeLine}
-        />
+        /> */}
       </View>
     </SafeAreaView>
   );
