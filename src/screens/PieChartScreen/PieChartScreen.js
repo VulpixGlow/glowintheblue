@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView, Text, View, Image, StyleSheet, Button, Dimensions } from 'react-native'
-import { PieChart } from 'react-native-chart-kit'
-import { filterUserDataPieChart } from '../TimerExperiment/filterDataPieFunction'
+import React, { useEffect, useState, useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
+import { SafeAreaView, Text, View, Image, StyleSheet, Button, Dimensions } from 'react-native';
+import { PieChart } from 'react-native-chart-kit';
+import { filterUserDataPieChart } from '../TimerExperiment/filterDataPieFunction';
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 
-const MyPieChart = props => {
-  //console.log('PROPS TO PIE', props)
-  //console.log('Array', props.route.params.userData)
-  //console.log('FIND USER EMAIL FOR PIE CHART', props.route.params)
-  // const timerEmail = props.userData.extraData.email
-  const data = props.route.params.userData
-  const navigation = useNavigation()
+const MyPieChart = () => {
+  const data = useContext(UserInfoContext);
+  const navigation = useNavigation();
 
   // let chartData = filterUserDataPieChart(data, 'ebThur@g.com')
 
@@ -19,22 +16,7 @@ const MyPieChart = props => {
     <View style={styles.container}>
       <Text style={styles.header}>Pie Chart</Text>
       <PieChart
-        data={[
-          {
-            name: 'Focus',
-            time: 55,
-            color: 'rgba(131, 167, 234, 1)',
-            legendFontColor: '#7F7F7F',
-            legendFontSize: 15
-          },
-          {
-            name: 'Mediate',
-            time: 65,
-            color: 'rgb(45,156,219)',
-            legendFontColor: '#7F7F7F',
-            legendFontSize: 15
-          }
-        ]}
+        data={data}
         width={Dimensions.get('window').width - 16}
         height={220}
         chartConfig={{
@@ -61,18 +43,14 @@ const MyPieChart = props => {
         <Button
           title='Home'
           style={styles.barGraphButton}
-          onPress={() =>
-            navigation.navigate('Home', {
-              userData: props.userData
-            })
-          }
+          onPress={() => navigation.navigate('Home')}
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default MyPieChart
+export default MyPieChart;
 
 const styles = StyleSheet.create({
   container: {
@@ -102,4 +80,4 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 16
   }
-})
+});

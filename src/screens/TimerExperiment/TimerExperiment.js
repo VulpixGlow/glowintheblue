@@ -1,15 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
 // CAN  YOU FEEL THE VIBRATION?
-import {
-  Text,
-  View,
-  Alert,
-  SafeAreaView,
-  Animated,
-  Vibration,
-  Item,
-  TouchableHighlight
-} from 'react-native';
+import { Text, View, Alert, SafeAreaView, Animated, Vibration } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
@@ -17,25 +9,36 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SelectDropdown from 'react-native-select-dropdown';
 import FooterScreen from '../FooterScreen/FooterScreen';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import filterDataFunction from './filterDataFunction';
 import styles from './styles';
 import axios from 'axios';
 
-export default function TimerExperiment(props) {
-  //console.log('TIMEREXPERIMENT COMPONENT PROPS', props);
+export default function TimerExperiment() {
+  const {
+    user,
+    setUser,
+    userData,
+    setUserData,
+    selectedValue,
+    setSelectedValue,
+    points,
+    setPoints,
+    selectCat,
+    setSelectedCat
+  } = useContext(UserInfoContext);
+  console.log('POINTS ', points);
+  console.log('INSIDE TIMERSCREEN', user);
 
-  const [userData, setUserData] = useState([]);
   const [isRunning, setRunning] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(0);
-  const [points, setPoints] = useState(0);
+  // const [selectedValue, setSelectedValue] = useState(0);
+  // const [points, setPoints] = useState(0);
 
-  const timerEmail = props.userData.extraData.email;
+  // const timerEmail = user.email;
   //console.log('timerEmail -->', timerEmail);
   const pickerRef = useRef();
   const navigation = useNavigation();
 
   // Category constants - Refactored
-  const [selectCat, setSelectedCat] = useState('');
+  // const [selectCat, setSelectedCat] = useState('');
   const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other'];
 
   // Axios request for data
@@ -68,24 +71,17 @@ export default function TimerExperiment(props) {
   // Axios call to update data in db after each "session"
   const onConfirmCompleted = async total => {
     try {
-      setPoints(total);
+      console.log('CHECK STATE OF POINTS', points);
       // http://localhost:8080/api/sessions/update
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
-        email: timerEmail,
+        email: user.email,
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
         points: points
       });
-
-      // return the updated data for the timeline to reflect newly completed session
-      // http://localhost:8080/api/sessions
-      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
-      //console.log('Newly Completed Session -->', data);
-      // update state with new data
-      setUserData(data);
     } catch (error) {
-      console.log('We got an error', error);
+      console.log('Error in onComfirmCompleted function', error);
     }
   };
 
@@ -125,17 +121,14 @@ export default function TimerExperiment(props) {
         onPress: () => console.log('Uncompleted Pressed'),
         style: 'cancel'
       },
-      { text: 'Glowing', onPress: () => onConfirmCompleted(totalPoints) }
+      {
+        text: 'Glowing',
+        onPress: () => {
+          setPoints(totalPoints);
+          onConfirmCompleted(totalPoints);
+        }
+      }
     ]);
-
-  // Jumps to this console.log after timerEmail console.log
-  //console.log('MOST RECENT USER DATA', userData);
-
-  // how to access the user email => props.userData.extraData.email
-  // let dataForTimeLine = filterDataFunction(userData, 'aavrahamy2x@webnode.com');
-
-  // Data cleaning  prior to passing it down to graph - invoked when a user clicks on the footer button
-  let dataForTimeLine = filterDataFunction(userData, `${timerEmail}`);
 
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600);
@@ -251,13 +244,7 @@ export default function TimerExperiment(props) {
             onPress={() => setRunning(false)}
           />
         </View>
-        <FooterScreen
-          userSession={props}
-          userPoints={points}
-          userTime={selectedValue}
-          userEmail={props.userData.extraData.email}
-          userData={dataForTimeLine}
-        />
+
       </View>
     </SafeAreaView>
   );

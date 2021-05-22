@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
 import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 
 import { useNavigation } from '@react-navigation/native';
 
-export default function FooterScreen(props) {
-  //console.log('FOOTER SCREEN PROPS', props);
+export default function FooterScreen() {
+  const {
+    user,
+    setUser,
+    userData,
+    setUserData,
+    selectedValue,
+    setSelectedValue,
+    points,
+    setPoints,
+    selectCat,
+    setSelectedCat
+  } = useContext(UserInfoContext);
+
   const navigation = useNavigation();
 
   return (
@@ -13,34 +26,22 @@ export default function FooterScreen(props) {
       <Button
         buttonStyle={styles.buttonCTA}
         title='🕙'
-        props={props}
         onPress={() => navigation.navigate('Home')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
         title='🎭'
-        props={props}
-        onPress={() =>
-          navigation.navigate('Groups', {
-            userData: props.userData,
-          })
-        }
+        onPress={() => navigation.navigate('Groups')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
         title='📈'
-        props={props}
-        onPress={() =>
-          navigation.navigate('Graph', {
-            userData: props.userData,
-          })
-        }
+        onPress={() => navigation.navigate('Graph')}
       />
       <Button
         buttonStyle={styles.buttonCTA}
         title='🎁'
-        props={props}
-        onPress={() => navigation.navigate('Store', { userData: props.userData })}
+        onPress={() => navigation.navigate('Store')}
       />
     </View>
   );
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     // marginRight: '7%',
     // padding: '20%',
     // alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   // textStyle: {
   //   color: 'white',
@@ -71,13 +72,13 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: '#fec4fc',
     borderStyle: 'solid',
-    borderColor: '#aedcff',
+    borderColor: '#aedcff'
   },
   buttonContainer: {
     marginTop: 80,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'row',
-  },
+    flexDirection: 'row'
+  }
 });

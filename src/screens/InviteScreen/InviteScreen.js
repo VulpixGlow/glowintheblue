@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { Card, Input, Text, Button } from 'react-native-elements';
 import FooterScreen from '../FooterScreen/FooterScreen';
@@ -14,23 +15,37 @@ import axios from 'axios';
 //   }
 // };
 
-export default function InviteScreen(props) {
+export default function InviteScreen() {
+  const {
+    user,
+    setUser,
+    userData,
+    setUserData,
+    selectedValue,
+    setSelectedValue,
+    points,
+    setPoints,
+    selectCat,
+    setSelectedCat,
+    inviteEmail,
+    setInviteEmail,
+    groupName,
+    setGroupName
+  } = useContext(UserInfoContext);
   // const navigation = useNavigation();
-  const [email, setEmail] = useState('');
-  const [groupName, setGroupName] = useState('');
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = evt => {
     // email = "s@s.com, a@a.com",
     const emails = email.split(', ');
     // axios.post('')
-//hello i want to merge
+    //hello i want to merge
     const notificationData = async () => {
-      const { data } = await axios.post('https://glowintheblue.herokuapp.com/api/notifications',{
-      //const { data } = await axios.post('http://localhost:8080/api/notifications', {
-        "userId": 5,
-        "emails": emails,
-        "groupName": groupName
-      })
+      const { data } = await axios.post('https://glowintheblue.herokuapp.com/api/notifications', {
+        //const { data } = await axios.post('http://localhost:8080/api/notifications', {
+        userId: 5, // user.email
+        emails: inviteEmail,
+        groupName: groupName
+      });
       //console.log('groupData line 12', data);
     };
     notificationData();
@@ -50,20 +65,20 @@ export default function InviteScreen(props) {
       <Card>
         <View style={{ marginBottom: 160 }}>
           <Text h1>Group name</Text>
-            <TextInput
-              type='text'
-              placeholder='name your group'
-              value={groupName}
-              onChangeText={(text) => {
-                setGroupName(text)
-              }}
-            />
+          <TextInput
+            type='text'
+            placeholder='name your group'
+            value={groupName}
+            onChangeText={text => {
+              setGroupName(text);
+            }}
+          />
           <Text h1>Invite your friends!</Text>
           <TextInput
             type='text'
             placeholder='Email'
             value={email}
-            onChangeText={(text) => {
+            onChangeText={text => {
               //console.log('EVENT TARGET', text);
               setEmail(text);
             }}
