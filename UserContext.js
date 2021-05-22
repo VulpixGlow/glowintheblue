@@ -1,5 +1,3 @@
-import React, { useEffect, useState, useContext } from 'react';
-
-import App from './App';
+import React from 'react';
 
 export const UserInfoContext = React.createContext(null);
