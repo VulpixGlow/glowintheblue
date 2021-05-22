@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView, Text, View, Image, StyleSheet, Button } from 'react-native'
-import Timeline from 'react-native-timeline-flatlist'
+import React, { useEffect, useState, useContext } from 'react';
+import { SafeAreaView, Text, View, Image, StyleSheet, Button } from 'react-native';
+import Timeline from 'react-native-timeline-flatlist';
+import { UserInfoContext } from '../../../UserContext';
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 
 // had issue with displaying graph with using a sperate style file
 
-const Graph = props => {
-  //console.log('PROPS TO GRAPH', props)
-  //console.log('Array', props.route.params.userData)
-  const data = props.route.params.userData
-  const navigation = useNavigation()
+const Graph = () => {
+  const data = useContext(UserInfoContext);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -37,18 +36,14 @@ const Graph = props => {
         <Button
           title='Pie Chart'
           style={styles.barGraphButton}
-          onPress={() =>
-            navigation.navigate('PieChart', {
-              userData: props.userData
-            })
-          }
+          onPress={() => navigation.navigate('PieChart')}
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default Graph
+export default Graph;
 
 const styles = StyleSheet.create({
   container: {
@@ -72,4 +67,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     color: 'white'
   }
-})
+});

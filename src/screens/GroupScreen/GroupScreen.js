@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
 import { View, Text, Button } from 'react-native';
 //import styles from './styles'
 import axios from 'axios';
@@ -10,7 +11,7 @@ import InviteScreen from '../InviteScreen/InviteScreen';
 //   backgroundGradientTo: '#08130D',
 //   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
 // }
-const groupData = async (props) => {
+const groupData = async () => {
   //console.log('props in group screen line 8', props);
   //const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
   //const { data } = await axios.get('http://localhost:8080/api/group')
@@ -19,10 +20,22 @@ const groupData = async (props) => {
 groupData();
 
 //console.log('hello from GroupScreen line 15');
-export default function GroupScreen(props) {
-  //console.log('props from GroupScreen line 19', props);
+export default function GroupScreen() {
+  const {
+    user,
+    setUser,
+    userData,
+    setUserData,
+    selectedValue,
+    setSelectedValue,
+    points,
+    setPoints,
+    selectCat,
+    setSelectedCat
+  } = useContext(UserInfoContext);
+
   const navigation = useNavigation();
-  const data = [0.4, 0.6, 0.8];
+
   return (
     <View>
       <Text>Memeber of the Group</Text>

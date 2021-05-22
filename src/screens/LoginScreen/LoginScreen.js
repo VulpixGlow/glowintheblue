@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { firebase } from '../../../config/Firebase';
 
 export default function LoginScreen({ navigation }) {
+  const {
+    user,
+    setUser,
+    userData,
+    setUserData,
+    selectedValue,
+    setSelectedValue,
+    points,
+    setPoints,
+    selectCat,
+    setSelectedCat,
+    inviteEmail,
+    setInviteEmail,
+    groupName,
+    setGroupName
+  } = useContext(UserInfoContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,13 +34,13 @@ export default function LoginScreen({ navigation }) {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((response) => {
+      .then(response => {
         const uid = response.user.uid;
         const usersRef = firebase.firestore().collection('users');
         usersRef
           .doc(uid)
           .get()
-          .then((firestoreDocument) => {
+          .then(firestoreDocument => {
             if (!firestoreDocument.exists) {
               alert('User does not exist anymore.');
               return;
@@ -30,11 +48,11 @@ export default function LoginScreen({ navigation }) {
             const user = firestoreDocument.data();
             navigation.navigate('Home', { user: user });
           })
-          .catch((error) => {
+          .catch(error => {
             alert(error);
           });
       })
-      .catch((error) => {
+      .catch(error => {
         alert(error);
       });
   };
@@ -49,7 +67,7 @@ export default function LoginScreen({ navigation }) {
           style={styles.input}
           placeholder='E-mail'
           placeholderTextColor='#aaaaaa'
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={text => setEmail(text)}
           value={email}
           underlineColorAndroid='transparent'
           autoCapitalize='none'
@@ -59,7 +77,7 @@ export default function LoginScreen({ navigation }) {
           placeholderTextColor='#aaaaaa'
           secureTextEntry
           placeholder='Password'
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={text => setPassword(text)}
           value={password}
           underlineColorAndroid='transparent'
           autoCapitalize='none'

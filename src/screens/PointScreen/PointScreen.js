@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
 import { StyleSheet, View, Image, ImageBackground } from 'react-native';
 import { Card, ListItem, Button, Icon, Text } from 'react-native-elements';
 import FooterScreen from '../FooterScreen/FooterScreen';
@@ -17,10 +18,11 @@ import { useNavigation } from '@react-navigation/native';
 //   )
 // }
 
-function Points(props) {
+function Points() {
+  const data = useContext(UserInfoContext);
   const navigation = useNavigation();
   //console.log('POINTS FUNCTION', props);
-  const dataForTimeLine = props.route.params.userData;
+  // const dataForTimeLine = data.userData
   return (
     <View>
       <Card>
@@ -28,13 +30,12 @@ function Points(props) {
           <Text h1>POINTS! </Text>
         </View>
       </Card>
-      <FooterScreen
-        // userSession={props}
-        // userPoints={points}
-        // userTime={selectedValue}
-        // userEmail={props.userData.extraData.email}
-        userData={dataForTimeLine}
-      />
+      {/* <FooterScreen
+        userPoints={points}
+        userTime={selectedValue}
+        userEmail={data.email}
+        userData={data.userData}
+      /> */}
     </View>
   );
 }
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     // marginLeft: 7,
     // marginRight: 7,
     // padding: 20,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   // textStyle: {
   //   color: 'white',
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#aedcff',
     // justifyContent: 'center',
     alignItems: 'center',
-    display: 'flex',
+    display: 'flex'
   },
   buttonCTA: {
     borderRadius: 50,
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     marginRight: 185,
     backgroundColor: '#fec4fc',
     borderStyle: 'solid',
-    borderColor: '#aedcff',
+    borderColor: '#aedcff'
   },
   buttonContainer: {
     borderRadius: 50,
@@ -78,6 +79,6 @@ const styles = StyleSheet.create({
     marginTop: 120,
     justifyContent: 'center',
     alignItems: 'center',
-    display: 'flex',
-  },
+    display: 'flex'
+  }
 });
