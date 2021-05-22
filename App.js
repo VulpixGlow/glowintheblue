@@ -1,8 +1,9 @@
-import 'react-native-gesture-handler'
-import React, { useEffect, useState } from 'react'
-import { firebase } from './config/Firebase'
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import 'react-native-gesture-handler';
+import React, { useEffect, useState, useContext } from 'react';
+import { firebase } from './config/Firebase';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ContextProvider, { Context } from './Context';
 
 import {
   Onboarding,
@@ -16,125 +17,102 @@ import {
   InviteScreen,
   NotifScreen,
   PieChartScreen,
-  GroupsScreen
+  GroupsScreen,
 } from './src/screens';
+import { StatusBar } from 'react-native';
+import BottomTabs from './src/screens/BottomTabs/BottomTabs';
 
-
-import { StatusBar } from 'react-native'
-
-import { decode, encode } from 'base-64'
+import { decode, encode } from 'base-64';
 if (!global.btoa) {
-  global.btoa = encode
+  global.btoa = encode;
 }
 if (!global.atob) {
-  global.atob = decode
+  global.atob = decode;
 }
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
     primary: '#aedcff',
-    background: '#8cffde'
-  }
-}
+    background: '#8cffde',
+  },
+};
 
-export default function App() {
-  const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState(null)
+export default function App(props) {
+  // const {
+  //   user: [user, setUser],
+  //   loading: [loading, setLoading],
+  // } = useContext(Context);
 
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection('users')
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        usersRef
-          .doc(user.uid)
-          .get()
-          .then(document => {
-            const userData = document.data()
-            setLoading(false)
-            setUser(userData)
-          })
-          .catch(error => {
-            setLoading(false)
-          })
-      } else {
-        setLoading(false)
-      }
-    })
-  }, [])
+  // console.log('Context in App', Context);
+  // const a = useContext(Context);
+  // console.log('a in App,', a);
 
-  // Good Spot to add a spinnging wheel or loading icon
+  // if (loading) {
+  //   return <></>;
+  // }
 
-  if (loading) {
-    return <></>
-  }
-
-  //console.log('How can user.id be passed down to store data', user)
+  const someContext = useContext(Context);
+  console.log('someContext IN APP.JS', someContext);
 
   return (
-    <NavigationContainer theme={MyTheme}>
-      <StatusBar translucent backgroundColor='#2d2660' barStyle='light-content' />
-      <Stack.Navigator screenOptions={{ title: '' }}>
-        {user ? (
-          <>
-            <Stack.Screen
-              name='Home'
-              options={{
-                headerStyle: {
-                  backgroundColor: '#2d2660',
-                  shadowColor: 'transparent'
-                },
-                headerTintColor: 'white'
-              }}>
-              {props => <HomeScreen {...props} extraData={user} />}
-            </Stack.Screen>
-            <Stack.Screen name='Points' component={PointScreen} />
-            <Stack.Screen name='Graph' component={GraphScreen} />
-            <Stack.Screen name='PieChart' component={PieChartScreen} />
-            <Stack.Screen name='Store' component={StoreScreen} />
-            <Stack.Screen name='Group' component={GroupScreen} />
-            <Stack.Screen name='Groups' component={GroupsScreen} />
-            <Stack.Screen name='InviteScreen' component={InviteScreen} />
-            <Stack.Screen name='NotifScreen' component={NotifScreen} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              name='Onboarding'
-              options={{
-                headerShown: false,
-                headerTintColor: null
-              }}
-              component={Onboarding}
-            />
-            <Stack.Screen
-              name='Login'
-              options={{
-                headerStyle: {
-                  backgroundColor: '#ffe1fd',
-                  shadowColor: 'transparent'
-                },
-                headerTintColor: '#e981e4'
-              }}
-              component={LoginScreen}
-            />
-            <Stack.Screen
-              name='Registration'
-              options={{
-                headerStyle: {
-                  backgroundColor: '#cbe3fc',
-                  shadowColor: 'transparent'
-                },
-                headerTintColor: '#64a5e9'
-              }}
-              component={RegistrationScreen}
-            />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+    <ContextProvider>
+      <NavigationContainer theme={MyTheme}>
+        <StatusBar translucent backgroundColor='#2d2660' barStyle='light-content' />
+        <Stack.Navigator screenOptions={{ title: '' }}>
+          {/* {user ? (
+            <> */}
+          <Stack.Screen
+            name='Home'
+            options={{
+              headerStyle: {
+                backgroundColor: '#2d2660',
+                shadowColor: 'transparent',
+              },
+              headerTintColor: 'white',
+            }}>
+            {(props) => <BottomTabs />}
+          </Stack.Screen>
+          {/* </>
+          ) : (
+            <>
+              <Stack.Screen
+                name='Onboarding'
+                options={{
+                  headerShown: false,
+                  headerTintColor: null,
+                }}
+                component={Onboarding}
+              />
+              <Stack.Screen
+                name='Login'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#ffe1fd',
+                    shadowColor: 'transparent',
+                  },
+                  headerTintColor: '#e981e4',
+                }}
+                component={LoginScreen}
+              />
+              <Stack.Screen
+                name='Registration'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#cbe3fc',
+                    shadowColor: 'transparent',
+                  },
+                  headerTintColor: '#64a5e9',
+                }}
+                component={RegistrationScreen}
+              />
+            </>
+          )} */}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ContextProvider>
+  );
 }
