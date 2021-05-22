@@ -14,15 +14,6 @@ export default function RegistrationScreen({ navigation }) {
     navigation.navigate('Login');
   };
 
-  const storeUserData = async (data) => {
-    try {
-      console.log('STORING USER DATA', data.email);
-      await axios.post('https://glowintheblue.herokuapp.com/api/users', data.email);
-    } catch (error) {
-      console.log('Unable to save user info');
-    }
-  };
-
   const onRegisterPress = () => {
     if (password !== confirmPassword) {
       alert("Passwords don't match.");
@@ -44,7 +35,6 @@ export default function RegistrationScreen({ navigation }) {
           .doc(uid)
           .set(data)
           .then(() => {
-            storeUserData(data);
             navigation.navigate('Home', { user: data });
           })
           .catch((error) => {
@@ -54,7 +44,6 @@ export default function RegistrationScreen({ navigation }) {
       .catch((error) => {
         alert(error);
       });
-    console.log('user in registration -->', user);
   };
 
   return (
