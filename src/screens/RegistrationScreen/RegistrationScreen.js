@@ -23,28 +23,37 @@ export default function RegistrationScreen({ navigation }) {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((response) => {
+      .then(response => {
         const uid = response.user.uid;
         const data = {
           id: uid,
           email,
-          fullName,
+          fullName
         };
         const usersRef = firebase.firestore().collection('users');
         usersRef
           .doc(uid)
           .set(data)
           .then(() => {
+            storeUserData(email);
             navigation.navigate('Home', { user: data });
           })
-          .catch((error) => {
+          .catch(error => {
             alert(error);
           });
       })
-      .catch((error) => {
+      .catch(error => {
         alert(error);
       });
   };
+
+  async function storeUserData(email) {
+    try {
+      await axios.post('https://glowintheblue.herokuapp.com/api/users', email);
+    } catch (error) {
+      console.log('Unable to save user info');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -56,7 +65,7 @@ export default function RegistrationScreen({ navigation }) {
           style={styles.input}
           placeholder='Full Name'
           placeholderTextColor='#aaaaaa'
-          onChangeText={(text) => setFullName(text)}
+          onChangeText={text => setFullName(text)}
           value={fullName}
           underlineColorAndroid='transparent'
           autoCapitalize='none'
@@ -65,7 +74,7 @@ export default function RegistrationScreen({ navigation }) {
           style={styles.input}
           placeholder='E-mail'
           placeholderTextColor='#aaaaaa'
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={text => setEmail(text)}
           value={email}
           underlineColorAndroid='transparent'
           autoCapitalize='none'
@@ -75,7 +84,7 @@ export default function RegistrationScreen({ navigation }) {
           placeholderTextColor='#aaaaaa'
           secureTextEntry
           placeholder='Password'
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={text => setPassword(text)}
           value={password}
           underlineColorAndroid='transparent'
           autoCapitalize='none'
@@ -85,7 +94,7 @@ export default function RegistrationScreen({ navigation }) {
           placeholderTextColor='#aaaaaa'
           secureTextEntry
           placeholder='Confirm Password'
-          onChangeText={(text) => setConfirmPassword(text)}
+          onChangeText={text => setConfirmPassword(text)}
           value={confirmPassword}
           underlineColorAndroid='transparent'
           autoCapitalize='none'
