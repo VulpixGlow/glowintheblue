@@ -17,7 +17,8 @@ import {
   InviteScreen,
   NotifScreen,
   PieChartScreen,
-  GroupsScreen
+  GroupsScreen,
+  BottomTabs
 } from './src/screens';
 
 import { StatusBar } from 'react-native';
@@ -53,10 +54,11 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState([]);
   const [selectedValue, setSelectedValue] = useState(0);
-  const [points, setPoints] = useState(10);
+  const [points, setPoints] = useState(0);
   const [selectCat, setSelectedCat] = useState('');
   const [inviteEmail, setInviteEmail] = useState('');
   const [groupName, setGroupName] = useState('');
+
   console.log('POINTS IN APP.JS', points);
 
   useEffect(() => {
@@ -111,7 +113,7 @@ export default function App() {
           {user ? (
             <>
               <Stack.Screen
-                name='Home'
+                name='Tabs'
                 options={{
                   headerStyle: {
                     backgroundColor: '#2d2660',
@@ -119,17 +121,16 @@ export default function App() {
                   },
                   headerTintColor: 'white'
                 }}
-                component={HomeScreen}
+                component={BottomTabs}
               />
-
+              {/* ANY thing that needs to be navagated to that isn't in the BottomsTab should be included here */}
+              <Stack.Screen name='NotifScreen' component={NotifScreen} />
               <Stack.Screen name='Points' component={PointScreen} />
               <Stack.Screen name='Graph' component={GraphScreen} />
               <Stack.Screen name='PieChart' component={PieChartScreen} />
-              <Stack.Screen name='Store' component={StoreScreen} />
               <Stack.Screen name='Group' component={GroupScreen} />
               <Stack.Screen name='Groups' component={GroupsScreen} />
               <Stack.Screen name='InviteScreen' component={InviteScreen} />
-              <Stack.Screen name='NotifScreen' component={NotifScreen} />
             </>
           ) : (
             <>

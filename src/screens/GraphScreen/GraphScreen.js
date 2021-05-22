@@ -2,20 +2,40 @@ import React, { useEffect, useState, useContext } from 'react';
 import { SafeAreaView, Text, View, Image, StyleSheet, Button } from 'react-native';
 import Timeline from 'react-native-timeline-flatlist';
 import { UserInfoContext } from '../../../UserContext';
+import FilterDataFunction from './filterDataFunction';
+import axios from 'axios';
 
 import { useNavigation } from '@react-navigation/native';
 
 // had issue with displaying graph with using a sperate style file
 
 const Graph = () => {
-  const data = useContext(UserInfoContext);
+  const { user, userData, setUserData } = useContext(UserInfoContext);
+
   const navigation = useNavigation();
+
+  const fetchUpdatedData = async () => {
+    try {
+      console.log('LINE 84');
+      // return the updated data for the timeline to reflect newly completed session
+      // http://localhost:8080/api/sessions
+      const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
+      console.log('Newly DATA LINE 21 GRAPH -->', data);
+      setUserData(FilterDataFunction(data, user.email));
+    } catch (error) {
+      console.log('GraphScreen Axios error', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUpdatedData();
+  }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Glow Timeline </Text>
       <Timeline
-        data={data}
+        data={userData}
         circleSize={20}
         circleColor='rgb(45,156,219)'
         lineColor='rgb(45,156,219)'
