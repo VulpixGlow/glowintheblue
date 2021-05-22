@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserInfoContext } from '../../../UserContext';
 import { StyleSheet, View, Image, ImageBackground } from 'react-native';
 import { Card, ListItem, Button, Icon, Text } from 'react-native-elements';
 import FooterScreen from '../FooterScreen/FooterScreen';
 import { useNavigation } from '@react-navigation/native';
 
-export default function NotifScreen(props) {
-  // const navigation = useNavigation();
-  
+export default function NotifScreen() {
+  const {
+    user,
+    setUser,
+    userData,
+    setUserData,
+    selectedValue,
+    setSelectedValue,
+    points,
+    setPoints,
+    selectCat,
+    setSelectedCat,
+    inviteEmail,
+    setInviteEmail,
+    groupName,
+    setGroupName
+  } = useContext(UserInfoContext);
+
   return (
     <View>
       <Card>
@@ -23,7 +39,7 @@ export default function NotifScreen(props) {
           <Button title='💣💔💣💔' type='outline' style={{ backgroundColor: 'red' }}></Button>
         </View>
       </Card>
-      <FooterScreen  />
+      <FooterScreen />
     </View>
   );
 }
