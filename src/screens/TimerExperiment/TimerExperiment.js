@@ -8,7 +8,7 @@ import {
   Animated,
   Vibration,
   Item,
-  TouchableHighlight,
+  TouchableHighlight
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -20,7 +20,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import filterDataFunction from './filterDataFunction';
 import styles from './styles';
 import axios from 'axios';
-import BottomTabs from '../BottomTabs/BottomTabs';
 
 export default function TimerExperiment(props) {
   //console.log('TIMEREXPERIMENT COMPONENT PROPS', props);
@@ -67,7 +66,7 @@ export default function TimerExperiment(props) {
   }, []);
 
   // Axios call to update data in db after each "session"
-  const onConfirmCompleted = async (total) => {
+  const onConfirmCompleted = async total => {
     try {
       setPoints(total);
       // http://localhost:8080/api/sessions/update
@@ -76,7 +75,7 @@ export default function TimerExperiment(props) {
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points,
+        points: points
       });
 
       // return the updated data for the timeline to reflect newly completed session
@@ -124,9 +123,9 @@ export default function TimerExperiment(props) {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel',
+        style: 'cancel'
       },
-      { text: 'Glowing', onPress: () => onConfirmCompleted(totalPoints) },
+      { text: 'Glowing', onPress: () => onConfirmCompleted(totalPoints) }
     ]);
 
   // Jumps to this console.log after timerEmail console.log
@@ -173,7 +172,7 @@ export default function TimerExperiment(props) {
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+            onValueChange={itemValue => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
             <Picker.Item color='white' label='5 seconds' value={5} />
             <Picker.Item color='white' label='20 minutes' value={20} />
@@ -196,7 +195,7 @@ export default function TimerExperiment(props) {
             colors={[
               ['#e785e2', 0.4],
               ['#5ba5e7', 0.4],
-              ['#e785e2', 0.4],
+              ['#e785e2', 0.4]
             ]}>
             {({ remainingTime, animatedColor }) => (
               <Animated.Text style={{ color: animatedColor, fontSize: 50 }}>
@@ -214,7 +213,7 @@ export default function TimerExperiment(props) {
               borderRadius: 50,
               borderColor: '#42397d',
               borderWidth: 2,
-              outerHeight: 40,
+              outerHeight: 40
             }}
             renderDropdownIcon={() => {
               return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
@@ -233,7 +232,7 @@ export default function TimerExperiment(props) {
             dropdownStyle={{ backgroundColor: '#EFEFEF' }}
             rowStyle={{
               backgroundColor: '#42397d',
-              borderBottomColor: '#C5C5C5',
+              borderBottomColor: '#C5C5C5'
             }}
             rowTextStyle={{ color: '#fff', textAlign: 'left' }}
           />
