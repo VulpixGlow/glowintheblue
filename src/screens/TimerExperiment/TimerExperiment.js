@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   Animated,
   Vibration,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -34,7 +34,7 @@ export default function TimerExperiment() {
     points,
     setPoints,
     selectCat,
-    setSelectedCat
+    setSelectedCat,
   } = useContext(UserInfoContext);
 
   const [defaultTime, setDefaultTime] = useState(10);
@@ -64,14 +64,14 @@ export default function TimerExperiment() {
     sessionData();
   }, [points]);
 
-  const onConfirmCompleted = async total => {
+  const onConfirmCompleted = async (total) => {
     try {
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points
+        points: points,
       });
     } catch (error) {
       console.log('Error in onComfirmCompleted function', error);
@@ -110,24 +110,24 @@ export default function TimerExperiment() {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel'
+        style: 'cancel',
       },
       {
         text: 'Glowing',
         onPress: () => {
           setPoints(totalPoints);
           onConfirmCompleted(totalPoints);
-        }
-      }
+        },
+      },
     ]);
 
-  // const children = ({ remainingTime }) => {
-  //   const hours = Math.floor(remainingTime / 3600);
-  //   const minutes = Math.floor((remainingTime % 3600) / 60);
-  //   const seconds = remainingTime % 60;
+  const children = ({ remainingTime }) => {
+    const hours = Math.floor(remainingTime / 3600);
+    const minutes = Math.floor((remainingTime % 3600) / 60);
+    const seconds = remainingTime % 60;
 
-  //   return `${hours}:${minutes}:${seconds}`;
-  // };
+    return `${minutes}:${seconds}`;
+  };
 
   return (
     <SafeAreaView>
@@ -142,11 +142,11 @@ export default function TimerExperiment() {
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={itemValue => setSelectedValue(itemValue)}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
             <Picker.Item color='white' label='10 seconds' value={10} />
-            <Picker.Item color='white' label='20 minutes' value={20} />
-            <Picker.Item color='white' label='30 minutes' value={30} />
+            <Picker.Item color='white' label='20 minutes' value={1200} />
+            <Picker.Item color='white' label='30 minutes' value={1800} />
           </Picker>
         </View>
         <View style={styles.countdownView}>
@@ -166,11 +166,11 @@ export default function TimerExperiment() {
             colors={[
               ['#e785e2', 0.4],
               ['#5ba5e7', 0.4],
-              ['#e785e2', 0.4]
+              ['#e785e2', 0.4],
             ]}>
             {({ remainingTime, animatedColor }) => (
               <Animated.Text style={{ color: animatedColor, fontSize: 50 }}>
-                {remainingTime}
+                {children({ remainingTime })}
               </Animated.Text>
             )}
           </CountdownCircleTimer>
@@ -184,7 +184,7 @@ export default function TimerExperiment() {
               borderRadius: 50,
               borderColor: '#42397d',
               borderWidth: 2,
-              outerHeight: 40
+              outerHeight: 40,
             }}
             renderDropdownIcon={() => {
               return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
@@ -203,7 +203,7 @@ export default function TimerExperiment() {
             dropdownStyle={{ backgroundColor: '#EFEFEF' }}
             rowStyle={{
               backgroundColor: '#42397d',
-              borderBottomColor: '#C5C5C5'
+              borderBottomColor: '#C5C5C5',
             }}
             rowTextStyle={{ color: '#fff', textAlign: 'left' }}
           />
@@ -223,14 +223,14 @@ export default function TimerExperiment() {
           />
         </View>
         <View style={styles.buttonsView}>
-          <TouchableOpacity style={styles.timeLineButton}>
+          {/* <TouchableOpacity style={styles.timeLineButton}>
             <FontAwesome
               name='bar-chart'
               size={24}
               color='#5BA5E7'
               onPress={() => navigation.navigate('BarChart')}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={styles.timeLineButton}>
             <MaterialCommunityIcons
               name='timeline-text-outline'
