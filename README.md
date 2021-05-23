@@ -14,17 +14,17 @@ Whether making sure they spent time meditating or that they allocated time to ex
 
 ## Table of Contents
 
-- [Glow in the Blue](glowintheblue.herokuapp.com)
-- [Table of Contents](Table-of-Contents)
-- [Download](Download)
-- [Team](Team)
-  - [Chumi Gonzalez](Chumi-Gonzalez)
-  - [Elisa Bennett](Elisa-Bennett)
-  - [Hannah Kemp](Hannah-Kemp)
-  - [Shannon Chang](Shannon-Chang)
-- [Tech Stack](Tech-Stack)
-- [Current Features](Current-Features)
-- [Additional Ideas](Additional-Ideas)
+- [Glow in the Blue](https://glowintheblue.herokuapp.com/)
+- [Table of Contents](#table-of-contents)
+- [Download](#download)
+- [Team](#team)
+  - [Chumi Gonzalez](#chumi-gonzalez)
+  - [Elisa Bennett](#elisa-bennett)
+  - [Hannah Kemp](#hannah-kemp)
+  - [Shannon Chang](#shannon-chang)
+- [Tech Stack](#tech-stack)
+- [Current Features](#current-features)
+- [Additional Ideas](#additional-ideas)
 
 ## Download
 
