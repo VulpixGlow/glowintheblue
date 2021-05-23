@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { UserInfoContext } from '../../../UserContext';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { Card, Input, Text, Button } from 'react-native-elements';
@@ -36,17 +36,15 @@ export default function InviteScreen() {
   console.log('INVITE EMAIL', inviteEmail);
   const handleSubmit = evt => {
     // email = "s@s.com, a@a.com",
+
     const emails = inviteEmail.split(', ');
-    // axios.post('')
-    //hello i want to merge
+
     const notificationData = async () => {
       const { data } = await axios.post('https://glowintheblue.herokuapp.com/api/notifications', {
-        //const { data } = await axios.post('http://localhost:8080/api/notifications', {
-        userId: 5, // user.email
-        emails: inviteEmail,
+        ownerEmail: user.email,
+        emails: emails,
         groupName: groupName
       });
-      //console.log('groupData line 12', data);
     };
     notificationData();
     // const emails = email.split(', '); ['s@s.com', 'a@a.com']
@@ -76,9 +74,8 @@ export default function InviteScreen() {
           <TextInput
             type='text'
             placeholder='Email'
-            value={setInviteEmail}
+            value={inviteEmail}
             onChangeText={text => {
-              //console.log('EVENT TARGET', text);
               setInviteEmail(text);
             }}
             rightIcon={{ name: 'add', size: 24, color: 'green' }}
