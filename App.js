@@ -61,6 +61,7 @@ export default function App() {
   const [inviteEmail, setInviteEmail] = useState('');
   const [groupName, setGroupName] = useState('');
   const [groups, setGroups] = useState([]);
+  const [totalPoints, setTotalPoints] = useState(0);
 
   console.log('POINTS IN APP.JS', points);
 
@@ -109,7 +110,9 @@ export default function App() {
     groupName,
     setGroupName,
     groups,
-    setGroups
+    setGroups,
+    totalPoints,
+    setTotalPoints
   };
 
   return (

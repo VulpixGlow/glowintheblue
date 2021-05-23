@@ -8,8 +8,6 @@ import { Card, ListItem, Button, Icon } from 'react-native-elements';
 
 import { useNavigation } from '@react-navigation/native';
 
-// had issue with displaying graph with using a sperate style file
-
 export default function TimelineScreen() {
   const { user, userData, setUserData, userTimeLineData, setUserTimeLineData } =
     useContext(UserInfoContext);
@@ -20,7 +18,6 @@ export default function TimelineScreen() {
   const fetchUpdatedData = async () => {
     if (graphIsLoading) {
       try {
-        console.log('Inside FetchUpdatedData in TimelineScreen');
         const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
         setUserTimeLineData(FilterDataFunction(data, user.email));
         setGraphLoading(false);
