@@ -132,10 +132,6 @@ export default function TimerExperiment() {
   return (
     <SafeAreaView>
       <View style={styles.inviteNotif}>
-        <Button
-          buttonStyle={styles.buttonContainerN}
-          title='🔔'
-          onPress={() => navigation.navigate('NotifScreen')}></Button>
         <View style={styles.pointsBox}>
           <Text style={styles.oima}>Points Earned:</Text>
           <Text>{points}</Text>

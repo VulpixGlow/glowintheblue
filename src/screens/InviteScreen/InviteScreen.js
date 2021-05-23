@@ -30,11 +30,11 @@ export default function InviteScreen() {
     inviteEmail,
     setInviteEmail,
     groupName,
-    setGroupName,
+    setGroupName
   } = useContext(UserInfoContext);
   // const navigation = useNavigation();
   console.log('INVITE EMAIL', inviteEmail);
-  const handleSubmit = (evt) => {
+  const handleSubmit = evt => {
     // email = "s@s.com, a@a.com",
     const emails = inviteEmail.split(', ');
     // axios.post('')
@@ -44,7 +44,7 @@ export default function InviteScreen() {
         //const { data } = await axios.post('http://localhost:8080/api/notifications', {
         userId: 5, // user.email
         emails: inviteEmail,
-        groupName: groupName,
+        groupName: groupName
       });
       //console.log('groupData line 12', data);
     };
@@ -68,7 +68,7 @@ export default function InviteScreen() {
             type='text'
             placeholder='name your group'
             value={groupName}
-            onChangeText={(text) => {
+            onChangeText={text => {
               setGroupName(text);
             }}
           />
@@ -77,7 +77,7 @@ export default function InviteScreen() {
             type='text'
             placeholder='Email'
             value={setInviteEmail}
-            onChangeText={(text) => {
+            onChangeText={text => {
               //console.log('EVENT TARGET', text);
               setInviteEmail(text);
             }}
@@ -86,7 +86,6 @@ export default function InviteScreen() {
         </View>
         <Button title='Send' onPress={handleSubmit}></Button>
       </Card>
-      <FooterScreen />
     </View>
   );
 }
