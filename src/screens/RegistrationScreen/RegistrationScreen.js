@@ -50,6 +50,7 @@ export default function RegistrationScreen({ navigation }) {
   async function storeUserData(email) {
     try {
       await axios.post('https://glowintheblue.herokuapp.com/api/users', email);
+      //await axios.post('http://localhost:8080/api/users', email);
     } catch (error) {
       console.log('Unable to save user info');
     }

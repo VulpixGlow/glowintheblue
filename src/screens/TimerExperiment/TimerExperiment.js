@@ -25,8 +25,8 @@ export default function TimerExperiment() {
     selectCat,
     setSelectedCat,
   } = useContext(UserInfoContext);
-  console.log('POINTS ', points);
-  console.log('INSIDE TIMERSCREEN', user);
+  //console.log('POINTS ', points);
+  //console.log('INSIDE TIMERSCREEN', user);
 
   const [isRunning, setRunning] = useState(false);
   // const [selectedValue, setSelectedValue] = useState(0);
@@ -71,7 +71,7 @@ export default function TimerExperiment() {
   // Axios call to update data in db after each "session"
   const onConfirmCompleted = async (total) => {
     try {
-      console.log('CHECK STATE OF POINTS', points);
+      //console.log('CHECK STATE OF POINTS', points);
       // http://localhost:8080/api/sessions/update
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,

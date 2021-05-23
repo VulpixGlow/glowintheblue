@@ -23,13 +23,12 @@ export default function BottomTabs() {
     setSelectedCat
   } = useContext(UserInfoContext);
 
-  console.log('user in BottomTabs-->', user);
+  //console.log('user in BottomTabs-->', user);
   return (
     <Tab.Navigator>
       <Tab.Screen name='Home' component={HomeScreen} />
       <Tab.Screen name='Stats' component={GraphScreen} />
       <Tab.Screen name='Groups' component={GroupsScreen} />
-
       {/* <Tab.Screen name='Home' component={HomeScreen} /> */}
       {/* <Tab.Screen name='Stats' component={Grap} /> */}
       {/* <Tab.Screen name='Login' component={Login} />

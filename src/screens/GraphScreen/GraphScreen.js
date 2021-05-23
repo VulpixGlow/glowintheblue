@@ -16,11 +16,11 @@ const Graph = () => {
 
   const fetchUpdatedData = async () => {
     try {
-      console.log('LINE 84');
+      //console.log('LINE 84');
       // return the updated data for the timeline to reflect newly completed session
       // http://localhost:8080/api/sessions
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
-      console.log('Newly DATA LINE 21 GRAPH -->', data);
+      //console.log('Newly DATA LINE 21 GRAPH -->', data);
       setUserData(FilterDataFunction(data, user.email));
     } catch (error) {
       console.log('GraphScreen Axios error', error);
