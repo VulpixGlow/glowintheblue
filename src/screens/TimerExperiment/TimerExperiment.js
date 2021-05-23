@@ -1,23 +1,34 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { UserInfoContext } from '../../../UserContext';
-// CAN  YOU FEEL THE VIBRATION?
-import { Text, View, Alert, SafeAreaView, Animated, Vibration } from 'react-native';
+import {
+  Text,
+  View,
+  Alert,
+  SafeAreaView,
+  Animated,
+  Vibration,
+  TouchableOpacity
+} from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SelectDropdown from 'react-native-select-dropdown';
-import FooterScreen from '../FooterScreen/FooterScreen';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+// import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FilterDataFunction from '../../dataFunctions/FilterDataFunction';
 import styles from './styles';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function TimerExperiment() {
   const {
     user,
-    setUser,
-    userData,
     setUserData,
+    setUserTimeLineData,
     selectedValue,
     setSelectedValue,
     points,
@@ -25,40 +36,25 @@ export default function TimerExperiment() {
     selectCat,
     setSelectedCat
   } = useContext(UserInfoContext);
-  console.log('POINTS ', points);
-  console.log('INSIDE TIMERSCREEN', user);
+
   const [defaultTime, setDefaultTime] = useState(10);
   const [isRunning, setRunning] = useState(false);
-  // const [selectedValue, setSelectedValue] = useState(0);
-  // const [points, setPoints] = useState(0);
-
-  // const timerEmail = user.email;
-  //console.log('timerEmail -->', timerEmail);
   const pickerRef = useRef();
   const navigation = useNavigation();
 
-  // Category constants - Refactored
-  // const [selectCat, setSelectedCat] = useState('');
   const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other'];
 
-  // Axios request for data
   const sessionData = async () => {
-    //console.log('INSIDE SESSION DATA FUNCTION');
     try {
-      // const { data } = await axios.get('http://localhost:8080/api/sessions')
       const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions');
-      //console.log('Data from Timer Component -->', data);
       setUserData(data);
+      setUserTimeLineData(FilterDataFunction(data, user.email));
     } catch (error) {
       if (error.response) {
-        // There is an error response from the server
-        // https://stackoverflow.com/questions/61116450/what-is-causing-an-unhandled-promise-rejection-undefined-is-not-an-object-eval
         console.log('Error response from server', err.response.data);
       } else if (error.request) {
-        // The request was made but no response was received
         console.log('No response was recieved', error.request);
       } else {
-        // Some other errors
         console.log('Error', error.message);
       }
     }
@@ -66,13 +62,10 @@ export default function TimerExperiment() {
 
   useEffect(() => {
     sessionData();
-  }, []);
+  }, [points]);
 
-  // Axios call to update data in db after each "session"
   const onConfirmCompleted = async total => {
     try {
-      console.log('CHECK STATE OF POINTS', points);
-      // http://localhost:8080/api/sessions/update
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,
         userPoints: total,
@@ -110,10 +103,8 @@ export default function TimerExperiment() {
       addPoints = 2;
   }
 
-  // TotalPoint collected after each "session"
   let totalPoints = points + addPoints;
 
-  // This function invokes "onConfirmCompleted" function which creates another axios request to update data
   const createTwoButtonAlert = () =>
     Alert.alert('Congratulations', 'Confirm Your Accomplishment', [
       {
@@ -130,38 +121,24 @@ export default function TimerExperiment() {
       }
     ]);
 
-  const children = ({ remainingTime }) => {
-    const hours = Math.floor(remainingTime / 3600);
-    const minutes = Math.floor((remainingTime % 3600) / 60);
-    const seconds = remainingTime % 60;
+  // const children = ({ remainingTime }) => {
+  //   const hours = Math.floor(remainingTime / 3600);
+  //   const minutes = Math.floor((remainingTime % 3600) / 60);
+  //   const seconds = remainingTime % 60;
 
-    return `${hours}:${minutes}:${seconds}`;
-  };
+  //   return `${hours}:${minutes}:${seconds}`;
+  // };
 
   return (
     <SafeAreaView>
       <View style={styles.inviteNotif}>
-        <Button
-          buttonStyle={styles.buttonContainerN}
-          title='🔔'
-          onPress={() => navigation.navigate('NotifScreen')}></Button>
         <View style={styles.pointsBox}>
           <Text style={styles.oima}>Points Earned:</Text>
           <Text>{points}</Text>
-          {/* <Button
-          title={`${points}`}
-          onPress={() => {
-            navigation.navigate('Points');
-          }}></Button> */}
         </View>
-        {/* <Button
-          buttonStyle={styles.buttonContainerF}
-          title='👯'
-          onPress={() => navigation.navigate('InviteScreen')}></Button> */}
       </View>
       <View style={styles.mainView}>
         <View style={styles.pickerView}>
-          {/* <Text style={styles.pickerViewText}>Choose your time:</Text> */}
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
@@ -244,6 +221,32 @@ export default function TimerExperiment() {
             title='Pause'
             onPress={() => setRunning(false)}
           />
+        </View>
+        <View style={styles.buttonsView}>
+          <TouchableOpacity style={styles.timeLineButton}>
+            <FontAwesome
+              name='bar-chart'
+              size={24}
+              color='#5BA5E7'
+              onPress={() => navigation.navigate('BarChart')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.timeLineButton}>
+            <MaterialCommunityIcons
+              name='timeline-text-outline'
+              size={32}
+              color='#E981E4'
+              onPress={() => navigation.navigate('Timeline')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.timeLineButton}>
+            <Entypo
+              name='pie-chart'
+              size={24}
+              color='#5BA5E7'
+              onPress={() => navigation.navigate('PieChart')}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>

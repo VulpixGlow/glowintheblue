@@ -12,13 +12,14 @@ import {
   HomeScreen,
   PointScreen,
   StoreScreen,
-  GraphScreen,
+  TimelineScreen,
   GroupScreen,
   InviteScreen,
   NotifScreen,
   PieChartScreen,
   GroupsScreen,
-  BottomTabs
+  BottomTabs,
+  BarGraphScreen
 } from './src/screens';
 
 import { StatusBar } from 'react-native';
@@ -53,11 +54,13 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState([]);
+  const [userTimeLineData, setUserTimeLineData] = useState([]);
   const [selectedValue, setSelectedValue] = useState(0);
   const [points, setPoints] = useState(0);
   const [selectCat, setSelectedCat] = useState('');
   const [inviteEmail, setInviteEmail] = useState('');
   const [groupName, setGroupName] = useState('');
+  const [groups, setGroups] = useState([]);
 
   console.log('POINTS IN APP.JS', points);
 
@@ -93,6 +96,8 @@ export default function App() {
     setUser,
     userData,
     setUserData,
+    userTimeLineData,
+    setUserTimeLineData,
     selectedValue,
     setSelectedValue,
     points,
@@ -102,7 +107,9 @@ export default function App() {
     inviteEmail,
     setInviteEmail,
     groupName,
-    setGroupName
+    setGroupName,
+    groups,
+    setGroups
   };
 
   return (
@@ -123,11 +130,12 @@ export default function App() {
                 }}
                 component={BottomTabs}
               />
-              {/* ANY thing that needs to be navagated to that isn't in the BottomsTab should be included here */}
+              {/*  Components that need to be navagated to that don't reside in BottomsTab should be included here */}
               <Stack.Screen name='NotifScreen' component={NotifScreen} />
               <Stack.Screen name='Points' component={PointScreen} />
-              <Stack.Screen name='Graph' component={GraphScreen} />
+              <Stack.Screen name='Timeline' component={TimelineScreen} />
               <Stack.Screen name='PieChart' component={PieChartScreen} />
+              <Stack.Screen name='BarChart' component={BarGraphScreen} />
               <Stack.Screen name='Group' component={GroupScreen} />
               <Stack.Screen name='Groups' component={GroupsScreen} />
               <Stack.Screen name='InviteScreen' component={InviteScreen} />

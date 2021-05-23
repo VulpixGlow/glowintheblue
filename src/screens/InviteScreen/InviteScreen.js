@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { UserInfoContext } from '../../../UserContext';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { Card, Input, Text, Button } from 'react-native-elements';
@@ -30,23 +30,21 @@ export default function InviteScreen() {
     inviteEmail,
     setInviteEmail,
     groupName,
-    setGroupName,
+    setGroupName
   } = useContext(UserInfoContext);
   // const navigation = useNavigation();
   console.log('INVITE EMAIL', inviteEmail);
-  const handleSubmit = (evt) => {
+  const handleSubmit = evt => {
     // email = "s@s.com, a@a.com",
+
     const emails = inviteEmail.split(', ');
-    // axios.post('')
-    //hello i want to merge
+
     const notificationData = async () => {
       const { data } = await axios.post('https://glowintheblue.herokuapp.com/api/notifications', {
-        //const { data } = await axios.post('http://localhost:8080/api/notifications', {
-        userId: 5, // user.email
-        emails: inviteEmail,
-        groupName: groupName,
+        ownerEmail: user.email,
+        emails: emails,
+        groupName: groupName
       });
-      //console.log('groupData line 12', data);
     };
     notificationData();
     // const emails = email.split(', '); ['s@s.com', 'a@a.com']
@@ -68,7 +66,7 @@ export default function InviteScreen() {
             type='text'
             placeholder='name your group'
             value={groupName}
-            onChangeText={(text) => {
+            onChangeText={text => {
               setGroupName(text);
             }}
           />
@@ -76,9 +74,8 @@ export default function InviteScreen() {
           <TextInput
             type='text'
             placeholder='Email'
-            value={setInviteEmail}
-            onChangeText={(text) => {
-              //console.log('EVENT TARGET', text);
+            value={inviteEmail}
+            onChangeText={text => {
               setInviteEmail(text);
             }}
             rightIcon={{ name: 'add', size: 24, color: 'green' }}
@@ -86,7 +83,6 @@ export default function InviteScreen() {
         </View>
         <Button title='Send' onPress={handleSubmit}></Button>
       </Card>
-      <FooterScreen />
     </View>
   );
 }

@@ -36,7 +36,7 @@ export default function FooterScreen() {
       <Button
         buttonStyle={styles.buttonCTA}
         title='📈'
-        onPress={() => navigation.navigate('Graph')}
+        onPress={() => navigation.navigate('Timeline')}
       />
       <Button
         buttonStyle={styles.buttonCTA}

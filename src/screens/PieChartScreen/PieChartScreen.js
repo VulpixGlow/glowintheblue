@@ -1,22 +1,46 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { SafeAreaView, ActivityIndicator, Text, View, Dimensions, StyleSheet } from 'react-native';
 import { UserInfoContext } from '../../../UserContext';
-import { SafeAreaView, Text, View, Image, StyleSheet, Button, Dimensions } from 'react-native';
+import FilterDataPieChart from '../../dataFunctions/FilterDataPieFunction';
+
 import { PieChart } from 'react-native-chart-kit';
-import { filterUserDataPieChart } from '../TimerExperiment/filterDataPieFunction';
+import axios from 'axios';
 
-import { useNavigation } from '@react-navigation/native';
+function MyPieChart() {
+  const { user } = useContext(UserInfoContext);
+  const [pieGraphIsLoading, setPieGraph] = useState(true);
+  const [pieData, setPieData] = useState([]);
 
-const MyPieChart = () => {
-  const data = useContext(UserInfoContext);
-  const navigation = useNavigation();
+  const fetchUpdatedData = async () => {
+    if (pieGraphIsLoading) {
+      try {
+        const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
+        setPieData(FilterDataPieChart(data, user.email));
+        setPieGraph(false);
+      } catch (error) {
+        setPieGraph(false);
+        console.log('PieChart Component Error', error);
+      }
+    }
+  };
 
-  // let chartData = filterUserDataPieChart(data, 'ebThur@g.com')
+  useEffect(() => {
+    fetchUpdatedData();
+  }, []);
+
+  if (pieGraphIsLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+        <ActivityIndicator size='large' color='#5BA5E7' />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Pie Chart</Text>
+      <Text style={styles.title}>Glow Pie Chart</Text>
       <PieChart
-        data={data}
+        data={pieData}
         width={Dimensions.get('window').width - 16}
         height={220}
         chartConfig={{
@@ -38,19 +62,17 @@ const MyPieChart = () => {
         paddingLeft='15'
         absolute //for the absolute number remove if you want percentage
       />
-
-      <View style={styles.graphButtonSection}>
-        <Button
-          title='Home'
-          style={styles.barGraphButton}
-          onPress={() => navigation.navigate('Home')}
-        />
-      </View>
     </View>
   );
-};
+}
 
-export default MyPieChart;
+export default function PieGraph() {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <MyPieChart />
+    </SafeAreaView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -63,21 +85,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold'
-  },
-  graphButtonSection: {
-    width: '100%',
-    height: '30%',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  barGraphButton: {
-    backgroundColor: 'blue',
-    color: 'white'
-  },
-  header: {
-    textAlign: 'center',
-    fontSize: 18,
-    padding: 16,
-    marginTop: 16
   }
 });
