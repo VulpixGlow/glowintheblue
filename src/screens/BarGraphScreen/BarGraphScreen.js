@@ -2,23 +2,24 @@ import React, { useEffect, useState, useContext } from 'react';
 import { SafeAreaView, ActivityIndicator, Text, View, Dimensions, StyleSheet } from 'react-native';
 import { UserInfoContext } from '../../../UserContext';
 import FilterDataPieChart from '../../dataFunctions/FilterDataPieFunction';
-
-import { PieChart } from 'react-native-chart-kit';
+// import styles from './styles';
+import { BarChart } from 'react-native-chart-kit';
 import axios from 'axios';
 
-function MyPieChart() {
+function MyBarChart() {
   const { user } = useContext(UserInfoContext);
-  const [pieGraphIsLoading, setPieGraph] = useState(true);
-  const [pieData, setPieData] = useState([]);
+  const [barGraphIsLoading, setBarGraph] = useState(true);
+  const [barData, setBarData] = useState([]);
 
   const fetchUpdatedData = async () => {
-    if (pieGraphIsLoading) {
+    if (barGraphIsLoading) {
       try {
         const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
-        setPieData(FilterDataPieChart(data, user.email));
-        setPieGraph(false);
+        // setPieData(FilterDataPieChart(data, user.email));
+
+        setBarGraph(false);
       } catch (error) {
-        setPieGraph(false);
+        setBarGraph(false);
         console.log('PieChart Component Error', error);
       }
     }
@@ -28,7 +29,7 @@ function MyPieChart() {
     fetchUpdatedData();
   }, []);
 
-  if (pieGraphIsLoading) {
+  if (barGraphIsLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
         <ActivityIndicator size='large' color='#5BA5E7' />
@@ -37,39 +38,16 @@ function MyPieChart() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Glow Pie Chart</Text>
-      <PieChart
-        data={pieData}
-        width={Dimensions.get('window').width - 16}
-        height={220}
-        chartConfig={{
-          backgroundColor: '#1cc910',
-          backgroundGradientFrom: '#eff3ff',
-          backgroundGradientTo: '#efefef',
-          decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16
-          }
-        }}
-        style={{
-          marginVertical: 8,
-          borderRadius: 16
-        }}
-        accessor='time'
-        backgroundColor='transparent'
-        paddingLeft='15'
-        absolute //for the absolute number remove if you want percentage
-      />
+    <View>
+      <Text>Hello</Text>
     </View>
   );
 }
 
-export default function PieGraph() {
+export default function BarGraph() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <MyPieChart />
+      <MyBarChart />
     </SafeAreaView>
   );
 }

@@ -1,31 +1,31 @@
-import React from 'react'
+import React from 'react';
 
-export default function filterUserDataPieChart(arr, email) {
-  let focusTotal = 0
-  let mediateTotal = 0
-  let moveTotal = 0
-  let connectTotal = 0
-  let otherTotal = 0
+export default function FilterDataPieChart(arr, email) {
+  let focusTotal = 0;
+  let mediateTotal = 0;
+  let moveTotal = 0;
+  let connectTotal = 0;
+  let otherTotal = 0;
 
   let filterArr = arr.filter(obj => {
     if (obj.user.email === email) {
-      return obj
+      return obj;
     }
-  })
+  });
 
   filterArr.forEach(obj => {
     if (obj.categoryName === 'Focus') {
-      focusTotal += obj.time
+      focusTotal += obj.time;
     } else if (obj.categoryName === 'Meditate') {
-      mediateTotal += obj.time
+      mediateTotal += obj.time;
     } else if (obj.categoryName === 'Move') {
-      moveTotal += obj.time
+      moveTotal += obj.time;
     } else if (obj.categoryName === 'Connect') {
-      connectTotal += obj.time
+      connectTotal += obj.time;
     } else {
-      otherTotal += obj.time
+      otherTotal += obj.time;
     }
-  })
+  });
 
   let catDataObj = [
     {
@@ -63,7 +63,7 @@ export default function filterUserDataPieChart(arr, email) {
       legendFontColor: '#7F7F7F',
       legendFontSize: 15
     }
-  ]
+  ];
 
-  return catDataObj
+  return catDataObj;
 }
