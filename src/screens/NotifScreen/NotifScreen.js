@@ -27,8 +27,8 @@ export default function NotifScreen() {
     <View>
       <Card>
         <View style={{ marginBottom: 160, paddingTop: 30, justifyContent: 'center' }}>
-          <Text h1>YOU'VE BEEN INVITED!</Text>
-          <Text style={{ paddingTop: 20, paddingBottom: 20 }} h4>
+          <Text h1>Group Invites:</Text>
+          {/* <Text style={{ paddingTop: 20, paddingBottom: 20 }} h4>
             Which do you choose?
           </Text>
           <Button
@@ -36,10 +36,9 @@ export default function NotifScreen() {
             type='outline'
             style={{ backgroundColor: 'green', marginBottom: 20 }}></Button>
           <Text></Text>
-          <Button title='💣💔💣💔' type='outline' style={{ backgroundColor: 'red' }}></Button>
+          <Button title='💣💔💣💔' type='outline' style={{ backgroundColor: 'red' }}></Button> */}
         </View>
       </Card>
-      <FooterScreen />
     </View>
   );
 }

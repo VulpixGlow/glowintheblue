@@ -8,15 +8,17 @@ export { default as RegistrationScreen } from './RegistrationScreen/Registration
 
 export { default as PointScreen } from './PointScreen/PointScreen';
 
-export { default as GraphScreen } from './GraphScreen/GraphScreen';
+export { default as TimelineScreen } from './TimelineScreen/TimelineScreen';
+
+export { default as PieChartScreen } from './PieChartScreen/PieChartScreen';
+
+export { default as BarGraphScreen } from './BarGraphScreen/BarGraphScreen';
 
 export { default as StoreScreen } from './StoreScreen/StoreScreen';
 
 export { default as FooterScreen } from './FooterScreen/FooterScreen';
 
 export { default as GroupScreen } from './GroupScreen/GroupScreen';
-
-export { default as PieChartScreen } from './PieChartScreen/PieChartScreen';
 
 export { default as NotifScreen } from './NotifScreen/NotifScreen';
 
