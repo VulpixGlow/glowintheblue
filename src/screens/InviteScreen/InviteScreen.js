@@ -30,13 +30,13 @@ export default function InviteScreen() {
     inviteEmail,
     setInviteEmail,
     groupName,
-    setGroupName
+    setGroupName,
   } = useContext(UserInfoContext);
   // const navigation = useNavigation();
-
-  const handleSubmit = evt => {
+  console.log('INVITE EMAIL', inviteEmail);
+  const handleSubmit = (evt) => {
     // email = "s@s.com, a@a.com",
-    const emails = email.split(', ');
+    const emails = inviteEmail.split(', ');
     // axios.post('')
     //hello i want to merge
     const notificationData = async () => {
@@ -44,7 +44,7 @@ export default function InviteScreen() {
         //const { data } = await axios.post('http://localhost:8080/api/notifications', {
         userId: 5, // user.email
         emails: inviteEmail,
-        groupName: groupName
+        groupName: groupName,
       });
       //console.log('groupData line 12', data);
     };
@@ -56,7 +56,6 @@ export default function InviteScreen() {
     // axios.post('http://YOUR_IP_ADDRESS:8080/api/...', emails)
     // Make your axios call to that route, and pass in your list of emails
     evt.preventDefault();
-    //console.log('EMAIL', email);
     alert(`Invite Sent!`);
   };
 
@@ -69,7 +68,7 @@ export default function InviteScreen() {
             type='text'
             placeholder='name your group'
             value={groupName}
-            onChangeText={text => {
+            onChangeText={(text) => {
               setGroupName(text);
             }}
           />
@@ -77,10 +76,10 @@ export default function InviteScreen() {
           <TextInput
             type='text'
             placeholder='Email'
-            value={email}
-            onChangeText={text => {
+            value={setInviteEmail}
+            onChangeText={(text) => {
               //console.log('EVENT TARGET', text);
-              setEmail(text);
+              setInviteEmail(text);
             }}
             rightIcon={{ name: 'add', size: 24, color: 'green' }}
           />

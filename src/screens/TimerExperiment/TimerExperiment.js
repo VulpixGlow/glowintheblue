@@ -27,7 +27,7 @@ export default function TimerExperiment() {
   } = useContext(UserInfoContext);
   console.log('POINTS ', points);
   console.log('INSIDE TIMERSCREEN', user);
-
+  const [defaultTime, setDefaultTime] = useState(10);
   const [isRunning, setRunning] = useState(false);
   // const [selectedValue, setSelectedValue] = useState(0);
   // const [points, setPoints] = useState(0);
@@ -167,7 +167,7 @@ export default function TimerExperiment() {
             selectedValue={selectedValue}
             onValueChange={itemValue => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
-            <Picker.Item color='white' label='5 seconds' value={5} />
+            <Picker.Item color='white' label='10 seconds' value={10} />
             <Picker.Item color='white' label='20 minutes' value={20} />
             <Picker.Item color='white' label='30 minutes' value={30} />
           </Picker>
@@ -181,6 +181,7 @@ export default function TimerExperiment() {
               setRunning(false);
               Vibration.vibrate();
               createTwoButtonAlert();
+              setSelectedValue(defaultTime);
             }}
             children
             size={180}
@@ -244,7 +245,6 @@ export default function TimerExperiment() {
             onPress={() => setRunning(false)}
           />
         </View>
-
       </View>
     </SafeAreaView>
   );
