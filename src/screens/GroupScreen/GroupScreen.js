@@ -33,7 +33,7 @@ export default function GroupScreen() {
     selectCat,
     setSelectedCat
   } = useContext(UserInfoContext);
-
+  //console.log('Group screen user'.user)
   const navigation = useNavigation();
 
   return (

@@ -8,7 +8,7 @@ import { UserInfoContext } from '../../../UserContext';
 export default function HomeScreen() {
   const { user } = useContext(UserInfoContext);
 
-  console.log('WE WANT TO SEE USERS', user);
+  //console.log('WE WANT TO SEE USERS', user);
 
 
   return (
