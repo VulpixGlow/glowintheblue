@@ -23,11 +23,11 @@ export default function TimerExperiment() {
     points,
     setPoints,
     selectCat,
-    setSelectedCat,
+    setSelectedCat
   } = useContext(UserInfoContext);
   console.log('POINTS ', points);
   console.log('INSIDE TIMERSCREEN', user);
-
+  const [defaultTime, setDefaultTime] = useState(10);
   const [isRunning, setRunning] = useState(false);
   // const [selectedValue, setSelectedValue] = useState(0);
   // const [points, setPoints] = useState(0);
@@ -69,7 +69,7 @@ export default function TimerExperiment() {
   }, []);
 
   // Axios call to update data in db after each "session"
-  const onConfirmCompleted = async (total) => {
+  const onConfirmCompleted = async total => {
     try {
       console.log('CHECK STATE OF POINTS', points);
       // http://localhost:8080/api/sessions/update
@@ -78,7 +78,7 @@ export default function TimerExperiment() {
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points,
+        points: points
       });
     } catch (error) {
       console.log('Error in onComfirmCompleted function', error);
@@ -119,15 +119,15 @@ export default function TimerExperiment() {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel',
+        style: 'cancel'
       },
       {
         text: 'Glowing',
         onPress: () => {
           setPoints(totalPoints);
           onConfirmCompleted(totalPoints);
-        },
-      },
+        }
+      }
     ]);
 
   const children = ({ remainingTime }) => {
@@ -165,9 +165,9 @@ export default function TimerExperiment() {
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+            onValueChange={itemValue => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
-            <Picker.Item color='white' label='5 seconds' value={5} />
+            <Picker.Item color='white' label='10 seconds' value={10} />
             <Picker.Item color='white' label='20 minutes' value={20} />
             <Picker.Item color='white' label='30 minutes' value={30} />
           </Picker>
@@ -181,6 +181,7 @@ export default function TimerExperiment() {
               setRunning(false);
               Vibration.vibrate();
               createTwoButtonAlert();
+              setSelectedValue(defaultTime);
             }}
             children
             size={180}
@@ -188,7 +189,7 @@ export default function TimerExperiment() {
             colors={[
               ['#e785e2', 0.4],
               ['#5ba5e7', 0.4],
-              ['#e785e2', 0.4],
+              ['#e785e2', 0.4]
             ]}>
             {({ remainingTime, animatedColor }) => (
               <Animated.Text style={{ color: animatedColor, fontSize: 50 }}>
@@ -206,7 +207,7 @@ export default function TimerExperiment() {
               borderRadius: 50,
               borderColor: '#42397d',
               borderWidth: 2,
-              outerHeight: 40,
+              outerHeight: 40
             }}
             renderDropdownIcon={() => {
               return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
@@ -225,7 +226,7 @@ export default function TimerExperiment() {
             dropdownStyle={{ backgroundColor: '#EFEFEF' }}
             rowStyle={{
               backgroundColor: '#42397d',
-              borderBottomColor: '#C5C5C5',
+              borderBottomColor: '#C5C5C5'
             }}
             rowTextStyle={{ color: '#fff', textAlign: 'left' }}
           />
