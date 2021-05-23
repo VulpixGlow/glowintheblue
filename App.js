@@ -18,7 +18,8 @@ import {
   NotifScreen,
   PieChartScreen,
   GroupsScreen,
-  BottomTabs
+  BottomTabs,
+  BarGraphScreen
 } from './src/screens';
 
 import { StatusBar } from 'react-native';

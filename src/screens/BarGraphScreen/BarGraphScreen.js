@@ -11,6 +11,27 @@ function MyBarChart() {
   const [barGraphIsLoading, setBarGraph] = useState(true);
   const [barData, setBarData] = useState([]);
 
+  const data = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [
+      {
+        data: [20, 45, 28, 80, 99, 43]
+      }
+    ]
+  };
+
+  const chartConfig = {
+    backgroundColor: '#1E2923',
+    backgroundGradientTo: '#08130D',
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+  };
+
+  const width = Dimensions.get('window').width;
+
   const fetchUpdatedData = async () => {
     if (barGraphIsLoading) {
       try {
@@ -20,7 +41,7 @@ function MyBarChart() {
         setBarGraph(false);
       } catch (error) {
         setBarGraph(false);
-        console.log('PieChart Component Error', error);
+        console.log('BarChart Component Error', error);
       }
     }
   };
@@ -39,7 +60,15 @@ function MyBarChart() {
 
   return (
     <View>
-      <Text>Hello</Text>
+      <BarChart
+        //style={graphStyle}
+        data={data}
+        width={width}
+        height={220}
+        yAxisLabel='$'
+        chartConfig={chartConfig}
+        verticalLabelRotation={30}
+      />
     </View>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function FilterDataPieChart(arr, email) {
   let focusTotal = 0;
-  let mediateTotal = 0;
+  let meditateTotal = 0;
   let moveTotal = 0;
   let connectTotal = 0;
   let otherTotal = 0;
@@ -17,7 +17,7 @@ export default function FilterDataPieChart(arr, email) {
     if (obj.categoryName === 'Focus') {
       focusTotal += obj.time;
     } else if (obj.categoryName === 'Meditate') {
-      mediateTotal += obj.time;
+      meditateTotal += obj.time;
     } else if (obj.categoryName === 'Move') {
       moveTotal += obj.time;
     } else if (obj.categoryName === 'Connect') {
@@ -36,8 +36,8 @@ export default function FilterDataPieChart(arr, email) {
       legendFontSize: 15
     },
     {
-      name: 'Mediate',
-      time: mediateTotal,
+      name: 'Meditate',
+      time: meditateTotal,
       color: 'rgb(45,156,219)',
       legendFontColor: '#7F7F7F',
       legendFontSize: 15

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { ActivityIndicator, Text, View, StyleSheet } from 'react-native';
+import { ActivityIndicator, Text, View, StyleSheet, Title, Divider, Image } from 'react-native';
 import Timeline from 'react-native-timeline-flatlist';
 import { UserInfoContext } from '../../../UserContext';
 import FilterDataFunction from '../../dataFunctions/FilterDataFunction';
 import axios from 'axios';
+import { Card, ListItem, Button, Icon } from 'react-native-elements';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -63,6 +64,7 @@ export default function TimelineScreen() {
           style: { paddingTop: 5 }
         }}
       />
+      <View></View>
     </View>
   );
 }
