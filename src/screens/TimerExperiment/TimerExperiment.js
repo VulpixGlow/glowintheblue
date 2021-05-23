@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   Animated,
   Vibration,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -28,13 +28,16 @@ export default function TimerExperiment() {
   const {
     user,
     setUserData,
+    userTimeLineData,
     setUserTimeLineData,
     selectedValue,
     setSelectedValue,
+    // totalPoints,
+    // setTotalPoints,
     points,
     setPoints,
     selectCat,
-    setSelectedCat,
+    setSelectedCat
   } = useContext(UserInfoContext);
 
   const [defaultTime, setDefaultTime] = useState(10);
@@ -60,18 +63,26 @@ export default function TimerExperiment() {
     }
   };
 
+  const addTotalPoints = () => {
+    return userTimeLineData.reduce((acc, currentVal) => {
+      acc += currentVal.time;
+
+      return acc;
+    }, 0);
+  };
+
   useEffect(() => {
     sessionData();
   }, [points]);
 
-  const onConfirmCompleted = async (total) => {
+  const onConfirmCompleted = async total => {
     try {
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points,
+        points: points
       });
     } catch (error) {
       console.log('Error in onComfirmCompleted function', error);
@@ -82,22 +93,22 @@ export default function TimerExperiment() {
 
   switch (selectedValue) {
     case 10:
-      addPoints = 5;
-      break;
-    case 20:
       addPoints = 10;
       break;
-    case 30:
-      addPoints = 15;
-      break;
-    case 40:
+    case 20:
       addPoints = 20;
       break;
+    case 30:
+      addPoints = 30;
+      break;
+    case 40:
+      addPoints = 40;
+      break;
     case 50:
-      addPoints = 25;
+      addPoints = 50;
       break;
     case 60:
-      addPoints = 30;
+      addPoints = 60;
       break;
     default:
       addPoints = 2;
@@ -110,15 +121,15 @@ export default function TimerExperiment() {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel',
+        style: 'cancel'
       },
       {
         text: 'Glowing',
         onPress: () => {
           setPoints(totalPoints);
           onConfirmCompleted(totalPoints);
-        },
-      },
+        }
+      }
     ]);
 
   const children = ({ remainingTime }) => {
@@ -134,7 +145,7 @@ export default function TimerExperiment() {
       <View style={styles.inviteNotif}>
         <View style={styles.pointsBox}>
           <Text style={styles.oima}>Points Earned:</Text>
-          <Text>{points}</Text>
+          <Text>{addTotalPoints()}</Text>
         </View>
       </View>
       <View style={styles.mainView}>
@@ -142,8 +153,9 @@ export default function TimerExperiment() {
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+            onValueChange={itemValue => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
+            {/* <Picker.Item color='white' label='Choose' /> */}
             <Picker.Item color='white' label='10 seconds' value={10} />
             <Picker.Item color='white' label='20 minutes' value={1200} />
             <Picker.Item color='white' label='30 minutes' value={1800} />
@@ -166,7 +178,7 @@ export default function TimerExperiment() {
             colors={[
               ['#e785e2', 0.4],
               ['#5ba5e7', 0.4],
-              ['#e785e2', 0.4],
+              ['#e785e2', 0.4]
             ]}>
             {({ remainingTime, animatedColor }) => (
               <Animated.Text style={{ color: animatedColor, fontSize: 50 }}>
@@ -184,7 +196,7 @@ export default function TimerExperiment() {
               borderRadius: 50,
               borderColor: '#42397d',
               borderWidth: 2,
-              outerHeight: 40,
+              outerHeight: 40
             }}
             renderDropdownIcon={() => {
               return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
@@ -203,7 +215,7 @@ export default function TimerExperiment() {
             dropdownStyle={{ backgroundColor: '#EFEFEF' }}
             rowStyle={{
               backgroundColor: '#42397d',
-              borderBottomColor: '#C5C5C5',
+              borderBottomColor: '#C5C5C5'
             }}
             rowTextStyle={{ color: '#fff', textAlign: 'left' }}
           />
