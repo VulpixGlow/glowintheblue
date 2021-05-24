@@ -132,11 +132,12 @@ export default function TimerExperiment() {
       }
     ]);
 
-  const children = ({ remainingTime }) => {
+  const children = ( {remainingTime} ) => {
     const hours = Math.floor(remainingTime / 3600);
-    const minutes = Math.floor((remainingTime % 3600) / 60);
-    const seconds = remainingTime % 60;
-
+    let minutes = Math.floor((remainingTime % 3600) / 60);
+    let seconds = parseInt(remainingTime % 60, 10)
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
     return `${minutes}:${seconds}`;
   };
 
@@ -182,7 +183,7 @@ export default function TimerExperiment() {
             ]}>
             {({ remainingTime, animatedColor }) => (
               <Animated.Text style={{ color: animatedColor, fontSize: 50 }}>
-                {children({ remainingTime })}
+                {children({remainingTime})}
               </Animated.Text>
             )}
           </CountdownCircleTimer>
