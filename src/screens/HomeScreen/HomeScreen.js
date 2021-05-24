@@ -5,9 +5,23 @@ import TimerExperiment from '../TimerExperiment/TimerExperiment';
 import axios from 'axios';
 import { UserInfoContext } from '../../../UserContext';
 import FilterDataFunction from '../../dataFunctions/FilterDataFunction';
+// import { Notifications } from 'expo'
+// import * as Permissions from 'expo-permissions'
+
 
 export default function HomeScreen() {
   const { user, setUserData, setUserTimeLineData } = useContext(UserInfoContext);
+
+  // const registerForPushNotifications = async () => {
+  //   try {
+  //     const permission = await Permissions.askAsync(Permissions.NOTIFICATIONS)
+  //     if(!permission.granted) return;
+  //     const token = await Notifications.getExpoPushTokenAsync()
+  //     console.log(token)
+  //   } catch(e){
+  //     console.log('Error getting a Notification token', e)
+  //   }
+  // }
 
   const sessionData = async () => {
     try {
@@ -27,6 +41,8 @@ export default function HomeScreen() {
 
   useEffect(() => {
     sessionData();
+   // registerForPushNotifications();
+
   }, []);
 
   return (

@@ -11,16 +11,10 @@ import InviteScreen from '../InviteScreen/InviteScreen';
 //   backgroundGradientTo: '#08130D',
 //   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
 // }
-const groupData = async () => {
-  //console.log('props in group screen line 8', props);
-  //const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
-  //const { data } = await axios.get('http://localhost:8080/api/group')
-  //console.log('groupData line 11', data);
-};
-groupData();
+
 
 //console.log('hello from GroupScreen line 15');
-export default function GroupScreen() {
+export default function GroupScreen(props) {
   const {
     user,
     setUser,
@@ -31,20 +25,24 @@ export default function GroupScreen() {
     points,
     setPoints,
     selectCat,
-    setSelectedCat
+    setSelectedCat,
+    groupNames,
+    groupData,
+    setGroupData
   } = useContext(UserInfoContext);
-
+  //console.log('groupData', groupData)
   const navigation = useNavigation();
 
+  //console.log('groupsMember1')
   return (
     <View>
-      <Text>Memeber of the Group</Text>
+      <Text h1>{props.route.params.props}</Text>
       <Text>user 1</Text>
-      <Text>user 2r</Text>
+      <Text>user 2</Text>
       <Text>user 3</Text>
       <Text>user 4</Text>
       <View>
-        <Button title='🔑' onPress={() => navigation.navigate('InviteScreen')}></Button>
+        <Button title='🔑' onPress={() => navigation.navigate('Groups')}></Button>
       </View>
     </View>
   );

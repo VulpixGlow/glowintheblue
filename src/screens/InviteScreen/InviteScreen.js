@@ -33,7 +33,7 @@ export default function InviteScreen() {
     setGroupName
   } = useContext(UserInfoContext);
   // const navigation = useNavigation();
-  console.log('INVITE EMAIL', inviteEmail);
+  //console.log('INVITE EMAIL', inviteEmail);
   const handleSubmit = evt => {
     // email = "s@s.com, a@a.com",
 

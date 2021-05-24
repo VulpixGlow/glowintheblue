@@ -62,8 +62,10 @@ export default function App() {
   const [groupName, setGroupName] = useState('');
   const [groups, setGroups] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
+  const [groupNames, setGroupNames] = useState([]);
+  const [groupData, setGroupData] = useState([])
 
-  console.log('POINTS IN APP.JS', points);
+  //console.log('POINTS IN APP.JS', points);
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
@@ -112,8 +114,11 @@ export default function App() {
     groups,
     setGroups,
     totalPoints,
-    setTotalPoints
-
+    setTotalPoints,
+    groupNames,
+    setGroupNames,
+    groupData,
+    setGroupData
   };
 
   return (
