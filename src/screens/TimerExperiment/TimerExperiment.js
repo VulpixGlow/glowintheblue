@@ -133,12 +133,12 @@ export default function TimerExperiment() {
     ]);
 
   const children = ( {remainingTime} ) => {
-    const hours = Math.floor(remainingTime / 3600);
+    let hours = Math.floor(remainingTime / 3600);
     let minutes = Math.floor((remainingTime % 3600) / 60);
     let seconds = parseInt(remainingTime % 60, 10);
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-    return `${minutes}:${seconds}`;
+    return remainingTime <= 3599 ?  `${minutes}:${seconds}` : '0' + `${hours}:${minutes}` 
   };
 
   return (
@@ -260,6 +260,7 @@ export default function TimerExperiment() {
             <Picker.Item color='#B4FEE7' label='30 minutes' value={1800} />
             <Picker.Item color='#B4FEE7' label='40 minutes' value={2400} />
             <Picker.Item color='#B4FEE7' label='50 minutes' value={3000} />
+            <Picker.Item color='#B4FEE7' label='60 minutes' value={3600} />
           </Picker>
           <View style={styles.buttonsView} importantForAccessibility='yes'>
             <Button
