@@ -112,7 +112,7 @@ To further enhance the user experience we audited the app for accessibility with
 
 - User and groups can see their statistics of time accrued in each category of activities
 
-- User can visualize statistics in the form of a dynamtic pie chart or timeline
+- User can visualize statistics in the form of a dynamic pie chart or timeline
     
 - Phone will vibrate when timer is complete
     
