@@ -82,7 +82,7 @@ Instead of “prop drilling” we used the React v16.3.0 Context API which is de
 
 As a team we believe that building a robust app involves ensuring that everyone can use it, including people with vision loss, reading disabilities or other disabilities. By using the AccessibilityInfo API we’ve insured our app is usable by someone who may need or use assistive technology such as a screen reader. 
 
-We intentionally designed our App with accessibility in mind by working with simple colors, making buttons descriptive, writing descriptive links and headings, making large clickable actions and following a strong linear and logical layout. To further enhance our apps accessibility we used an Accessibility Inspector to get feedback on color contract, font size etc. By simulating a Text-To-Speech Accessibility feature on IOS and Android devices we found ways to enhance the user experience and spot additional areas to target for improvement. 
+To further enhance the user experience we audited the app for accessibility with the Accessibility Inspector. By mirroring the actual user experience we were able to catch additional usability issues to resolve within our app. 
 
 - React-Native
 
@@ -111,6 +111,8 @@ We intentionally designed our App with accessibility in mind by working with sim
 - User can challenge friends by creating a group
 
 - User and groups can see their statistics of time accrued in each category of activities
+
+- User can visualize statistics in the form of a dynamtic pie chart or timeline
     
 - Phone will vibrate when timer is complete
     
