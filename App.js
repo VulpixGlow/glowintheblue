@@ -39,7 +39,7 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#aedcff',
-    background: '#2d2660',
+    background: '#8CFFDF',
   },
 };
 
@@ -61,6 +61,7 @@ export default function App() {
   const [inviteEmail, setInviteEmail] = useState('');
   const [groupName, setGroupName] = useState('');
   const [groups, setGroups] = useState([]);
+  const [totalPoints, setTotalPoints] = useState(0);
 
   console.log('POINTS IN APP.JS', points);
 
@@ -110,6 +111,9 @@ export default function App() {
     setGroupName,
     groups,
     setGroups,
+    totalPoints,
+    setTotalPoints
+
   };
 
   return (

@@ -29,13 +29,16 @@ export default function TimerExperiment() {
   const {
     user,
     setUserData,
+    userTimeLineData,
     setUserTimeLineData,
     selectedValue,
     setSelectedValue,
+    // totalPoints,
+    // setTotalPoints,
     points,
     setPoints,
     selectCat,
-    setSelectedCat,
+    setSelectedCat
   } = useContext(UserInfoContext);
 
   const [defaultTime, setDefaultTime] = useState(10);
@@ -61,18 +64,26 @@ export default function TimerExperiment() {
     }
   };
 
+  const addTotalPoints = () => {
+    return userTimeLineData.reduce((acc, currentVal) => {
+      acc += currentVal.time;
+
+      return acc;
+    }, 0);
+  };
+
   useEffect(() => {
     sessionData();
   }, [points]);
 
-  const onConfirmCompleted = async (total) => {
+  const onConfirmCompleted = async total => {
     try {
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points,
+        points: points
       });
     } catch (error) {
       console.log('Error in onComfirmCompleted function', error);
@@ -83,22 +94,22 @@ export default function TimerExperiment() {
 
   switch (selectedValue) {
     case 10:
-      addPoints = 5;
-      break;
-    case 20:
       addPoints = 10;
       break;
-    case 30:
-      addPoints = 15;
-      break;
-    case 40:
+    case 20:
       addPoints = 20;
       break;
+    case 30:
+      addPoints = 30;
+      break;
+    case 40:
+      addPoints = 40;
+      break;
     case 50:
-      addPoints = 25;
+      addPoints = 50;
       break;
     case 60:
-      addPoints = 30;
+      addPoints = 60;
       break;
     default:
       addPoints = 2;
@@ -111,15 +122,15 @@ export default function TimerExperiment() {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel',
+        style: 'cancel'
       },
       {
         text: 'Glowing',
         onPress: () => {
           setPoints(totalPoints);
           onConfirmCompleted(totalPoints);
-        },
-      },
+        }
+      }
     ]);
 
   const children = ({ remainingTime }) => {
@@ -220,12 +231,14 @@ export default function TimerExperiment() {
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+            onValueChange={itemValue => setSelectedValue(itemValue)}
             style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
+            {/* <Picker.Item color='white' label='Choose' /> */}
             <Picker.Item color='white' label='10 seconds' value={10} />
             <Picker.Item color='white' label='20 minutes' value={1200} />
             <Picker.Item color='white' label='30 minutes' value={1800} />
           </Picker>
+
           <View style={styles.buttonsView}>
             <Button
               buttonStyle={styles.playPauseButtons}
