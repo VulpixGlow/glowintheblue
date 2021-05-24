@@ -15,7 +15,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SelectDropdown from 'react-native-select-dropdown';
-// import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FilterDataFunction from '../../dataFunctions/FilterDataFunction';
 import styles from './styles';
 import axios from 'axios';
@@ -136,21 +135,30 @@ export default function TimerExperiment() {
   const children = ( {remainingTime} ) => {
     const hours = Math.floor(remainingTime / 3600);
     let minutes = Math.floor((remainingTime % 3600) / 60);
-    let seconds = parseInt(remainingTime % 60, 10)
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    let seconds = parseInt(remainingTime % 60, 10);
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
     return `${minutes}:${seconds}`;
   };
 
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={styles.topHeader}>
-          <View style={styles.pointsBox}>
+        <View style={styles.topHeader}
+        accessibilityLabel={'Timer View'}
+        accessibilityHint='Clicking me will do nothing'
+        accessibilityRole={'Display timer and picker to select times.'} >
+          <View style={styles.pointsBox} 
+          importantForAccessibility='yes'
+          accessibilityLabel={'Points View'}
+          accessibilityRole={'Display total points currently earned.'} >
             <Text style={styles.pointsBoxText}>Points: {points}</Text>
           </View>
           <View style={styles.graphButtonsView}>
-            <TouchableOpacity style={styles.timeLineButton}>
+            <TouchableOpacity style={styles.timeLineButton} 
+            accessible={true}
+            accessibilityLabel='View Timeline '
+            accessibilityHint='Navigates to the next screen to show timeline'>
               <FontAwesome
                 name='line-chart'
                 color={'#fff'}
@@ -158,7 +166,10 @@ export default function TimerExperiment() {
                 onPress={() => navigation.navigate('Timeline')}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.timeLineButton}>
+            <TouchableOpacity style={styles.timeLineButton} 
+            accessible={true}
+            accessibilityLabel='View Pie Chart'
+            accessibilityHint='Navigates to the next screen to show pie chart'>
               <FontAwesome
                 name='pie-chart'
                 color={'#fff'}
@@ -170,7 +181,7 @@ export default function TimerExperiment() {
         </View>
         <View style={styles.mainView}>
           <Text style={styles.mainTitle}>What are we doing today?</Text>
-          <View style={styles.dropdownView}>
+          <View style={styles.dropdownView} importantForAccessibility='yes'>
             <SelectDropdown
               data={categories}
               defaultButtonText='Choose a category'
@@ -182,7 +193,7 @@ export default function TimerExperiment() {
                 outerHeight: 40,
               }}
               renderDropdownIcon={() => {
-                return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
+                return <FontAwesome name='chevron-down' color={'#fff'} size={16} />;
               }}
               dropdownIconPosition={'right'}
               buttonTextStyle={{ color: '#fff' }}
@@ -203,7 +214,11 @@ export default function TimerExperiment() {
               rowTextStyle={{ color: '#fff', textAlign: 'left' }}
             />
           </View>
-          <View style={styles.countdownView}>
+          <View style={styles.countdownView}
+          accessible={true}
+          accessibilityLabel='Countdown View'
+          accessibilityHint='Countdown timer for the amount of time left on clock'
+          importantForAccessibility='yes'>
             <CountdownCircleTimer
               isPlaying={isRunning}
               key={selectedValue}
@@ -229,29 +244,35 @@ export default function TimerExperiment() {
             </CountdownCircleTimer>
           </View>
         </View>
-        <View style={styles.pickerView}>
+        <View style={styles.pickerView} 
+          accessible={true}
+          accessibilityLabel='Time Picker View'
+          accessibilityHint='Picker to pick from 10 up to 50 minutes'>
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
             onValueChange={itemValue => setSelectedValue(itemValue)}
-            style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
+            // style={{ color: '#ffffff', placeholderTextColor: '#fff', fontWeight: '900' }}
+            itemStyle={{ fontSize: 16 }}>
             {/* <Picker.Item color='white' label='Choose' /> */}
-            <Picker.Item color='white' label='10 seconds' value={10} />
-            <Picker.Item color='white' label='20 minutes' value={1200} />
-            <Picker.Item color='white' label='30 minutes' value={1800} />
+            <Picker.Item color='#B4FEE7' label='10 seconds' value={10} />
+            <Picker.Item color='#B4FEE7' label='20 minutes' value={1200} />
+            <Picker.Item color='#B4FEE7' label='30 minutes' value={1800} />
+            <Picker.Item color='#B4FEE7' label='40 minutes' value={2400} />
+            <Picker.Item color='#B4FEE7' label='50 minutes' value={3000} />
           </Picker>
-          <View style={styles.buttonsView}>
+          <View style={styles.buttonsView} importantForAccessibility='yes'>
             <Button
               buttonStyle={styles.playPauseButtons}
               titleStyle={{ color: '#2d2660' }}
-              icon={<FontAwesome name='play' size={15} color='white' />}
+              icon={<FontAwesome name='play' size={16} color='white' />}
               // title='Start'
               onPress={() => setRunning(true)}
             />
             <Button
               buttonStyle={styles.playPauseButtons}
               titleStyle={{ color: '#2d2660' }}
-              icon={<FontAwesome name='pause' size={15} color='white' />}
+              icon={<FontAwesome name='pause' size={16} color='white' />}
               // title='Pause'
               onPress={() => setRunning(false)}
             />

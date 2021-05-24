@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAccessibilityInfo } from '@react-native-community/hooks';
 import { firebase } from './config/Firebase';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,9 +10,7 @@ import {
   Onboarding,
   LoginScreen,
   RegistrationScreen,
-  HomeScreen,
   PointScreen,
-  StoreScreen,
   TimelineScreen,
   GroupScreen,
   InviteScreen,
@@ -43,13 +42,6 @@ const MyTheme = {
   },
 };
 
-// const userInfo = {
-//   user,
-//   loading
-// };
-
-// const UserInfoContext = React.createContext();
-
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -65,7 +57,15 @@ export default function App() {
   const [groupNames, setGroupNames] = useState([]);
   const [groupData, setGroupData] = useState([])
 
-  //console.log('POINTS IN APP.JS', points);
+  // State for Accessibilty
+  const {
+    boldTextEnabled,
+    screenReaderEnabled,
+    reduceMotionEnabled,
+    grayscaleEnabled,
+    invertColorsEnabled,
+    reduceTransparencyEnabled
+  } = useAccessibilityInfo();
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
@@ -87,8 +87,6 @@ export default function App() {
       }
     });
   }, []);
-
-  // Good Spot to add a spinnging wheel or loading icon
 
   if (loading) {
     return <></>;

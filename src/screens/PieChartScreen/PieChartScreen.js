@@ -46,7 +46,6 @@ function MyPieChart() {
 
   return (
     <View style={styles.container}>
-      {/* <Card> */}
       <PieChart
         data={pieData}
         width={Dimensions.get('window').width - 30}
@@ -62,7 +61,9 @@ function MyPieChart() {
           },
         }}
         style={{
+          marginVertical: 8,
           borderRadius: 16,
+          fontSize: 16
           backgroundColor: '#dcfff5',
           height: 280,
           paddingTop: 50,
@@ -75,8 +76,6 @@ function MyPieChart() {
         absolute //for the absolute number remove if you want percentage
       />
       <Text style={styles.title}>Your Pie</Text>
-
-      {/* </Card> */}
     </View>
   );
 }

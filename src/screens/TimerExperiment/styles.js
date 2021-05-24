@@ -23,11 +23,13 @@ export default StyleSheet.create({
   },
   pickerView: {
     marginTop: -50,
+    fontSize: 20,
     marginBottom: -20,
     flexDirection: 'column',
   },
   pickerViewText: {
     color: 'white',
+    fontWeight: '900',
     marginLeft: 'auto',
     marginRight: 'auto',
   },
@@ -40,6 +42,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 'auto',
+    borderRadius: 10
+  },
+  homeButton: {
     borderRadius: 10,
   },
   pointsBoxText: {
@@ -69,7 +74,7 @@ export default StyleSheet.create({
     marginLeft: 10,
     // marginTop: 40,
     borderStyle: 'solid',
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
