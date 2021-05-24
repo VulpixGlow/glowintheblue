@@ -19,7 +19,7 @@ import {
   PieChartScreen,
   GroupsScreen,
   BottomTabs,
-  BarGraphScreen
+  BarGraphScreen,
 } from './src/screens';
 
 import { StatusBar } from 'react-native';
@@ -39,8 +39,8 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#aedcff',
-    background: '#8cffde'
-  }
+    background: '#2d2660',
+  },
 };
 
 // const userInfo = {
@@ -66,17 +66,17 @@ export default function App() {
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         usersRef
           .doc(user.uid)
           .get()
-          .then(document => {
+          .then((document) => {
             const userData = document.data();
             setLoading(false);
             setUser(userData);
           })
-          .catch(error => {
+          .catch((error) => {
             setLoading(false);
           });
       } else {
@@ -109,7 +109,7 @@ export default function App() {
     groupName,
     setGroupName,
     groups,
-    setGroups
+    setGroups,
   };
 
   return (
@@ -124,17 +124,37 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#2d2660',
-                    shadowColor: 'transparent'
+                    shadowColor: 'transparent',
                   },
-                  headerTintColor: 'white'
+                  headerTintColor: 'white',
                 }}
                 component={BottomTabs}
               />
               {/*  Components that need to be navagated to that don't reside in BottomsTab should be included here */}
               <Stack.Screen name='NotifScreen' component={NotifScreen} />
               <Stack.Screen name='Points' component={PointScreen} />
-              <Stack.Screen name='Timeline' component={TimelineScreen} />
-              <Stack.Screen name='PieChart' component={PieChartScreen} />
+              <Stack.Screen
+                name='Timeline'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#fec7fb',
+                    shadowColor: 'transparent',
+                  },
+                  headerTintColor: '#e981e4',
+                }}
+                component={TimelineScreen}
+              />
+              <Stack.Screen
+                name='PieChart'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#8cffde',
+                    shadowColor: 'transparent',
+                  },
+                  headerTintColor: '#397867',
+                }}
+                component={PieChartScreen}
+              />
               <Stack.Screen name='BarChart' component={BarGraphScreen} />
               <Stack.Screen name='Group' component={GroupScreen} />
               <Stack.Screen name='Groups' component={GroupsScreen} />
@@ -146,7 +166,7 @@ export default function App() {
                 name='Onboarding'
                 options={{
                   headerShown: false,
-                  headerTintColor: null
+                  headerTintColor: null,
                 }}
                 component={Onboarding}
               />
@@ -155,9 +175,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#ffe1fd',
-                    shadowColor: 'transparent'
+                    shadowColor: 'transparent',
                   },
-                  headerTintColor: '#e981e4'
+                  headerTintColor: '#e981e4',
                 }}
                 component={LoginScreen}
               />
@@ -166,9 +186,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#cbe3fc',
-                    shadowColor: 'transparent'
+                    shadowColor: 'transparent',
                   },
-                  headerTintColor: '#64a5e9'
+                  headerTintColor: '#64a5e9',
                 }}
                 component={RegistrationScreen}
               />

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { UserInfoContext } from '../../../UserContext';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
 import { Card, Input, Text, Button } from 'react-native-elements';
 //import styles from './styles'
 import axios from 'axios';
@@ -30,7 +30,7 @@ export default function GroupScreen() {
     groupName,
     groups,
     setGroups,
-    setGroupName
+    setGroupName,
   } = useContext(UserInfoContext);
   //console.log('userData in groups screen', groupName)
   const navigation = useNavigation();
@@ -56,7 +56,7 @@ export default function GroupScreen() {
 
   groupData();
 
-  const handleSubmit = evt => {
+  const handleSubmit = (evt) => {
     // email = "s@s.com, a@a.com",
 
     const emails = inviteEmail.split(', ');
@@ -65,7 +65,7 @@ export default function GroupScreen() {
       const { data } = await axios.post('https://glowintheblue.herokuapp.com/api/notifications', {
         ownerEmail: user.email,
         emails: emails,
-        groupName: groupName
+        groupName: groupName,
       });
     };
     notificationData();
@@ -81,62 +81,143 @@ export default function GroupScreen() {
 
   //console.log('groups in groups screen line 42', groups)
   return (
-    <View style={styles.container}>
-      {/* <Text style={styles.title}> All Groups</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        {/* <Text style={styles.title}> All Groups</Text>
       {groups ? (
-        groups.map(group => (
+        groups.map((group) => (
           <Button title={group.name} onPress={() => navigation.navigate('Group')} />
         ))
       ) : (
         <Text>No group to display</Text>
-      )} */}
-      {/* <Button title='View Group 1' onPress={() => navigation.navigate('Group')} /> */}
-      {/* <Button title='Create Group' onPress={() => navigation.navigate('InviteScreen')} /> */}
-      <View>
-        <Card>
-          <Text>My Groups</Text>
-          <Button style={{ padding: 10 }} title='Group 1' />
-          <Button style={{ padding: 10 }} title='Group 2' />
-          <Button style={{ padding: 10 }} title='Group 3' />
-        </Card>
-        <Card>
-          <View style={{ marginBottom: 30 }}>
-            <Text h1>Group name</Text>
-            <TextInput
-              type='text'
-              placeholder='name your group'
-              value={groupName}
-              onChangeText={text => {
-                setGroupName(text);
-              }}
+      )}
+      <Button title='View Group 1' onPress={() => navigation.navigate('Group')} />
+      <Button title='Create Group' onPress={() => navigation.navigate('InviteScreen')} /> */}
+        <View>
+          <Card containerStyle={styles.createGroupCard}>
+            <Text style={styles.myGroupsTitle}>My Groups</Text>
+            <Button
+              buttonStyle={styles.myGroupsButton}
+              titleStyle={{ color: '#7b4f79', fontWeight: 'bold' }}
+              title='Group 1'
             />
-            <Text h1>Invite your friends!</Text>
-            <TextInput
-              type='text'
-              placeholder='Email'
-              value={inviteEmail}
-              onChangeText={text => {
-                setInviteEmail(text);
-              }}
-              rightIcon={{ name: 'add', size: 24, color: 'green' }}
+            <Button
+              buttonStyle={styles.myGroupsButton}
+              titleStyle={{ color: '#7b4f79', fontWeight: 'bold' }}
+              title='Group 2'
             />
-          </View>
-          <Button title='Send' onPress={handleSubmit}></Button>
-        </Card>
+            <Button
+              buttonStyle={styles.myGroupsButton}
+              titleStyle={{ color: '#7b4f79', fontWeight: 'bold' }}
+              title='Group 3'
+            />
+          </Card>
+          <Card containerStyle={styles.createGroupCard}>
+            <Text style={styles.createGroupTitle}>Create Group</Text>
+            <View style={styles}>
+              <Text style={styles.createGroupSubtitle}>Group name:</Text>
+              <TextInput
+                style={styles.createGroupInput}
+                type='text'
+                placeholder='Type group name'
+                placeholderTextColor='#928ace'
+                value={groupName}
+                onChangeText={(text) => {
+                  setGroupName(text);
+                }}
+              />
+              <Text style={styles.createGroupSubtitle}>Invite your friends:</Text>
+              <TextInput
+                style={styles.createGroupInput}
+                color='white'
+                type='text'
+                placeholderTextColor='#928ace'
+                placeholder='Type email'
+                value={inviteEmail}
+                onChangeText={(text) => {
+                  setInviteEmail(text);
+                }}
+                rightIcon={{ name: 'add', size: 24, color: 'green' }}
+              />
+            </View>
+            <Button
+              title='Send'
+              buttonStyle={styles.createGroupButton}
+              titleStyle={{ color: '#397867', fontWeight: 'bold' }}
+              onPress={handleSubmit}></Button>
+          </Card>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#2d2660',
     flex: 1,
-    marginLeft: 15,
-    marginRight: 15
+  },
+  createGroupButton: {
+    borderRadius: 10,
+    padding: 15,
+    margin: 5,
+    marginTop: 10,
+    backgroundColor: '#8cffde',
+  },
+  myGroupsButton: {
+    borderRadius: 10,
+    padding: 15,
+    margin: 5,
+    marginTop: 10,
+    backgroundColor: '#fec7fb',
+  },
+  createGroupCard: {
+    backgroundColor: '#42397d',
+    borderWidth: 0,
+    borderRadius: 10,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  myGroupsTitle: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 20,
+    marginLeft: 10,
+    color: '#fec7fb',
+  },
+  createGroupTitle: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 20,
+    marginLeft: 10,
+    color: '#8cffde',
+    // marginRight: 'auto',
+  },
+  createGroupSubtitle: {
+    fontSize: 16,
+    marginBottom: 5,
+    marginLeft: 10,
+    color: 'white',
+    fontWeight: 'bold',
+
+    // marginRight: 'auto',
+  },
+  createGroupInput: {
+    color: 'white',
+    marginBottom: 20,
+    backgroundColor: '#5a5299',
+    padding: 15,
+    borderRadius: 10,
+    margin: 5,
+    // width: 340,
+    // marginLeft: 'auto',
+    // marginRight: 'auto',
   },
   title: {
     padding: 16,
     fontSize: 20,
     textAlign: 'center',
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 });

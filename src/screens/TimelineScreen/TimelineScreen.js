@@ -45,26 +45,38 @@ export default function TimelineScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> Glow Timeline </Text>
       <Timeline
+        timeTitle='HII'
         data={userTimeLineData}
         circleSize={20}
-        circleColor='#2D2660'
-        lineColor='#2D2660'
-        timeContainerStyle={{ minWidth: 52, marginTop: -5 }}
+        innerCircle='dot'
+        dotColor='#8cffde'
+        circleColor='#e785e2'
+        lineColor='#e785e2'
+        separator='true'
+        separatorStyle={{ backgroundColor: '#e785e2' }}
+        timeContainerStyle={styles.timelineData}
         timeStyle={{
           textAlign: 'center',
           backgroundColor: '#5BA5E7',
           color: 'white',
           padding: 5,
-          borderRadius: 13
+          borderRadius: 13,
+          fontWeight: 'bold',
         }}
         descriptionStyle={{ color: 'rgb(64,64,64)' }}
         options={{
-          style: { paddingTop: 5 }
+          style: {
+            padding: 25,
+            paddingTop: 100,
+            margin: 20,
+            backgroundColor: '#ffeafe',
+            borderRadius: 10,
+            height: 'auto',
+          },
         }}
       />
-      <View></View>
+      <Text style={styles.title}>Your Timeline</Text>
     </View>
   );
 }
@@ -72,23 +84,33 @@ export default function TimelineScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 15,
-    marginRight: 15
+    backgroundColor: '#fec7fb',
   },
   title: {
-    padding: 16,
+    padding: 0,
+    marginTop: 50,
+    marginLeft: 40,
     fontSize: 20,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    position: 'absolute',
   },
   graphButtonSection: {
     width: '100%',
     height: '30%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   barGraphButton: {
     backgroundColor: 'blue',
-    color: 'white'
-  }
+    color: 'white',
+  },
+  timelineCard: {
+    backgroundColor: '#42397d',
+    height: 200,
+  },
+  timelineData: {
+    minWidth: 52,
+    marginTop: -5,
+  },
 });
