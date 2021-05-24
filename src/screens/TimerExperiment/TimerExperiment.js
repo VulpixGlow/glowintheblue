@@ -8,7 +8,7 @@ import {
   Animated,
   Vibration,
   TouchableOpacity,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -18,10 +18,6 @@ import SelectDropdown from 'react-native-select-dropdown';
 import FilterDataFunction from '../../dataFunctions/FilterDataFunction';
 import styles from './styles';
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function TimerExperiment() {
@@ -46,6 +42,8 @@ export default function TimerExperiment() {
   const navigation = useNavigation();
 
   const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other'];
+
+  console.log('USER EMAIL', user.email);
 
   const sessionData = async () => {
     try {
@@ -132,33 +130,36 @@ export default function TimerExperiment() {
       }
     ]);
 
-  const children = ( {remainingTime} ) => {
+  const children = ({ remainingTime }) => {
     let hours = Math.floor(remainingTime / 3600);
     let minutes = Math.floor((remainingTime % 3600) / 60);
     let seconds = parseInt(remainingTime % 60, 10);
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-    return remainingTime <= 3599 ?  `${minutes}:${seconds}` : '0' + `${hours}:${minutes}` 
+    return remainingTime <= 3599 ? `${minutes}:${seconds}` : '0' + `${hours}:${minutes}`;
   };
 
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={styles.topHeader}
-        accessibilityLabel={'Timer View'}
-        accessibilityHint='Clicking me will do nothing'
-        accessibilityRole={'Display timer and picker to select times.'} >
-          <View style={styles.pointsBox} 
-          importantForAccessibility='yes'
-          accessibilityLabel={'Points View'}
-          accessibilityRole={'Display total points currently earned.'} >
+        <View
+          style={styles.topHeader}
+          accessibilityLabel={'Timer View'}
+          accessibilityHint='Clicking me will do nothing'
+          accessibilityRole={'Display timer and picker to select times.'}>
+          <View
+            style={styles.pointsBox}
+            importantForAccessibility='yes'
+            accessibilityLabel={'Points View'}
+            accessibilityRole={'Display total points currently earned.'}>
             <Text style={styles.pointsBoxText}>Points: {points}</Text>
           </View>
           <View style={styles.graphButtonsView}>
-            <TouchableOpacity style={styles.timeLineButton} 
-            accessible={true}
-            accessibilityLabel='View Timeline '
-            accessibilityHint='Navigates to the next screen to show timeline'>
+            <TouchableOpacity
+              style={styles.timeLineButton}
+              accessible={true}
+              accessibilityLabel='View Timeline '
+              accessibilityHint='Navigates to the next screen to show timeline'>
               <FontAwesome
                 name='line-chart'
                 color={'#fff'}
@@ -166,10 +167,11 @@ export default function TimerExperiment() {
                 onPress={() => navigation.navigate('Timeline')}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.timeLineButton} 
-            accessible={true}
-            accessibilityLabel='View Pie Chart'
-            accessibilityHint='Navigates to the next screen to show pie chart'>
+            <TouchableOpacity
+              style={styles.timeLineButton}
+              accessible={true}
+              accessibilityLabel='View Pie Chart'
+              accessibilityHint='Navigates to the next screen to show pie chart'>
               <FontAwesome
                 name='pie-chart'
                 color={'#fff'}
@@ -190,7 +192,7 @@ export default function TimerExperiment() {
                 borderRadius: 50,
                 borderColor: '#42397d',
                 borderWidth: 2,
-                outerHeight: 40,
+                outerHeight: 40
               }}
               renderDropdownIcon={() => {
                 return <FontAwesome name='chevron-down' color={'#fff'} size={16} />;
@@ -209,16 +211,17 @@ export default function TimerExperiment() {
               dropdownStyle={{ backgroundColor: '#EFEFEF' }}
               rowStyle={{
                 backgroundColor: '#42397d',
-                borderBottomColor: '#C5C5C5',
+                borderBottomColor: '#C5C5C5'
               }}
               rowTextStyle={{ color: '#fff', textAlign: 'left' }}
             />
           </View>
-          <View style={styles.countdownView}
-          accessible={true}
-          accessibilityLabel='Countdown View'
-          accessibilityHint='Countdown timer for the amount of time left on clock'
-          importantForAccessibility='yes'>
+          <View
+            style={styles.countdownView}
+            accessible={true}
+            accessibilityLabel='Countdown View'
+            accessibilityHint='Countdown timer for the amount of time left on clock'
+            importantForAccessibility='yes'>
             <CountdownCircleTimer
               isPlaying={isRunning}
               key={selectedValue}
@@ -234,7 +237,7 @@ export default function TimerExperiment() {
               colors={[
                 ['#8cffdf', 0.4],
                 ['#e785e2', 0.4],
-                ['#8cffdf', 0.4],
+                ['#8cffdf', 0.4]
               ]}>
               {({ remainingTime, animatedColor }) => (
                 <Animated.Text style={{ color: animatedColor, fontSize: 45 }}>
@@ -244,7 +247,8 @@ export default function TimerExperiment() {
             </CountdownCircleTimer>
           </View>
         </View>
-        <View style={styles.pickerView} 
+        <View
+          style={styles.pickerView}
           accessible={true}
           accessibilityLabel='Time Picker View'
           accessibilityHint='Picker to pick from 10 up to 50 minutes'>
