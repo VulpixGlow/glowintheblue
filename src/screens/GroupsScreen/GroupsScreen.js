@@ -28,7 +28,7 @@ export default function GroupScreen() {
     groupData,
     setGroupData
   } = useContext(UserInfoContext);
-  const [groupIsLoading, setGroupIsLoading] = useState(true)
+  const [groupIsLoading, setGroupIsLoading] = useState(true);
   const navigation = useNavigation();
   const someGroupData = async () => {
     if (groupIsLoading) {
@@ -39,22 +39,21 @@ export default function GroupScreen() {
             return obj.groups;
           }
         });
-        const [groupObj] = filterData.map((obj)=>obj.groups)
-        const groupNames = groupObj.map((obj)=>obj.groupName)
-        setGroupNames(groupNames)
-        setGroupIsLoading(false)
+        const [groupObj] = filterData.map(obj => obj.groups);
+        const groupNames = groupObj.map(obj => obj.groupName);
+        setGroupNames(groupNames);
+        setGroupIsLoading(false);
       } catch (error) {
-          setGroupIsLoading(false)
-          console.log('Group is not loading', error)
+        setGroupIsLoading(false);
+        console.log('Group is not loading', error);
       }
     }
   };
-  useEffect(()=>{
-    someGroupData()
-  }, [])
+  useEffect(() => {
+    someGroupData();
+  }, []);
 
-
-  const handleSubmit = (evt) => {
+  const handleSubmit = evt => {
     // email = "s@s.com, a@a.com",
 
     const emails = inviteEmail.split(', ');
@@ -63,7 +62,7 @@ export default function GroupScreen() {
       const { data } = await axios.post('https://glowintheblue.herokuapp.com/api/notifications', {
         ownerEmail: user.email,
         emails: emails,
-        groupName: groupName,
+        groupName: groupName
       });
     };
     notificationData();
@@ -88,10 +87,10 @@ export default function GroupScreen() {
   return (
     <ScrollView>
       <View style={styles.container}>
-//           <Text>My Groups</Text>
-//         {
-//            groupNames.map((name, idx)=> <Button style={{ padding: 10 }} key={idx} title={name} onPress={()=>navigation.navigate('Group', {props:name})} />)
-//           }
+        {/* <Text>My Groups</Text> */}
+        {/* {
+            groupNames.map((name, idx)=> <Button style={{ padding: 10 }} key={idx} title={name} onPress={()=>navigation.navigate('Group', {props:name})} />)
+          } */}
         <View>
           <Card containerStyle={styles.createGroupCard}>
             <Text style={styles.myGroupsTitle}>My Groups</Text>
@@ -121,7 +120,7 @@ export default function GroupScreen() {
                 placeholder='Type group name'
                 placeholderTextColor='#928ace'
                 value={groupName}
-                onChangeText={(text) => {
+                onChangeText={text => {
                   setGroupName(text);
                 }}
               />
@@ -133,7 +132,7 @@ export default function GroupScreen() {
                 placeholderTextColor='#928ace'
                 placeholder='Type email'
                 value={inviteEmail}
-                onChangeText={(text) => {
+                onChangeText={text => {
                   setInviteEmail(text);
                 }}
                 rightIcon={{ name: 'add', size: 24, color: 'green' }}
@@ -153,28 +152,28 @@ export default function GroupScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2d2660',
-    flex: 1,
+    flex: 1
   },
   createGroupButton: {
     borderRadius: 10,
     padding: 15,
     margin: 5,
     marginTop: 10,
-    backgroundColor: '#8cffde',
+    backgroundColor: '#8cffde'
   },
   myGroupsButton: {
     borderRadius: 10,
     padding: 15,
     margin: 5,
     marginTop: 10,
-    backgroundColor: '#fec7fb',
+    backgroundColor: '#fec7fb'
   },
   createGroupCard: {
     backgroundColor: '#42397d',
     borderWidth: 0,
     borderRadius: 10,
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   myGroupsTitle: {
     fontSize: 25,
@@ -182,7 +181,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     marginLeft: 10,
-    color: '#fec7fb',
+    color: '#fec7fb'
   },
   createGroupTitle: {
     fontSize: 25,
@@ -190,7 +189,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     marginLeft: 10,
-    color: '#8cffde',
+    color: '#8cffde'
     // marginRight: 'auto',
   },
   createGroupSubtitle: {
@@ -198,7 +197,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginLeft: 10,
     color: 'white',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
 
     // marginRight: 'auto',
   },
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#5a5299',
     padding: 15,
     borderRadius: 10,
-    margin: 5,
+    margin: 5
     // width: 340,
     // marginLeft: 'auto',
     // marginRight: 'auto',
@@ -217,6 +216,6 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 20,
     textAlign: 'center',
-    fontWeight: 'bold',
-  },
+    fontWeight: 'bold'
+  }
 });

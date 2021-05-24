@@ -1,6 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { UserInfoContext } from '../../../UserContext';
-import { StyleSheet, View, Image, ImageBackground, ActivityIndicator, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  ImageBackground,
+  ActivityIndicator,
+  TouchableOpacity
+} from 'react-native';
 import { Card, ListItem, Button, Icon, Text } from 'react-native-elements';
 import FooterScreen from '../FooterScreen/FooterScreen';
 import { useNavigation } from '@react-navigation/native';
@@ -23,44 +30,45 @@ export default function NotifScreen() {
     inviteEmail,
     setInviteEmail,
     groupName,
-    setGroupName,
+    setGroupName
   } = useContext(UserInfoContext);
-  const [notifIsLoading, setNotifIsLoading] = useState(true)
-  const [friend, setFriend ] = useState('')
+  const [notifIsLoading, setNotifIsLoading] = useState(true);
+  const [friend, setFriend] = useState('');
   const navigation = useNavigation();
-  
+
   const notifiReceived = async () => {
-    if (notifIsLoading){
+    if (notifIsLoading) {
       try {
         const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/notifications');
-        const detailsArr = data.map((obj)=>obj.groupDetails)
-        const detailsNesArr = detailsArr.map((str)=> str.split(','))
-        const notifIdx = detailsNesArr.map((arr, idx)=>arr.indexOf(user.email)>0 ? idx:null)
-        const filtered=(idxArr)=>{
-          return idxArr.filter((idx)=>idx!==null)
-        }
-        const theIdx = filtered(notifIdx)
-        console.log('detailsArr',theIdx)
-        const getData =(idxs, data)=>{
-          let newArr = []
-          for(let i=0; i<idxs.length; i++){
-            newArr.push(data[idxs[i]])
+        const detailsArr = data.map(obj => obj.groupDetails);
+        const detailsNesArr = detailsArr.map(str => str.split(','));
+        const notifIdx = detailsNesArr.map((arr, idx) =>
+          arr.indexOf(user.email) > 0 ? idx : null
+        );
+        const filtered = idxArr => {
+          return idxArr.filter(idx => idx !== null);
+        };
+        const theIdx = filtered(notifIdx);
+        console.log('detailsArr', theIdx);
+        const getData = (idxs, data) => {
+          let newArr = [];
+          for (let i = 0; i < idxs.length; i++) {
+            newArr.push(data[idxs[i]]);
           }
-          return newArr
-        }
-        const myNotif = getData(theIdx, data)
-        setFriend(myNotif)
-        setNotifIsLoading(false)
-      } catch (e){
-        setNotifIsLoading(false)
-        console.log('not getting notif data', e)
+          return newArr;
+        };
+        const myNotif = getData(theIdx, data);
+        setFriend(myNotif);
+        setNotifIsLoading(false);
+      } catch (e) {
+        setNotifIsLoading(false);
+        console.log('not getting notif data', e);
       }
     }
-
   };
-  useEffect(()=>{
-    notifiReceived()
-  },[])
+  useEffect(() => {
+    notifiReceived();
+  }, []);
 
   if (notifIsLoading) {
     return (
@@ -69,7 +77,7 @@ export default function NotifScreen() {
       </View>
     );
   }
-  
+
   return (
     <View style={styles.container}>
       <Card containerStyle={styles.inviteCard}>
@@ -77,10 +85,10 @@ export default function NotifScreen() {
           <Text style={styles.inviteTitle}>Group Invites:</Text>
           <View style={styles.inviteInfo}>
             <View>
-//                <Text h1>Group Invites:</Text>
-//               {
-//                 friend.map((obj, idx)=><Text key={idx}>{obj.userId}</Text>)
-//               }
+              {/* <Text h1>Group Invites:</Text> */}
+
+              {/* //                 friend.map((obj, idx)=><Text key={idx}>{obj.userId}</Text>) */}
+
               <Text style={styles.groupName}>Vulpix</Text>
               <Text style={styles.invitedBy}>Invited by Shannon</Text>
             </View>
@@ -112,7 +120,7 @@ export default function NotifScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2d2660',
-    flex: 1,
+    flex: 1
   },
   inviteTitle: {
     fontSize: 25,
@@ -120,14 +128,14 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 20,
     // marginLeft: 10,
-    color: '#8cffde',
+    color: '#8cffde'
   },
   inviteCard: {
     backgroundColor: '#42397d',
     borderWidth: 0,
     borderRadius: 10,
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   buttonYes: {
     borderRadius: 50,
@@ -140,7 +148,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: 50,
-    height: 50,
+    height: 50
   },
   buttonNo: {
     borderRadius: 50,
@@ -152,28 +160,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: 50,
-    height: 50,
+    height: 50
   },
   buttonsView: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 20
   },
   groupName: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     marginTop: 10,
-    color: '#fff',
+    color: '#fff'
   },
   invitedBy: {
-    fontSize: 14,
+    fontSize: 16,
     marginTop: 5,
     marginBottom: 20,
-    color: '#fff',
+    color: '#fff'
   },
   inviteInfo: {
     borderBottomColor: '#cbc4ff',
     borderBottomWidth: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+    justifyContent: 'space-between'
+  }
 });

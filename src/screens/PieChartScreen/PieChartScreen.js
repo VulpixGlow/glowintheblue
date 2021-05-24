@@ -6,7 +6,7 @@ import {
   View,
   Dimensions,
   StyleSheet,
-  Card,
+  Card
 } from 'react-native';
 import { UserInfoContext } from '../../../UserContext';
 import FilterDataPieChart from '../../dataFunctions/FilterDataPieFunction';
@@ -57,18 +57,18 @@ function MyPieChart() {
           decimalPlaces: 2,
           color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
-            borderRadius: 10,
-          },
+            borderRadius: 10
+          }
         }}
         style={{
           marginVertical: 8,
           borderRadius: 16,
-          fontSize: 16
+          fontSize: 16,
           backgroundColor: '#dcfff5',
           height: 280,
           paddingTop: 50,
           paddingBottom: 20,
-          marginTop: 20,
+          marginTop: 20
         }}
         accessor='time'
         backgroundColor='transparent'
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 15,
     marginRight: 30,
-    backgroundColor: '#8cffde',
+    backgroundColor: '#8cffde'
   },
   title: {
     padding: 0,
@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    position: 'absolute',
-  },
+    position: 'absolute'
+  }
 });
