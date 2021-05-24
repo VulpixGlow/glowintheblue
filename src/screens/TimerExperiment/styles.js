@@ -3,86 +3,90 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   mainView: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
     // justifyContent: 'center',
     // alignItems: 'center',
   },
   buttonsView: {
-    // flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center'
-    // marginTop: 20,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  graphButtonsView: {
+    flexDirection: 'row',
   },
   dropdownView: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20
+    marginTop: 20,
+    marginBottom: 30,
   },
   pickerView: {
-    marginTop: 20,
+    marginTop: -50,
+    fontSize: 20,
+    marginBottom: -20,
     flexDirection: 'column',
-    fontSize: 20
   },
   pickerViewText: {
     color: 'white',
     fontWeight: '900',
     marginLeft: 'auto',
-    marginRight: 'auto'
-    // fontSize: 25
+    marginRight: 'auto',
   },
   countdownView: {
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonContainerN: {
-    margin: 10,
-    backgroundColor: '#ffd893'
-  },
-  buttonContainerF: {
-    margin: 10,
-    backgroundColor: '#ffd893'
+    alignItems: 'center',
+    // flexDirection: 'row',
   },
   pointsBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#8cffdf',
-    width: 150,
-    marginLeft: 'auto',
     marginRight: 'auto',
-    padding: 10,
     borderRadius: 10
-  },
-  oima: {
-    fontSize: 20
   },
   homeButton: {
     borderRadius: 10,
-    padding: 15,
-    margin: 5,
-    marginTop: 10,
-    width: 80,
-    backgroundColor: '#fec4fc',
-    borderStyle: 'solid',
-    borderColor: '#aedcff'
   },
-  inviteNotif: {
+  pointsBoxText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  playPauseButtons: {
+    borderRadius: 50,
+    padding: 20,
+    margin: 10,
+    marginTop: 10,
+    backgroundColor: '#e785e2',
+    borderStyle: 'solid',
+    borderColor: '#aedcff',
+    width: 60,
+    height: 60,
+    // paddingBottom: -5,
+  },
+  topHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
-    // margin: 10,
   },
   timeLineButton: {
     borderRadius: 50,
-    padding: 10,
-    margin: 5,
-    marginTop: 40,
-    width: 55,
-    // backgroundColor: '#fff',
-    // backgroundColor: '#000',
-    backgroundColor: '#8CFFDF',
+    padding: 15,
+    marginLeft: 10,
+    // marginTop: 40,
     borderStyle: 'solid',
-    borderColor: '#aedcff',
+    borderWidth: 2,
+    borderColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  mainTitle: {
+    fontSize: 25,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 50,
+    marginBottom: 20,
+    marginLeft: 30,
+    marginRight: 30,
+    color: '#8cffde',
+  },
 });

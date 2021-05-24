@@ -18,7 +18,7 @@ import {
   PieChartScreen,
   GroupsScreen,
   BottomTabs,
-  BarGraphScreen
+  BarGraphScreen,
 } from './src/screens';
 
 import { StatusBar } from 'react-native';
@@ -38,8 +38,8 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#aedcff',
-    background: '#8cffde'
-  }
+    background: '#8CFFDF',
+  },
 };
 
 export default function App() {
@@ -54,6 +54,8 @@ export default function App() {
   const [groupName, setGroupName] = useState('');
   const [groups, setGroups] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
+  const [groupNames, setGroupNames] = useState([]);
+  const [groupData, setGroupData] = useState([])
 
   // State for Accessibilty
   const {
@@ -65,7 +67,31 @@ export default function App() {
     reduceTransparencyEnabled
   } = useAccessibilityInfo();
 
-  // Pass all information down as an object to context provider
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data();
+            setLoading(false);
+            setUser(userData);
+          })
+          .catch((error) => {
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
+    });
+  }, []);
+
+  if (loading) {
+    return <></>;
+  }
+
   const data = {
     user,
     setUser,
@@ -86,33 +112,12 @@ export default function App() {
     groups,
     setGroups,
     totalPoints,
-    setTotalPoints
+    setTotalPoints,
+    groupNames,
+    setGroupNames,
+    groupData,
+    setGroupData
   };
-
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection('users');
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        usersRef
-          .doc(user.uid)
-          .get()
-          .then(document => {
-            const userData = document.data();
-            setLoading(false);
-            setUser(userData);
-          })
-          .catch(error => {
-            setLoading(false);
-          });
-      } else {
-        setLoading(false);
-      }
-    });
-  }, []);
-
-  if (loading) {
-    return <></>;
-  }
 
   return (
     <UserInfoContext.Provider value={data}>
@@ -126,17 +131,37 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#2d2660',
-                    shadowColor: 'transparent'
+                    shadowColor: 'transparent',
                   },
-                  headerTintColor: 'white'
+                  headerTintColor: 'white',
                 }}
                 component={BottomTabs}
               />
               {/*  Components that need to be navagated to that don't reside in BottomsTab should be included here */}
               <Stack.Screen name='NotifScreen' component={NotifScreen} />
               <Stack.Screen name='Points' component={PointScreen} />
-              <Stack.Screen name='Timeline' component={TimelineScreen} />
-              <Stack.Screen name='PieChart' component={PieChartScreen} />
+              <Stack.Screen
+                name='Timeline'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#fec7fb',
+                    shadowColor: 'transparent',
+                  },
+                  headerTintColor: '#e981e4',
+                }}
+                component={TimelineScreen}
+              />
+              <Stack.Screen
+                name='PieChart'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#8cffde',
+                    shadowColor: 'transparent',
+                  },
+                  headerTintColor: '#397867',
+                }}
+                component={PieChartScreen}
+              />
               <Stack.Screen name='BarChart' component={BarGraphScreen} />
               <Stack.Screen name='Group' component={GroupScreen} />
               <Stack.Screen name='Groups' component={GroupsScreen} />
@@ -148,7 +173,7 @@ export default function App() {
                 name='Onboarding'
                 options={{
                   headerShown: false,
-                  headerTintColor: null
+                  headerTintColor: null,
                 }}
                 component={Onboarding}
               />
@@ -157,9 +182,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#ffe1fd',
-                    shadowColor: 'transparent'
+                    shadowColor: 'transparent',
                   },
-                  headerTintColor: '#e981e4'
+                  headerTintColor: '#e981e4',
                 }}
                 component={LoginScreen}
               />
@@ -168,9 +193,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#cbe3fc',
-                    shadowColor: 'transparent'
+                    shadowColor: 'transparent',
                   },
-                  headerTintColor: '#64a5e9'
+                  headerTintColor: '#64a5e9',
                 }}
                 component={RegistrationScreen}
               />

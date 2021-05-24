@@ -1,5 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { SafeAreaView, ActivityIndicator, Text, View, Dimensions, StyleSheet } from 'react-native';
+import {
+  SafeAreaView,
+  ActivityIndicator,
+  Text,
+  View,
+  Dimensions,
+  StyleSheet,
+  Card,
+} from 'react-native';
 import { UserInfoContext } from '../../../UserContext';
 import FilterDataPieChart from '../../dataFunctions/FilterDataPieFunction';
 
@@ -38,10 +46,9 @@ function MyPieChart() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Glow Pie Chart</Text>
       <PieChart
         data={pieData}
-        width={Dimensions.get('window').width - 16}
+        width={Dimensions.get('window').width - 30}
         height={220}
         chartConfig={{
           backgroundColor: '#1cc910',
@@ -50,19 +57,25 @@ function MyPieChart() {
           decimalPlaces: 2,
           color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
-            borderRadius: 16
-          }
+            borderRadius: 10,
+          },
         }}
         style={{
           marginVertical: 8,
           borderRadius: 16,
           fontSize: 16
+          backgroundColor: '#dcfff5',
+          height: 280,
+          paddingTop: 50,
+          paddingBottom: 20,
+          marginTop: 20,
         }}
         accessor='time'
         backgroundColor='transparent'
         paddingLeft='15'
         absolute //for the absolute number remove if you want percentage
       />
+      <Text style={styles.title}>Your Pie</Text>
     </View>
   );
 }
@@ -79,12 +92,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginLeft: 15,
-    marginRight: 15
+    marginRight: 30,
+    backgroundColor: '#8cffde',
   },
   title: {
-    padding: 16,
+    padding: 0,
+    marginTop: 50,
+    marginLeft: 40,
     fontSize: 20,
     textAlign: 'center',
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+    position: 'absolute',
+  },
 });

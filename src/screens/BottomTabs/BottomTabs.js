@@ -19,9 +19,9 @@ export default function BottomTabs() {
     points,
     setPoints,
     selectCat,
-    setSelectedCat
+    setSelectedCat,
   } = useContext(UserInfoContext);
-  console.log('user in BottomTabs-->', user);
+  //console.log('user in BottomTabs-->', user);
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -30,15 +30,15 @@ export default function BottomTabs() {
         style: {
           backgroundColor: '#2d2660',
           borderTopWidth: null,
-          borderTopColor: '#cbc4ff'
-        }
+          borderTopColor: '#cbc4ff',
+        },
       }}>
       <Tab.Screen
         name='Home'
         component={HomeScreen}
         options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({ color, size }) => <FontAwesome name='home' color={color} size={25} />
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => <FontAwesome name='home' color={color} size={25} />,
         }}
       />
       <Tab.Screen
@@ -46,7 +46,7 @@ export default function BottomTabs() {
         component={GroupsScreen}
         options={{
           tabBarLabel: 'Groups',
-          tabBarIcon: ({ color }) => <FontAwesome name='users' color={color} size={20} />
+          tabBarIcon: ({ color }) => <FontAwesome name='users' color={color} size={20} />,
         }}
       />
       <Tab.Screen
@@ -54,7 +54,7 @@ export default function BottomTabs() {
         component={NotifScreen}
         options={{
           tabBarLabel: 'Notifications',
-          tabBarIcon: ({ color }) => <FontAwesome name='bell' color={color} size={20} />
+          tabBarIcon: ({ color }) => <FontAwesome name='bell' color={color} size={20} />,
         }}
       />
     </Tab.Navigator>

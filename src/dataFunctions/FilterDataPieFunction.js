@@ -7,13 +7,13 @@ export default function FilterDataPieChart(arr, email) {
   let connectTotal = 0;
   let otherTotal = 0;
 
-  let filterArr = arr.filter(obj => {
+  let filterArr = arr.filter((obj) => {
     if (obj.user.email === email) {
       return obj;
     }
   });
 
-  filterArr.forEach(obj => {
+  filterArr.forEach((obj) => {
     if (obj.categoryName === 'Focus') {
       focusTotal += obj.time;
     } else if (obj.categoryName === 'Meditate') {
@@ -33,36 +33,36 @@ export default function FilterDataPieChart(arr, email) {
       time: focusTotal,
       color: 'rgba(131, 167, 234, 1)',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15
+      legendFontSize: 15,
     },
     {
       name: 'Meditate',
       time: meditateTotal,
       color: 'rgb(45,156,219)',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15
+      legendFontSize: 15,
     },
     {
       name: 'Move',
       time: moveTotal,
       color: 'gold',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15
+      legendFontSize: 15,
     },
     {
       name: 'Connnect',
       time: connectTotal,
       color: 'white',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15
+      legendFontSize: 15,
     },
     {
       name: 'Other',
       time: otherTotal,
       color: 'pink',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15
-    }
+      legendFontSize: 15,
+    },
   ];
 
   return catDataObj;
