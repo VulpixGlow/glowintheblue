@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserInfoContext } from '../../../UserContext';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import { Card, Input, Text, Button } from 'react-native-elements';
-//import styles from './styles'
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,7 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 //   backgroundGradientTo: '#08130D',
 //   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
 // }
-//console.log('hello from GroupScreen line 15');
 export default function GroupScreen() {
   const {
     user,
@@ -30,31 +28,37 @@ export default function GroupScreen() {
     groupName,
     groups,
     setGroups,
-    setGroupName
+    setGroupName,
+    groupNames,
+    setGroupNames,
+    groupData,
+    setGroupData
   } = useContext(UserInfoContext);
-  //console.log('userData in groups screen', groupName)
+  const [groupIsLoading, setGroupIsLoading] = useState(true)
   const navigation = useNavigation();
-  const groupData = async () => {
-    //console.log('props in group screen line 8', props)
-    const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
-    console.log('Data returned from axios request GROUPSCREEN', data);
-
-    /*
-        const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/sessions/');
-        setUserTimeLineData(FilterDataFunction(data, user.email));
-        setGraphLoading(false);
-    */
-    // console.log('user in groupscreen line 32', user)
-    // const { data } = await axios.get('http://localhost:8080/api/group', {
-    //   email: 'user2@gmail.com'
-    // })
-    //console.log('groupData in groups screen line 35', data);
-    // const groupNames = data.map(group => group.groupName);
-    //console.log('group names in group screen line 40', groupNames)
-    //setGroups(data)
+  const someGroupData = async () => {
+    if (groupIsLoading) {
+      try {
+        const { data } = await axios.get('https://glowintheblue.herokuapp.com/api/group');
+        const filterData = data.filter(obj => {
+          if (obj.email === user.email) {
+            return obj.groups;
+          }
+        });
+        const [groupObj] = filterData.map((obj)=>obj.groups)
+        const groupNames = groupObj.map((obj)=>obj.groupName)
+        setGroupNames(groupNames)
+        setGroupIsLoading(false)
+      } catch (error) {
+          setGroupIsLoading(false)
+          console.log('Group is not loading', error)
+      }
+    }
   };
+  useEffect(()=>{
+    someGroupData()
+  }, [])
 
-  groupData();
 
   const handleSubmit = evt => {
     // email = "s@s.com, a@a.com",
@@ -79,25 +83,22 @@ export default function GroupScreen() {
     alert(`Invite Sent!`);
   };
 
-  //console.log('groups in groups screen line 42', groups)
+  if (groupIsLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+        <ActivityIndicator size='large' color='#5BA5E7' />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}> All Groups</Text>
-      {groups ? (
-        groups.map(group => (
-          <Button title={group.name} onPress={() => navigation.navigate('Group')} />
-        ))
-      ) : (
-        <Text>No group to display</Text>
-      )} */}
-      {/* <Button title='View Group 1' onPress={() => navigation.navigate('Group')} /> */}
-      {/* <Button title='Create Group' onPress={() => navigation.navigate('InviteScreen')} /> */}
       <View>
         <Card>
           <Text>My Groups</Text>
-          <Button style={{ padding: 10 }} title='Group 1' />
-          <Button style={{ padding: 10 }} title='Group 2' />
-          <Button style={{ padding: 10 }} title='Group 3' />
+          {
+            groupNames.map((name, idx)=> <Button style={{ padding: 10 }} key={idx} title={name} onPress={()=>navigation.navigate('Group', {props:name})} />)
+          }
         </Card>
         <Card>
           <View style={{ marginBottom: 30 }}>

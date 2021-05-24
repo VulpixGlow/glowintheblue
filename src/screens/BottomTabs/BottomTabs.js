@@ -21,7 +21,7 @@ export default function BottomTabs() {
     selectCat,
     setSelectedCat
   } = useContext(UserInfoContext);
-  console.log('user in BottomTabs-->', user);
+  //console.log('user in BottomTabs-->', user);
   return (
     <Tab.Navigator
       tabBarOptions={{
