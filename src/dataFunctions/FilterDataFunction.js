@@ -1,34 +1,34 @@
-import React from 'react'
+import React from 'react';
 
 export default function filterUserData(arr, email) {
   //console.log('Inside FilterDataFunction')
-  let focusTotal = 0
-  let meditateTotal = 0
-  let moveTotal = 0
-  let connectTotal = 0
-  let otherTotal = 0
+  let focusTotal = 0;
+  let meditateTotal = 0;
+  let moveTotal = 0;
+  let connectTotal = 0;
+  let otherTotal = 0;
 
   let filterArr = arr.filter(obj => {
     if (obj.user.email === email) {
-      return obj
+      return obj;
     }
-  })
+  });
 
   //console.log('Filtered Arr- should only see the user data', filterArr)
 
   filterArr.forEach(obj => {
     if (obj.categoryName === 'Focus') {
-      focusTotal += obj.time
+      focusTotal += obj.time;
     } else if (obj.categoryName === 'Meditate') {
-      meditateTotal += obj.time
+      meditateTotal += obj.time;
     } else if (obj.categoryName === 'Move') {
-      moveTotal += obj.time
+      moveTotal += obj.time;
     } else if (obj.categoryName === 'Connect') {
-      connectTotal += obj.time
+      connectTotal += obj.time;
     } else {
-      otherTotal += obj.time
+      otherTotal += obj.time;
     }
-  })
+  });
 
   let categoryDataArr = [
     {
@@ -48,7 +48,7 @@ export default function filterUserData(arr, email) {
     },
     {
       time: connectTotal,
-      title: 'Connnect',
+      title: 'Connect',
       description: `I've spent a total of ${connectTotal} minutes connecting with friends, family, co-workers and pets.`
     },
     {
@@ -56,7 +56,7 @@ export default function filterUserData(arr, email) {
       title: 'Other',
       description: `I've spent a total of ${otherTotal} minutes on other task that enhance my emotional, mental and physical well-being.`
     }
-  ]
+  ];
   //console.log('Data structure returned from FilterDataFunction', categoryDataArr)
-  return categoryDataArr
+  return categoryDataArr;
 }

@@ -20,12 +20,15 @@ export default StyleSheet.create({
   },
   pickerView: {
     marginTop: 20,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    fontSize: 20
   },
   pickerViewText: {
     color: 'white',
+    fontWeight: '900',
     marginLeft: 'auto',
     marginRight: 'auto'
+    // fontSize: 25
   },
   countdownView: {
     justifyContent: 'center',
@@ -48,6 +51,9 @@ export default StyleSheet.create({
     marginRight: 'auto',
     padding: 10,
     borderRadius: 10
+  },
+  oima: {
+    fontSize: 20
   },
   homeButton: {
     borderRadius: 10,

@@ -55,7 +55,8 @@ function MyPieChart() {
         }}
         style={{
           marginVertical: 8,
-          borderRadius: 16
+          borderRadius: 16,
+          fontSize: 16
         }}
         accessor='time'
         backgroundColor='transparent'

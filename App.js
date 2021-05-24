@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAccessibilityInfo } from '@react-native-community/hooks';
 import { firebase } from './config/Firebase';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,9 +10,7 @@ import {
   Onboarding,
   LoginScreen,
   RegistrationScreen,
-  HomeScreen,
   PointScreen,
-  StoreScreen,
   TimelineScreen,
   GroupScreen,
   InviteScreen,
@@ -43,13 +42,6 @@ const MyTheme = {
   }
 };
 
-// const userInfo = {
-//   user,
-//   loading
-// };
-
-// const UserInfoContext = React.createContext();
-
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -63,35 +55,17 @@ export default function App() {
   const [groups, setGroups] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
 
-  console.log('POINTS IN APP.JS', points);
+  // State for Accessibilty
+  const {
+    boldTextEnabled,
+    screenReaderEnabled,
+    reduceMotionEnabled,
+    grayscaleEnabled,
+    invertColorsEnabled,
+    reduceTransparencyEnabled
+  } = useAccessibilityInfo();
 
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection('users');
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        usersRef
-          .doc(user.uid)
-          .get()
-          .then(document => {
-            const userData = document.data();
-            setLoading(false);
-            setUser(userData);
-          })
-          .catch(error => {
-            setLoading(false);
-          });
-      } else {
-        setLoading(false);
-      }
-    });
-  }, []);
-
-  // Good Spot to add a spinnging wheel or loading icon
-
-  if (loading) {
-    return <></>;
-  }
-
+  // Pass all information down as an object to context provider
   const data = {
     user,
     setUser,
@@ -114,6 +88,31 @@ export default function App() {
     totalPoints,
     setTotalPoints
   };
+
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then(document => {
+            const userData = document.data();
+            setLoading(false);
+            setUser(userData);
+          })
+          .catch(error => {
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
+    });
+  }, []);
+
+  if (loading) {
+    return <></>;
+  }
 
   return (
     <UserInfoContext.Provider value={data}>

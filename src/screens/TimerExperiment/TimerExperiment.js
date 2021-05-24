@@ -134,34 +134,55 @@ export default function TimerExperiment() {
 
   const children = ({ remainingTime }) => {
     const hours = Math.floor(remainingTime / 3600);
-    const minutes = Math.floor((remainingTime % 3600) / 60);
-    const seconds = remainingTime % 60;
-
+    let minutes = Math.floor((remainingTime % 3600) / 60);
+    let seconds = parseInt(remainingTime % 60, 10);
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
     return `${minutes}:${seconds}`;
   };
 
   return (
     <SafeAreaView>
-      <View style={styles.inviteNotif}>
-        <View style={styles.pointsBox}>
+      <View
+        style={styles.inviteNotif}
+        accessibilityLabel={'Timer View'}
+        accessibilityHint='Clicking me will do nothing'
+        accessibilityRole={'Display timer and picker to select times.'}>
+        <View
+          style={styles.pointsBox}
+          importantForAccessibility='yes'
+          accessibilityLabel={'Points View'}
+          accessibilityRole={'Display total points currently earned.'}>
           <Text style={styles.oima}>Points Earned:</Text>
-          <Text>{addTotalPoints()}</Text>
+          <Text style={{ fontSize: 16, fontWeight: '900' }}>{addTotalPoints()}</Text>
         </View>
       </View>
-      <View style={styles.mainView}>
-        <View style={styles.pickerView}>
+      <View style={styles.mainView} importantForAccessibility='yes'>
+        <View
+          style={styles.pickerView}
+          accessible={true}
+          accessibilityLabel='Time Picker View'
+          accessibilityHint='Picker to pick from 10 up to 50 minutes'>
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
             onValueChange={itemValue => setSelectedValue(itemValue)}
-            style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
+            // style={{ color: '#ffffff', placeholderTextColor: '#fff', fontWeight: '900' }}
+            itemStyle={{ fontSize: 20 }}>
             {/* <Picker.Item color='white' label='Choose' /> */}
-            <Picker.Item color='white' label='10 seconds' value={10} />
-            <Picker.Item color='white' label='20 minutes' value={1200} />
-            <Picker.Item color='white' label='30 minutes' value={1800} />
+            <Picker.Item color='#B4FEE7' label='10 seconds' value={10} />
+            <Picker.Item color='#B4FEE7' label='20 minutes' value={1200} />
+            <Picker.Item color='#B4FEE7' label='30 minutes' value={1800} />
+            <Picker.Item color='#B4FEE7' label='40 minutes' value={2400} />
+            <Picker.Item color='#B4FEE7' label='50 minutes' value={3000} />
           </Picker>
         </View>
-        <View style={styles.countdownView}>
+        <View
+          style={styles.countdownView}
+          accessible={true}
+          accessibilityLabel='Countdown View'
+          accessibilityHint='Countdown timer for the amount of time left on clock'
+          importantForAccessibility='yes'>
           <CountdownCircleTimer
             isPlaying={isRunning}
             key={selectedValue}
@@ -187,7 +208,7 @@ export default function TimerExperiment() {
             )}
           </CountdownCircleTimer>
         </View>
-        <View style={styles.pickerView}>
+        <View style={styles.pickerView} importantForAccessibility='yes'>
           <SelectDropdown
             data={categories}
             defaultButtonText='Choose a category'
@@ -199,7 +220,7 @@ export default function TimerExperiment() {
               outerHeight: 40
             }}
             renderDropdownIcon={() => {
-              return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
+              return <FontAwesome name='chevron-down' color={'#fff'} size={16} />;
             }}
             dropdownIconPosition={'right'}
             buttonTextStyle={{ color: '#fff' }}
@@ -220,15 +241,17 @@ export default function TimerExperiment() {
             rowTextStyle={{ color: '#fff', textAlign: 'left' }}
           />
         </View>
-        <View style={styles.buttonsView}>
+        <View style={styles.buttonsView} importantForAccessibility='yes'>
           <Button
             buttonStyle={styles.homeButton}
+            accessibilityRole={'button'}
             titleStyle={{ color: '#2d2660' }}
             title='Start'
             onPress={() => setRunning(true)}
           />
           <Button
             buttonStyle={styles.homeButton}
+            accessibilityRole={'button'}
             titleStyle={{ color: '#2d2660' }}
             title='Pause'
             onPress={() => setRunning(false)}
@@ -243,19 +266,29 @@ export default function TimerExperiment() {
               onPress={() => navigation.navigate('BarChart')}
             />
           </TouchableOpacity> */}
-          <TouchableOpacity style={styles.timeLineButton}>
+          <TouchableOpacity
+            style={styles.timeLineButton}
+            accessible={true}
+            accessibilityLabel='View Timeline '
+            accessibilityHint='Navigates to the next screen to show timeline'>
             <MaterialCommunityIcons
               name='timeline-text-outline'
-              size={32}
+              size={35}
               color='#E981E4'
+              accessibilityRole={'button'}
               onPress={() => navigation.navigate('Timeline')}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.timeLineButton}>
+          <TouchableOpacity
+            style={styles.timeLineButton}
+            accessible={true}
+            accessibilityLabel='View Pie Chart'
+            accessibilityHint='Navigates to the next screen to show pie chart'>
             <Entypo
               name='pie-chart'
-              size={24}
+              size={35}
               color='#5BA5E7'
+              accessibilityRole={'button'}
               onPress={() => navigation.navigate('PieChart')}
             />
           </TouchableOpacity>
