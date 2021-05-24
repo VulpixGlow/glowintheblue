@@ -37,7 +37,7 @@ export default function TimerExperiment() {
     points,
     setPoints,
     selectCat,
-    setSelectedCat
+    setSelectedCat,
   } = useContext(UserInfoContext);
 
   const [defaultTime, setDefaultTime] = useState(10);
@@ -75,14 +75,14 @@ export default function TimerExperiment() {
     sessionData();
   }, [points]);
 
-  const onConfirmCompleted = async total => {
+  const onConfirmCompleted = async (total) => {
     try {
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points
+        points: points,
       });
     } catch (error) {
       console.log('Error in onComfirmCompleted function', error);
@@ -121,44 +121,47 @@ export default function TimerExperiment() {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel'
+        style: 'cancel',
       },
       {
         text: 'Glowing',
         onPress: () => {
           setPoints(totalPoints);
           onConfirmCompleted(totalPoints);
-        }
-      }
+        },
+      },
     ]);
 
-  const children = ( {remainingTime} ) => {
+  const children = ({ remainingTime }) => {
     let hours = Math.floor(remainingTime / 3600);
     let minutes = Math.floor((remainingTime % 3600) / 60);
     let seconds = parseInt(remainingTime % 60, 10);
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-    return remainingTime <= 3599 ?  `${minutes}:${seconds}` : '0' + `${hours}:${minutes}` 
+    return remainingTime <= 3599 ? `${minutes}:${seconds}` : '0' + `${hours}:${minutes}`;
   };
 
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={styles.topHeader}
-        accessibilityLabel={'Timer View'}
-        accessibilityHint='Clicking me will do nothing'
-        accessibilityRole={'Display timer and picker to select times.'} >
-          <View style={styles.pointsBox} 
-          importantForAccessibility='yes'
-          accessibilityLabel={'Points View'}
-          accessibilityRole={'Display total points currently earned.'} >
+        <View
+          style={styles.topHeader}
+          accessibilityLabel={'Timer View'}
+          accessibilityHint='Clicking me will do nothing'
+          accessibilityRole={'Display timer and picker to select times.'}>
+          <View
+            style={styles.pointsBox}
+            importantForAccessibility='yes'
+            accessibilityLabel={'Points View'}
+            accessibilityRole={'Display total points currently earned.'}>
             <Text style={styles.pointsBoxText}>Points: {points}</Text>
           </View>
           <View style={styles.graphButtonsView}>
-            <TouchableOpacity style={styles.timeLineButton} 
-            accessible={true}
-            accessibilityLabel='View Timeline '
-            accessibilityHint='Navigates to the next screen to show timeline'>
+            <TouchableOpacity
+              style={styles.timeLineButton}
+              accessible={true}
+              accessibilityLabel='View Timeline '
+              accessibilityHint='Navigates to the next screen to show timeline'>
               <FontAwesome
                 name='line-chart'
                 color={'#fff'}
@@ -166,10 +169,11 @@ export default function TimerExperiment() {
                 onPress={() => navigation.navigate('Timeline')}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.timeLineButton} 
-            accessible={true}
-            accessibilityLabel='View Pie Chart'
-            accessibilityHint='Navigates to the next screen to show pie chart'>
+            <TouchableOpacity
+              style={styles.timeLineButton}
+              accessible={true}
+              accessibilityLabel='View Pie Chart'
+              accessibilityHint='Navigates to the next screen to show pie chart'>
               <FontAwesome
                 name='pie-chart'
                 color={'#fff'}
@@ -214,11 +218,12 @@ export default function TimerExperiment() {
               rowTextStyle={{ color: '#fff', textAlign: 'left' }}
             />
           </View>
-          <View style={styles.countdownView}
-          accessible={true}
-          accessibilityLabel='Countdown View'
-          accessibilityHint='Countdown timer for the amount of time left on clock'
-          importantForAccessibility='yes'>
+          <View
+            style={styles.countdownView}
+            accessible={true}
+            accessibilityLabel='Countdown View'
+            accessibilityHint='Countdown timer for the amount of time left on clock'
+            importantForAccessibility='yes'>
             <CountdownCircleTimer
               isPlaying={isRunning}
               key={selectedValue}
@@ -244,17 +249,19 @@ export default function TimerExperiment() {
             </CountdownCircleTimer>
           </View>
         </View>
-        <View style={styles.pickerView} 
+        <View
+          style={styles.pickerView}
           accessible={true}
           accessibilityLabel='Time Picker View'
           accessibilityHint='Picker to pick from 10 up to 50 minutes'>
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={itemValue => setSelectedValue(itemValue)}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
             // style={{ color: '#ffffff', placeholderTextColor: '#fff', fontWeight: '900' }}
             itemStyle={{ fontSize: 16 }}>
             {/* <Picker.Item color='white' label='Choose' /> */}
+            <Picker.Item color='#B4FEE7' label='Choose your time' value={0} />
             <Picker.Item color='#B4FEE7' label='10 seconds' value={10} />
             <Picker.Item color='#B4FEE7' label='20 minutes' value={1200} />
             <Picker.Item color='#B4FEE7' label='30 minutes' value={1800} />
