@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   Animated,
   Vibration,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -133,7 +134,6 @@ export default function TimerExperiment() {
     ]);
 
   const children = ({ remainingTime }) => {
-    const hours = Math.floor(remainingTime / 3600);
     const minutes = Math.floor((remainingTime % 3600) / 60);
     const seconds = remainingTime % 60;
 
@@ -142,13 +142,91 @@ export default function TimerExperiment() {
 
   return (
     <SafeAreaView>
-      <View style={styles.inviteNotif}>
-        <View style={styles.pointsBox}>
-          <Text style={styles.oima}>Points Earned:</Text>
-          <Text>{addTotalPoints()}</Text>
+      <ScrollView>
+        <View style={styles.topHeader}>
+          <View style={styles.pointsBox}>
+            <Text style={styles.pointsBoxText}>Points: {points}</Text>
+          </View>
+          <View style={styles.graphButtonsView}>
+            <TouchableOpacity style={styles.timeLineButton}>
+              <FontAwesome
+                name='line-chart'
+                color={'#fff'}
+                size={20}
+                onPress={() => navigation.navigate('Timeline')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.timeLineButton}>
+              <FontAwesome
+                name='pie-chart'
+                color={'#fff'}
+                size={20}
+                onPress={() => navigation.navigate('PieChart')}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={styles.mainView}>
+        <View style={styles.mainView}>
+          <Text style={styles.mainTitle}>What are we doing today?</Text>
+          <View style={styles.dropdownView}>
+            <SelectDropdown
+              data={categories}
+              defaultButtonText='Choose a category'
+              buttonStyle={{
+                backgroundColor: '#42397d',
+                borderRadius: 50,
+                borderColor: '#42397d',
+                borderWidth: 2,
+                outerHeight: 40,
+              }}
+              renderDropdownIcon={() => {
+                return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
+              }}
+              dropdownIconPosition={'right'}
+              buttonTextStyle={{ color: '#fff' }}
+              onSelect={(selectedItem, index) => {
+                setSelectedCat(selectedItem);
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                return item;
+              }}
+              dropdownStyle={{ backgroundColor: '#EFEFEF' }}
+              rowStyle={{
+                backgroundColor: '#42397d',
+                borderBottomColor: '#C5C5C5',
+              }}
+              rowTextStyle={{ color: '#fff', textAlign: 'left' }}
+            />
+          </View>
+          <View style={styles.countdownView}>
+            <CountdownCircleTimer
+              isPlaying={isRunning}
+              key={selectedValue}
+              duration={selectedValue}
+              onComplete={() => {
+                setRunning(false);
+                Vibration.vibrate();
+                createTwoButtonAlert();
+                setSelectedValue(defaultTime);
+              }}
+              size={180}
+              strokeWidth={15}
+              colors={[
+                ['#8cffdf', 0.4],
+                ['#e785e2', 0.4],
+                ['#8cffdf', 0.4],
+              ]}>
+              {({ remainingTime, animatedColor }) => (
+                <Animated.Text style={{ color: animatedColor, fontSize: 45 }}>
+                  {children({ remainingTime })}
+                </Animated.Text>
+              )}
+            </CountdownCircleTimer>
+          </View>
+        </View>
         <View style={styles.pickerView}>
           <Picker
             ref={pickerRef}
@@ -160,107 +238,25 @@ export default function TimerExperiment() {
             <Picker.Item color='white' label='20 minutes' value={1200} />
             <Picker.Item color='white' label='30 minutes' value={1800} />
           </Picker>
-        </View>
-        <View style={styles.countdownView}>
-          <CountdownCircleTimer
-            isPlaying={isRunning}
-            key={selectedValue}
-            duration={selectedValue}
-            onComplete={() => {
-              setRunning(false);
-              Vibration.vibrate();
-              createTwoButtonAlert();
-              setSelectedValue(defaultTime);
-            }}
-            children
-            size={180}
-            strokeWidth={15}
-            colors={[
-              ['#e785e2', 0.4],
-              ['#5ba5e7', 0.4],
-              ['#e785e2', 0.4]
-            ]}>
-            {({ remainingTime, animatedColor }) => (
-              <Animated.Text style={{ color: animatedColor, fontSize: 50 }}>
-                {children({ remainingTime })}
-              </Animated.Text>
-            )}
-          </CountdownCircleTimer>
-        </View>
-        <View style={styles.pickerView}>
-          <SelectDropdown
-            data={categories}
-            defaultButtonText='Choose a category'
-            buttonStyle={{
-              backgroundColor: '#42397d',
-              borderRadius: 50,
-              borderColor: '#42397d',
-              borderWidth: 2,
-              outerHeight: 40
-            }}
-            renderDropdownIcon={() => {
-              return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
-            }}
-            dropdownIconPosition={'right'}
-            buttonTextStyle={{ color: '#fff' }}
-            onSelect={(selectedItem, index) => {
-              setSelectedCat(selectedItem);
-            }}
-            buttonTextAfterSelection={(selectedItem, index) => {
-              return selectedItem;
-            }}
-            rowTextForSelection={(item, index) => {
-              return item;
-            }}
-            dropdownStyle={{ backgroundColor: '#EFEFEF' }}
-            rowStyle={{
-              backgroundColor: '#42397d',
-              borderBottomColor: '#C5C5C5'
-            }}
-            rowTextStyle={{ color: '#fff', textAlign: 'left' }}
-          />
-        </View>
-        <View style={styles.buttonsView}>
-          <Button
-            buttonStyle={styles.homeButton}
-            titleStyle={{ color: '#2d2660' }}
-            title='Start'
-            onPress={() => setRunning(true)}
-          />
-          <Button
-            buttonStyle={styles.homeButton}
-            titleStyle={{ color: '#2d2660' }}
-            title='Pause'
-            onPress={() => setRunning(false)}
-          />
-        </View>
-        <View style={styles.buttonsView}>
-          {/* <TouchableOpacity style={styles.timeLineButton}>
-            <FontAwesome
-              name='bar-chart'
-              size={24}
-              color='#5BA5E7'
-              onPress={() => navigation.navigate('BarChart')}
+
+          <View style={styles.buttonsView}>
+            <Button
+              buttonStyle={styles.playPauseButtons}
+              titleStyle={{ color: '#2d2660' }}
+              icon={<FontAwesome name='play' size={15} color='white' />}
+              // title='Start'
+              onPress={() => setRunning(true)}
             />
-          </TouchableOpacity> */}
-          <TouchableOpacity style={styles.timeLineButton}>
-            <MaterialCommunityIcons
-              name='timeline-text-outline'
-              size={32}
-              color='#E981E4'
-              onPress={() => navigation.navigate('Timeline')}
+            <Button
+              buttonStyle={styles.playPauseButtons}
+              titleStyle={{ color: '#2d2660' }}
+              icon={<FontAwesome name='pause' size={15} color='white' />}
+              // title='Pause'
+              onPress={() => setRunning(false)}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.timeLineButton}>
-            <Entypo
-              name='pie-chart'
-              size={24}
-              color='#5BA5E7'
-              onPress={() => navigation.navigate('PieChart')}
-            />
-          </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
