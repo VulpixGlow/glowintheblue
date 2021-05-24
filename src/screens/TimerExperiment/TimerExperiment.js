@@ -8,7 +8,7 @@ import {
   Animated,
   Vibration,
   TouchableOpacity,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -18,10 +18,6 @@ import SelectDropdown from 'react-native-select-dropdown';
 import FilterDataFunction from '../../dataFunctions/FilterDataFunction';
 import styles from './styles';
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function TimerExperiment() {
@@ -46,6 +42,8 @@ export default function TimerExperiment() {
   const navigation = useNavigation();
 
   const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other'];
+
+  console.log('USER EMAIL', user.email);
 
   const sessionData = async () => {
     try {
@@ -194,7 +192,7 @@ export default function TimerExperiment() {
                 borderRadius: 50,
                 borderColor: '#42397d',
                 borderWidth: 2,
-                outerHeight: 40,
+                outerHeight: 40
               }}
               renderDropdownIcon={() => {
                 return <FontAwesome name='chevron-down' color={'#fff'} size={16} />;
@@ -213,7 +211,7 @@ export default function TimerExperiment() {
               dropdownStyle={{ backgroundColor: '#EFEFEF' }}
               rowStyle={{
                 backgroundColor: '#42397d',
-                borderBottomColor: '#C5C5C5',
+                borderBottomColor: '#C5C5C5'
               }}
               rowTextStyle={{ color: '#fff', textAlign: 'left' }}
             />
@@ -239,7 +237,7 @@ export default function TimerExperiment() {
               colors={[
                 ['#8cffdf', 0.4],
                 ['#e785e2', 0.4],
-                ['#8cffdf', 0.4],
+                ['#8cffdf', 0.4]
               ]}>
               {({ remainingTime, animatedColor }) => (
                 <Animated.Text style={{ color: animatedColor, fontSize: 45 }}>

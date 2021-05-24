@@ -5,6 +5,7 @@ import { firebase } from './config/Firebase';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { UserInfoContext } from './UserContext';
+import { LogBox } from 'react-native';
 
 import {
   Onboarding,
@@ -18,7 +19,7 @@ import {
   PieChartScreen,
   GroupsScreen,
   BottomTabs,
-  BarGraphScreen,
+  BarGraphScreen
 } from './src/screens';
 
 import { StatusBar } from 'react-native';
@@ -31,6 +32,9 @@ if (!global.atob) {
   global.atob = decode;
 }
 
+// ignore yellow logs
+LogBox.ignoreAllLogs();
+
 const Stack = createStackNavigator();
 
 const MyTheme = {
@@ -38,8 +42,8 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#aedcff',
-    background: '#8CFFDF',
-  },
+    background: '#8CFFDF'
+  }
 };
 
 export default function App() {
@@ -55,7 +59,7 @@ export default function App() {
   const [groups, setGroups] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [groupNames, setGroupNames] = useState([]);
-  const [groupData, setGroupData] = useState([])
+  const [groupData, setGroupData] = useState([]);
 
   // State for Accessibilty
   const {
@@ -69,17 +73,17 @@ export default function App() {
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         usersRef
           .doc(user.uid)
           .get()
-          .then((document) => {
+          .then(document => {
             const userData = document.data();
             setLoading(false);
             setUser(userData);
           })
-          .catch((error) => {
+          .catch(error => {
             setLoading(false);
           });
       } else {
@@ -131,9 +135,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#2d2660',
-                    shadowColor: 'transparent',
+                    shadowColor: 'transparent'
                   },
-                  headerTintColor: 'white',
+                  headerTintColor: 'white'
                 }}
                 component={BottomTabs}
               />
@@ -145,9 +149,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#fec7fb',
-                    shadowColor: 'transparent',
+                    shadowColor: 'transparent'
                   },
-                  headerTintColor: '#e981e4',
+                  headerTintColor: '#e981e4'
                 }}
                 component={TimelineScreen}
               />
@@ -156,9 +160,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#8cffde',
-                    shadowColor: 'transparent',
+                    shadowColor: 'transparent'
                   },
-                  headerTintColor: '#397867',
+                  headerTintColor: '#397867'
                 }}
                 component={PieChartScreen}
               />
@@ -173,7 +177,7 @@ export default function App() {
                 name='Onboarding'
                 options={{
                   headerShown: false,
-                  headerTintColor: null,
+                  headerTintColor: null
                 }}
                 component={Onboarding}
               />
@@ -182,9 +186,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#ffe1fd',
-                    shadowColor: 'transparent',
+                    shadowColor: 'transparent'
                   },
-                  headerTintColor: '#e981e4',
+                  headerTintColor: '#e981e4'
                 }}
                 component={LoginScreen}
               />
@@ -193,9 +197,9 @@ export default function App() {
                 options={{
                   headerStyle: {
                     backgroundColor: '#cbe3fc',
-                    shadowColor: 'transparent',
+                    shadowColor: 'transparent'
                   },
-                  headerTintColor: '#64a5e9',
+                  headerTintColor: '#64a5e9'
                 }}
                 component={RegistrationScreen}
               />
