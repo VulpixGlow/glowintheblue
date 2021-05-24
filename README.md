@@ -76,19 +76,31 @@ Github: https://github.com/ShannonCH
 
 ## Tech Stack
 
--React-Native
+**Overview:**
 
--Firebase
+Instead of “prop drilling” we used the React v16.3.0 Context API which is designed to share data that can be considered “global” for a tree of React components. This eliminated the need to install additional libraries such as Redux for state management and allowed us to manage state effectively within each component. 
 
--Postgres
+As a team we believe that building a robust app involves ensuring that everyone can use it, including people with vision loss, reading disabilities or other disabilities. By using the AccessibilityInfo API we’ve insured our app is usable by someone who may need or use assistive technology such as a screen reader. 
 
--Sequelize
+To further enhance the user experience we audited the app for accessibility with the Accessibility Inspector. By mirroring the actual user experience we were able to catch additional usability issues to resolve within our app. 
 
--React Hooks
+- React-Native
 
--React Context API
+- Firebase
+
+- Postgres
+
+- Sequelize
+
+- React Hooks
+
+- React Context API
+
+- AccessibilityInfo API
+
+- Node.js
     
--Heroku
+- Heroku
 
 ## Current Features
     
@@ -99,6 +111,8 @@ Github: https://github.com/ShannonCH
 - User can challenge friends by creating a group
 
 - User and groups can see their statistics of time accrued in each category of activities
+
+- User can visualize statistics in the form of a dynamic pie chart or timeline
     
 - Phone will vibrate when timer is complete
     
@@ -108,10 +122,10 @@ Github: https://github.com/ShannonCH
 
 ## Additional Ideas
     
--Creating AR items to populate a store
+- Creating AR items to populate a store
 
--User can spend points in a store on AR items to beautify their surroundings
+- User can spend points in a store on AR items to beautify their surroundings
 
--Groups can customize length of challenges
+- Groups can customize length of challenges
 
--Android application
+- Android application
