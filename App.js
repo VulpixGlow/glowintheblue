@@ -33,7 +33,7 @@ if (!global.atob) {
 }
 
 // ignore yellow logs
-LogBox.ignoreAllLogs();
+// LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
 
