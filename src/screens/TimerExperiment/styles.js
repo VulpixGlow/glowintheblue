@@ -3,39 +3,40 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   mainView: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'column'
     // justifyContent: 'center',
     // alignItems: 'center',
   },
   buttonsView: {
     flexDirection: 'row',
     marginLeft: 'auto',
-    marginRight: 'auto',
+    marginRight: 'auto'
   },
   graphButtonsView: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   dropdownView: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    marginBottom: 30,
+    marginBottom: 30
   },
   pickerView: {
     marginTop: -50,
     fontSize: 20,
     marginBottom: -20,
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   pickerViewText: {
     color: 'white',
     fontWeight: '900',
     marginLeft: 'auto',
     marginRight: 'auto',
+    fontSize: 20
   },
   countdownView: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
     // flexDirection: 'row',
   },
   pointsBox: {
@@ -45,12 +46,12 @@ export default StyleSheet.create({
     borderRadius: 10
   },
   homeButton: {
-    borderRadius: 10,
+    borderRadius: 10
   },
   pointsBoxText: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 18
   },
   playPauseButtons: {
     borderRadius: 50,
@@ -61,12 +62,12 @@ export default StyleSheet.create({
     borderStyle: 'solid',
     borderColor: '#aedcff',
     width: 60,
-    height: 60,
+    height: 60
     // paddingBottom: -5,
   },
   topHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   timeLineButton: {
     borderRadius: 50,
@@ -77,7 +78,7 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   mainTitle: {
     fontSize: 25,
@@ -87,6 +88,6 @@ export default StyleSheet.create({
     marginBottom: 20,
     marginLeft: 30,
     marginRight: 30,
-    color: '#8cffde',
-  },
+    color: '#8cffde'
+  }
 });

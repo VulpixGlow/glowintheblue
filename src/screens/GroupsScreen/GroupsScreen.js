@@ -91,7 +91,6 @@ export default function GroupScreen() {
   return (
     <ScrollView>
       <View style={styles.container}>
-
         <View>
           <Card containerStyle={styles.createGroupCard}>
             <Text style={styles.myGroupsTitle}>My Groups</Text>
@@ -110,6 +109,7 @@ export default function GroupScreen() {
             <View style={styles}>
               <Text style={styles.createGroupSubtitle}>Group name:</Text>
               <TextInput
+                allowFontScaling={true}
                 style={styles.createGroupInput}
                 type='text'
                 placeholder='Type group name'
@@ -121,6 +121,7 @@ export default function GroupScreen() {
               />
               <Text style={styles.createGroupSubtitle}>Invite your friends:</Text>
               <TextInput
+                allowFontScaling={true}
                 style={styles.createGroupInput}
                 color='white'
                 type='text'
@@ -193,12 +194,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginLeft: 10,
     color: 'white',
-    fontWeight: 'bold',
-
+    fontWeight: '900'
     // marginRight: 'auto',
   },
   createGroupInput: {
     color: 'white',
+    fontWeight: '900',
+    fontSize: 16,
     marginBottom: 20,
     backgroundColor: '#5a5299',
     padding: 15,
