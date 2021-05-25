@@ -1,17 +1,17 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAccessibilityInfo } from '@react-native-community/hooks';
 import { firebase } from './config/Firebase';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { UserInfoContext } from './UserContext';
+import { LogBox } from 'react-native';
 
 import {
   Onboarding,
   LoginScreen,
   RegistrationScreen,
-  HomeScreen,
   PointScreen,
-  StoreScreen,
   TimelineScreen,
   GroupScreen,
   InviteScreen,
@@ -32,6 +32,9 @@ if (!global.atob) {
   global.atob = decode;
 }
 
+// ignore yellow logs
+// LogBox.ignoreAllLogs();
+
 const Stack = createStackNavigator();
 
 const MyTheme = {
@@ -39,16 +42,9 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#aedcff',
-    background: '#8cffde'
+    background: '#8CFFDF'
   }
 };
-
-// const userInfo = {
-//   user,
-//   loading
-// };
-
-// const UserInfoContext = React.createContext();
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -62,8 +58,18 @@ export default function App() {
   const [groupName, setGroupName] = useState('');
   const [groups, setGroups] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
+  const [groupNames, setGroupNames] = useState([]);
+  const [groupData, setGroupData] = useState([]);
 
-  console.log('POINTS IN APP.JS', points);
+  // State for Accessibilty
+  const {
+    boldTextEnabled,
+    screenReaderEnabled,
+    reduceMotionEnabled,
+    grayscaleEnabled,
+    invertColorsEnabled,
+    reduceTransparencyEnabled
+  } = useAccessibilityInfo();
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
@@ -85,8 +91,6 @@ export default function App() {
       }
     });
   }, []);
-
-  // Good Spot to add a spinnging wheel or loading icon
 
   if (loading) {
     return <></>;
@@ -112,7 +116,11 @@ export default function App() {
     groups,
     setGroups,
     totalPoints,
-    setTotalPoints
+    setTotalPoints,
+    groupNames,
+    setGroupNames,
+    groupData,
+    setGroupData
   };
 
   return (
@@ -136,8 +144,28 @@ export default function App() {
               {/*  Components that need to be navagated to that don't reside in BottomsTab should be included here */}
               <Stack.Screen name='NotifScreen' component={NotifScreen} />
               <Stack.Screen name='Points' component={PointScreen} />
-              <Stack.Screen name='Timeline' component={TimelineScreen} />
-              <Stack.Screen name='PieChart' component={PieChartScreen} />
+              <Stack.Screen
+                name='Timeline'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#fec7fb',
+                    shadowColor: 'transparent'
+                  },
+                  headerTintColor: '#e981e4'
+                }}
+                component={TimelineScreen}
+              />
+              <Stack.Screen
+                name='PieChart'
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#8cffde',
+                    shadowColor: 'transparent'
+                  },
+                  headerTintColor: '#397867'
+                }}
+                component={PieChartScreen}
+              />
               <Stack.Screen name='BarChart' component={BarGraphScreen} />
               <Stack.Screen name='Group' component={GroupScreen} />
               <Stack.Screen name='Groups' component={GroupsScreen} />

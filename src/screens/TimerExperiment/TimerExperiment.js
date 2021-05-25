@@ -7,21 +7,17 @@ import {
   SafeAreaView,
   Animated,
   Vibration,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import SelectDropdown from 'react-native-select-dropdown';
-// import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FilterDataFunction from '../../dataFunctions/FilterDataFunction';
 import styles from './styles';
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function TimerExperiment() {
@@ -46,6 +42,8 @@ export default function TimerExperiment() {
   const navigation = useNavigation();
 
   const categories = ['Focus', 'Meditate', 'Move', 'Connect', 'Other'];
+
+  console.log('USER EMAIL', user.email);
 
   const sessionData = async () => {
     try {
@@ -132,136 +130,160 @@ export default function TimerExperiment() {
       }
     ]);
 
-  const children = ( {remainingTime} ) => {
-    const hours = Math.floor(remainingTime / 3600);
+  const children = ({ remainingTime }) => {
+    let hours = Math.floor(remainingTime / 3600);
     let minutes = Math.floor((remainingTime % 3600) / 60);
-    let seconds = parseInt(remainingTime % 60, 10)
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    return `${minutes}:${seconds}`;
+    let seconds = parseInt(remainingTime % 60, 10);
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    return remainingTime <= 3599 ? `${minutes}:${seconds}` : '0' + `${hours}:${minutes}`;
   };
 
   return (
     <SafeAreaView>
-      <View style={styles.inviteNotif}>
-        <View style={styles.pointsBox}>
-          <Text style={styles.oima}>Points Earned:</Text>
-          <Text>{addTotalPoints()}</Text>
+      <ScrollView>
+        <View
+          style={styles.topHeader}
+          accessibilityLabel={'Timer View'}
+          accessibilityHint='Clicking me will do nothing'
+          accessibilityRole={'Display timer and picker to select times.'}>
+          <View
+            style={styles.pointsBox}
+            importantForAccessibility='yes'
+            accessibilityLabel={'Points View'}
+            accessibilityRole={'Display total points currently earned.'}>
+            <Text style={styles.pointsBoxText}>Points: {points}</Text>
+          </View>
+          <View style={styles.graphButtonsView}>
+            <TouchableOpacity
+              style={styles.timeLineButton}
+              accessible={true}
+              accessibilityLabel='View Timeline '
+              accessibilityHint='Navigates to the next screen to show timeline'>
+              <FontAwesome
+                name='line-chart'
+                color={'#fff'}
+                size={20}
+                onPress={() => navigation.navigate('Timeline')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.timeLineButton}
+              accessible={true}
+              accessibilityLabel='View Pie Chart'
+              accessibilityHint='Navigates to the next screen to show pie chart'>
+              <FontAwesome
+                name='pie-chart'
+                color={'#fff'}
+                size={20}
+                onPress={() => navigation.navigate('PieChart')}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={styles.mainView}>
-        <View style={styles.pickerView}>
+        <View style={styles.mainView}>
+          <Text style={styles.mainTitle}>What are we doing today?</Text>
+          <View style={styles.dropdownView} importantForAccessibility='yes'>
+            <SelectDropdown
+              data={categories}
+              defaultButtonText='Choose a category'
+              buttonStyle={{
+                backgroundColor: '#42397d',
+                borderRadius: 50,
+                borderColor: '#42397d',
+                borderWidth: 2,
+                outerHeight: 40
+              }}
+              renderDropdownIcon={() => {
+                return <FontAwesome name='chevron-down' color={'#fff'} size={16} />;
+              }}
+              dropdownIconPosition={'right'}
+              buttonTextStyle={{ color: '#fff' }}
+              onSelect={(selectedItem, index) => {
+                setSelectedCat(selectedItem);
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                return item;
+              }}
+              dropdownStyle={{ backgroundColor: '#EFEFEF' }}
+              rowStyle={{
+                backgroundColor: '#42397d',
+                borderBottomColor: '#C5C5C5'
+              }}
+              rowTextStyle={{ color: '#fff', textAlign: 'left' }}
+            />
+          </View>
+          <View
+            style={styles.countdownView}
+            accessible={true}
+            accessibilityLabel='Countdown View'
+            accessibilityHint='Countdown timer for the amount of time left on clock'
+            importantForAccessibility='yes'>
+            <CountdownCircleTimer
+              isPlaying={isRunning}
+              key={selectedValue}
+              duration={selectedValue}
+              onComplete={() => {
+                setRunning(false);
+                Vibration.vibrate();
+                createTwoButtonAlert();
+                setSelectedValue(defaultTime);
+              }}
+              size={180}
+              strokeWidth={15}
+              colors={[
+                ['#8cffdf', 0.4],
+                ['#e785e2', 0.4],
+                ['#8cffdf', 0.4]
+              ]}>
+              {({ remainingTime, animatedColor }) => (
+                <Animated.Text style={{ color: animatedColor, fontSize: 45 }}>
+                  {children({ remainingTime })}
+                </Animated.Text>
+              )}
+            </CountdownCircleTimer>
+          </View>
+        </View>
+        <View
+          style={styles.pickerView}
+          accessible={true}
+          accessibilityLabel='Time Picker View'
+          accessibilityHint='Picker to pick from 10 up to 50 minutes'>
           <Picker
             ref={pickerRef}
             selectedValue={selectedValue}
             onValueChange={itemValue => setSelectedValue(itemValue)}
-            style={{ color: '#ffffff', placeholderTextColor: '#fff' }}>
+            // style={{ color: '#ffffff', placeholderTextColor: '#fff', fontWeight: '900' }}
+            itemStyle={{ fontSize: 16 }}>
             {/* <Picker.Item color='white' label='Choose' /> */}
-            <Picker.Item color='white' label='10 seconds' value={10} />
-            <Picker.Item color='white' label='20 minutes' value={1200} />
-            <Picker.Item color='white' label='30 minutes' value={1800} />
+            <Picker.Item color='#B4FEE7' label='10 seconds' value={10} />
+            <Picker.Item color='#B4FEE7' label='20 minutes' value={1200} />
+            <Picker.Item color='#B4FEE7' label='30 minutes' value={1800} />
+            <Picker.Item color='#B4FEE7' label='40 minutes' value={2400} />
+            <Picker.Item color='#B4FEE7' label='50 minutes' value={3000} />
+            <Picker.Item color='#B4FEE7' label='60 minutes' value={3600} />
           </Picker>
-        </View>
-        <View style={styles.countdownView}>
-          <CountdownCircleTimer
-            isPlaying={isRunning}
-            key={selectedValue}
-            duration={selectedValue}
-            onComplete={() => {
-              setRunning(false);
-              Vibration.vibrate();
-              createTwoButtonAlert();
-              setSelectedValue(defaultTime);
-            }}
-            children
-            size={180}
-            strokeWidth={15}
-            colors={[
-              ['#e785e2', 0.4],
-              ['#5ba5e7', 0.4],
-              ['#e785e2', 0.4]
-            ]}>
-            {({ remainingTime, animatedColor }) => (
-              <Animated.Text style={{ color: animatedColor, fontSize: 50 }}>
-                {children({remainingTime})}
-              </Animated.Text>
-            )}
-          </CountdownCircleTimer>
-        </View>
-        <View style={styles.pickerView}>
-          <SelectDropdown
-            data={categories}
-            defaultButtonText='Choose a category'
-            buttonStyle={{
-              backgroundColor: '#42397d',
-              borderRadius: 50,
-              borderColor: '#42397d',
-              borderWidth: 2,
-              outerHeight: 40
-            }}
-            renderDropdownIcon={() => {
-              return <FontAwesome name='chevron-down' color={'#fff'} size={14} />;
-            }}
-            dropdownIconPosition={'right'}
-            buttonTextStyle={{ color: '#fff' }}
-            onSelect={(selectedItem, index) => {
-              setSelectedCat(selectedItem);
-            }}
-            buttonTextAfterSelection={(selectedItem, index) => {
-              return selectedItem;
-            }}
-            rowTextForSelection={(item, index) => {
-              return item;
-            }}
-            dropdownStyle={{ backgroundColor: '#EFEFEF' }}
-            rowStyle={{
-              backgroundColor: '#42397d',
-              borderBottomColor: '#C5C5C5'
-            }}
-            rowTextStyle={{ color: '#fff', textAlign: 'left' }}
-          />
-        </View>
-        <View style={styles.buttonsView}>
-          <Button
-            buttonStyle={styles.homeButton}
-            titleStyle={{ color: '#2d2660' }}
-            title='Start'
-            onPress={() => setRunning(true)}
-          />
-          <Button
-            buttonStyle={styles.homeButton}
-            titleStyle={{ color: '#2d2660' }}
-            title='Pause'
-            onPress={() => setRunning(false)}
-          />
-        </View>
-        <View style={styles.buttonsView}>
-          {/* <TouchableOpacity style={styles.timeLineButton}>
-            <FontAwesome
-              name='bar-chart'
-              size={24}
-              color='#5BA5E7'
-              onPress={() => navigation.navigate('BarChart')}
+          <View style={styles.buttonsView} importantForAccessibility='yes'>
+            <Button
+              buttonStyle={styles.playPauseButtons}
+              titleStyle={{ color: '#2d2660' }}
+              icon={<FontAwesome name='play' size={16} color='white' />}
+              // title='Start'
+              onPress={() => setRunning(true)}
             />
-          </TouchableOpacity> */}
-          <TouchableOpacity style={styles.timeLineButton}>
-            <MaterialCommunityIcons
-              name='timeline-text-outline'
-              size={32}
-              color='#E981E4'
-              onPress={() => navigation.navigate('Timeline')}
+            <Button
+              buttonStyle={styles.playPauseButtons}
+              titleStyle={{ color: '#2d2660' }}
+              icon={<FontAwesome name='pause' size={16} color='white' />}
+              // title='Pause'
+              onPress={() => setRunning(false)}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.timeLineButton}>
-            <Entypo
-              name='pie-chart'
-              size={24}
-              color='#5BA5E7'
-              onPress={() => navigation.navigate('PieChart')}
-            />
-          </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

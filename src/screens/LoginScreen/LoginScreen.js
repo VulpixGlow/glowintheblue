@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation }) {
               return;
             }
             const user = firestoreDocument.data();
-            navigation.navigate('Home', { user: user });
+            navigation.navigate('Tabs', { user: user });
           })
           .catch(error => {
             alert(error);
