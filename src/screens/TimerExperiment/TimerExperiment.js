@@ -33,7 +33,7 @@ export default function TimerExperiment() {
     points,
     setPoints,
     selectCat,
-    setSelectedCat
+    setSelectedCat,
   } = useContext(UserInfoContext);
 
   const [defaultTime, setDefaultTime] = useState(10);
@@ -73,14 +73,14 @@ export default function TimerExperiment() {
     sessionData();
   }, [points]);
 
-  const onConfirmCompleted = async total => {
+  const onConfirmCompleted = async (total) => {
     try {
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points
+        points: points,
       });
     } catch (error) {
       console.log('Error in onComfirmCompleted function', error);
@@ -119,15 +119,15 @@ export default function TimerExperiment() {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel'
+        style: 'cancel',
       },
       {
         text: 'Glowing',
         onPress: () => {
           setPoints(totalPoints);
           onConfirmCompleted(totalPoints);
-        }
-      }
+        },
+      },
     ]);
 
   const children = ({ remainingTime }) => {
@@ -256,7 +256,7 @@ export default function TimerExperiment() {
             accessibilityState={selectedValue}
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={itemValue => setSelectedValue(itemValue)}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
             // style={{ color: '#ffffff', placeholderTextColor: '#fff', fontWeight: '900' }}
             itemStyle={{ fontSize: 20 }}>
             <Picker.Item
