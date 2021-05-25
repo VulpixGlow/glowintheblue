@@ -59,12 +59,16 @@ export default function GroupScreen() {
     const emails = inviteEmail.split(', ');
 
     const notificationData = async () => {
+      //const { data } = await axios.post('http://localhost:8080/api/notifications', {
       const { data } = await axios.post('https://glowintheblue.herokuapp.com/api/notifications', {
         ownerEmail: user.email,
         emails: emails,
         groupName: groupName
       });
+      setGroupData(data)
+      console.log('data in groupScreen line 68',data)
     };
+
     notificationData();
     // const emails = email.split(', '); ['s@s.com', 'a@a.com']
     // email -> a string of comma delimited emails
@@ -87,28 +91,19 @@ export default function GroupScreen() {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {/* <Text>My Groups</Text> */}
-        {/* {
-            groupNames.map((name, idx)=> <Button style={{ padding: 10 }} key={idx} title={name} onPress={()=>navigation.navigate('Group', {props:name})} />)
-          } */}
+
         <View>
           <Card containerStyle={styles.createGroupCard}>
             <Text style={styles.myGroupsTitle}>My Groups</Text>
-            <Button
-              buttonStyle={styles.myGroupsButton}
-              titleStyle={{ color: '#7b4f79', fontWeight: 'bold' }}
-              title='Group 1'
-            />
-            <Button
-              buttonStyle={styles.myGroupsButton}
-              titleStyle={{ color: '#7b4f79', fontWeight: 'bold' }}
-              title='Group 2'
-            />
-            <Button
-              buttonStyle={styles.myGroupsButton}
-              titleStyle={{ color: '#7b4f79', fontWeight: 'bold' }}
-              title='Group 3'
-            />
+            {
+              groupNames.map((name, idx)=> <Button
+                                              buttonStyle={styles.myGroupsButton}
+                                              titleStyle={{ color: '#7b4f79', fontWeight: 'bold' }}
+                                              key={idx}
+                                              title={name}
+                                              onPress={()=>navigation.navigate('Group', {props:name})} />)
+            }
+
           </Card>
           <Card containerStyle={styles.createGroupCard}>
             <Text style={styles.createGroupTitle}>Create Group</Text>
