@@ -2,7 +2,7 @@
 
 # Glow In The Blue
 
-![Alt text](./gifs/Onboarding2.gif) ![Alt text](./gifs/Login.gif) ![Alt text](./gifs/TimerScreen.gif)
+![Alt text](./gifs/Onboarding.gif) ![Alt text](./gifs/Login.gif) ![Alt text](./gifs/Timer.gif)
 
 **A cozy place for pacing your day.**
 
