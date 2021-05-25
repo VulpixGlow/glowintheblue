@@ -2,13 +2,7 @@
 
 # Glow In The Blue
 
-<img src="/assets/images/main-splash.png" height="220" width="120"> <img src="assets/images/hiw-squid.png" height="220" width="120">
-<img src="assets/images/hiw-seahorse.png" height="220" width="120">
-<img src="assets/images/hiw-octopus.png" height="220" width="120">
-
-# App GIF
-
-![Alt text](./gifs/Onboarding2.gif)
+![Alt text](./gifs/Onboarding2.gif) ![Alt text](./gifs/Login.gif) ![Alt text](./gifs/TimerScreen.gif)
 
 **A cozy place for pacing your day.**
 
