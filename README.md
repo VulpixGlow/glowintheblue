@@ -39,9 +39,7 @@ npm start
 
 on a mobile app/tablet, download Expo Go app
 
-scan the QR code:
-
-
+visit - https://expo.io/@ebennett/projects/glowInTheBlue
 
 start Glowing!
 ```
