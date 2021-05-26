@@ -33,7 +33,7 @@ export default function TimerExperiment() {
     points,
     setPoints,
     selectCat,
-    setSelectedCat
+    setSelectedCat,
   } = useContext(UserInfoContext);
 
   const [defaultTime, setDefaultTime] = useState(10);
@@ -73,14 +73,14 @@ export default function TimerExperiment() {
     sessionData();
   }, [points]);
 
-  const onConfirmCompleted = async total => {
+  const onConfirmCompleted = async (total) => {
     try {
       await axios.put('https://glowintheblue.herokuapp.com/api/sessions/update', {
         email: user.email,
         userPoints: total,
         categoryName: selectCat,
         time: selectedValue,
-        points: points
+        points: points,
       });
     } catch (error) {
       console.log('Error in onComfirmCompleted function', error);
@@ -119,15 +119,15 @@ export default function TimerExperiment() {
       {
         text: "Didn't happen",
         onPress: () => console.log('Uncompleted Pressed'),
-        style: 'cancel'
+        style: 'cancel',
       },
       {
         text: 'Glowing',
         onPress: () => {
           setPoints(totalPoints);
           onConfirmCompleted(totalPoints);
-        }
-      }
+        },
+      },
     ]);
 
   const children = ({ remainingTime }) => {
@@ -142,11 +142,7 @@ export default function TimerExperiment() {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View
-          style={styles.topHeader}
-          accessibilityLabel={'Timer View'}
-          accessibilityHint='Clicking me will do nothing'
-          accessibilityRole={'Display timer and picker to select times.'}>
+        <View style={styles.topHeader} accessibilityLabel={'Main screen view'}>
           <View
             style={styles.pointsBox}
             importantForAccessibility='yes'
@@ -185,6 +181,10 @@ export default function TimerExperiment() {
           <Text style={styles.mainTitle}>What are we doing today?</Text>
           <View style={styles.dropdownView} importantForAccessibility='yes'>
             <SelectDropdown
+              accessibilityLabel='Select category dropdown menu'
+              accessibilityHint='Navigates to the next screen to show pie chart'
+              accessibilityRole='dropdown'
+              allowFontScaling={true}
               data={categories}
               defaultButtonText='Choose a category'
               buttonStyle={{
@@ -218,7 +218,7 @@ export default function TimerExperiment() {
           </View>
           <View
             style={styles.countdownView}
-            accessible={true}
+            allowFontScaling={true}
             accessibilityLabel='Countdown View'
             accessibilityHint='Countdown timer for the amount of time left on clock'
             importantForAccessibility='yes'>
@@ -247,34 +247,84 @@ export default function TimerExperiment() {
             </CountdownCircleTimer>
           </View>
         </View>
-        <View
-          style={styles.pickerView}
-          accessible={true}
-          accessibilityLabel='Time Picker View'
-          accessibilityHint='Picker to pick from 10 up to 50 minutes'>
+        <View style={styles.pickerView} accessible={true} allowFontScaling={true}>
           <Picker
+            accessibilityLabel='Time Picker View'
+            accessibilityHint='Picker to pick from 10 seconds up to 50 minutes'
+            accessibilityRole='adjustable'
+            accessibilityLiveRegion='polite'
+            accessibilityState={selectedValue}
             ref={pickerRef}
             selectedValue={selectedValue}
-            onValueChange={itemValue => setSelectedValue(itemValue)}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
             // style={{ color: '#ffffff', placeholderTextColor: '#fff', fontWeight: '900' }}
-            itemStyle={{ fontSize: 16 }}>
-            {/* <Picker.Item color='white' label='Choose' /> */}
-            <Picker.Item color='#B4FEE7' label='10 seconds' value={10} />
-            <Picker.Item color='#B4FEE7' label='20 minutes' value={1200} />
-            <Picker.Item color='#B4FEE7' label='30 minutes' value={1800} />
-            <Picker.Item color='#B4FEE7' label='40 minutes' value={2400} />
-            <Picker.Item color='#B4FEE7' label='50 minutes' value={3000} />
-            <Picker.Item color='#B4FEE7' label='60 minutes' value={3600} />
+            itemStyle={{ fontSize: 20 }}>
+            <Picker.Item
+              color='#B4FEE7'
+              label='10 seconds'
+              value={10}
+              importantForAccessibility='yes'
+              accessibilityLabel='Time Picker 10 Seconds'
+              accessibilityValue='10 seconds'
+            />
+            <Picker.Item
+              color='#B4FEE7'
+              label='20 minutes'
+              value={1200}
+              importantForAccessibility='yes'
+              accessibilityValue='20 minutes'
+              accessibilityLabel='Time Picker 20 minutes'
+            />
+            <Picker.Item
+              color='#B4FEE7'
+              label='30 minutes'
+              value={1800}
+              importantForAccessibility='yes'
+              accessibilityValue='30 minutes'
+              accessibilityLabel='Time Picker 30 minutes'
+            />
+            <Picker.Item
+              color='#B4FEE7'
+              label='40 minutes'
+              value={2400}
+              importantForAccessibility='yes'
+              accessibilityValue='40 minutes'
+              accessibilityLabel='Time Picker 40 minutes'
+            />
+            <Picker.Item
+              color='#B4FEE7'
+              label='50 minutes'
+              value={3000}
+              importantForAccessibility='yes'
+              accessibilityValue='50 minutes'
+              accessibilityLabel='Time Picker 50 minutes'
+            />
+            <Picker.Item
+              color='#B4FEE7'
+              label='60 minutes'
+              value={3600}
+              importantForAccessibility='yes'
+              accessibilityValue='60 minutes'
+              accessibilityLabel='Time Picker 60 minutes'
+            />
           </Picker>
-          <View style={styles.buttonsView} importantForAccessibility='yes'>
+          <View style={styles.buttonsView} accessibilityHint='Start and pause buttons for timer'>
             <Button
+              accessible={true}
+              accessibilityHint='Navigates to the next screen to show pie chart'
+              accessibilityLabel='Start Button'
+              accessibilityHint='Clicking me will start the timer'
+              accessibilityRole='button'
               buttonStyle={styles.playPauseButtons}
               titleStyle={{ color: '#2d2660' }}
               icon={<FontAwesome name='play' size={16} color='white' />}
-              // title='Start'
               onPress={() => setRunning(true)}
             />
             <Button
+              accessible={true}
+              accessibilityLabel='Pause Button'
+              accessibilityHint='Clicking me will pause the timer'
+              accessibilityRole='button'
               buttonStyle={styles.playPauseButtons}
               titleStyle={{ color: '#2d2660' }}
               icon={<FontAwesome name='pause' size={16} color='white' />}

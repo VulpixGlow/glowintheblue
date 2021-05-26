@@ -2,7 +2,7 @@
 
 # Glow In The Blue
 
-![Alt text](./gifs/Onboarding.gif) ![Alt text](./gifs/Login.gif) ![Alt text](./gifs/Timer.gif)
+![Alt text](./gifs/Onboarding.gif) ![Alt text](./gifs/Timer.gif)
 
 **A cozy place for pacing your day.**
 
@@ -39,9 +39,7 @@ npm start
 
 on a mobile app/tablet, download Expo Go app
 
-scan the QR code:
-
-
+visit - https://expo.io/@ebennett/projects/glowInTheBlue
 
 start Glowing!
 ```

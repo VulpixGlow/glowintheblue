@@ -51,11 +51,11 @@ function MyPieChart() {
         width={Dimensions.get('window').width - 30}
         height={220}
         chartConfig={{
-          backgroundColor: '#1cc910',
           backgroundGradientFrom: '#eff3ff',
           backgroundGradientTo: '#efefef',
           decimalPlaces: 2,
           color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           style: {
             borderRadius: 10
           }
@@ -63,7 +63,9 @@ function MyPieChart() {
         style={{
           marginVertical: 8,
           borderRadius: 16,
-          fontSize: 16,
+          fontSize: 20,
+          color: 'pink',
+          fontWeight: '900',
           backgroundColor: '#dcfff5',
           height: 280,
           paddingTop: 50,
