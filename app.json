@@ -1,19 +1,21 @@
 {
   "expo": {
-    "name": "glowInTheBlue",
-    "slug": "glowInTheBlue",
+    "name": "Glow In The Blue",
+    "slug": "glow-in-the-blue",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/seahorse-pinkbg.png",
     "splash": {
-      "image": "./assets//images/main-splash.png",
+      "image": "./assets/images/main-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -26,7 +28,7 @@
     "web": {
       "favicon": "./assets/images/seahorse2.png"
     },
-    "description": "A cozy place for pacing your day. :sparkles:",
-    "githubUrl": "https://github.com/VulpixTribe/glowintheblue"
+    "description": "A cozy place for pacing your day.",
+    "githubUrl": "https://github.com/VulpixGlow/glowintheblue"
   }
 }
