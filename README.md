@@ -82,19 +82,23 @@ To further enhance the user experience we audited the app for accessibility with
 
 - React-Native
 
+- React Hooks
+
+- React Context
+
+- React Accessibility 
+
 - Firebase
 
-- Postgres
+- PostgreSQL
 
 - Sequelize
 
-- React Hooks
-
-- React Context API
-
-- AccessibilityInfo API
-
 - Node.js
+
+- Express
+
+- Nodemailer
 
 - Heroku
 
@@ -106,8 +110,6 @@ To further enhance the user experience we audited the app for accessibility with
 
 - User can challenge friends by creating a group
 
-- User and groups can see their statistics of time accrued in each category of activities
-
 - User can visualize statistics in the form of a dynamic pie chart or timeline
 
 - Phone will vibrate when timer is complete
@@ -118,9 +120,9 @@ To further enhance the user experience we audited the app for accessibility with
 
 ## Additional Ideas
 
-- Creating AR items to populate a store
+- User and groups can see their statistics of time accrued in each category of activities
 
-- User can spend points in a store on AR items to beautify their surroundings
+- User can spend points in a meaningful way.
 
 - Groups can customize length of challenges
 
